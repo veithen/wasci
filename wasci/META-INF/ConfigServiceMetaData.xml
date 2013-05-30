@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE MBean SYSTEM "MbeanDescriptor.dtd">
+<MBean type="ConfigServiceMetaData"
+       version="1.0.0"
+       description="Allows to retrieve the configuration repository and config service metadata">
+    <operation name="extractMetaData" type="byte[]" targetObjectType="objectReference" role="monitor">
+        <signature/>
+    </operation>
+</MBean>

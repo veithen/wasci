@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: WebSphere Configuration Intelligence
+Bundle-SymbolicName: wasci;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Import-Package: com.ibm.websphere.management,
+ com.ibm.websphere.management.exception,
+ com.ibm.ws.exception,
+ com.ibm.ws.management.collaborator,
+ com.ibm.ws.management.configservice,
+ com.ibm.wsspi.runtime.component,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.emf.ecore.util
+Require-Bundle: com.ibm.wsspi.extension
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
