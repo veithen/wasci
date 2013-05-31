@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="repository" nsURI="urn:repository" nsPrefix="repository">
+  <eClassifiers xsi:type="ecore:EClass" name="ContextType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childContextTypes" upperBound="-1"
+        eType="#//ContextType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childDocumentTypes" upperBound="-1"
+        eType="#//DocumentType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootDocumentType" eType="#//DocumentType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DocumentType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filePattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootRefObjectTypes" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+  </eClassifiers>
+</ecore:EPackage>
