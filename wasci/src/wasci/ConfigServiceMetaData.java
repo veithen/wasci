@@ -19,10 +19,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jst.j2ee.application.ApplicationPackage;
 
 import com.ibm.websphere.management.AdminServiceFactory;
 import com.ibm.websphere.management.exception.AdminException;
 import com.ibm.websphere.management.exception.InvalidConfigDataTypeException;
+import com.ibm.websphere.models.datatype.DatatypePackage;
 import com.ibm.ws.exception.RuntimeError;
 import com.ibm.ws.exception.RuntimeWarning;
 import com.ibm.ws.management.collaborator.DefaultRuntimeCollaborator;
@@ -65,6 +67,9 @@ public class ConfigServiceMetaData extends WsComponentImpl {
             }
             ePackages.add(ePackage);
         }
+        // Add packages that are referenced in the models, but that are not seen in the TypeRegistry
+        ePackages.add(DatatypePackage.eINSTANCE);
+        ePackages.add(ApplicationPackage.eINSTANCE);
         // Need to copy the packages because we are going to assign new resources
         ePackages = (Collection<EPackage>)EcoreUtil.copyAll(ePackages);
         ResourceSet resourceSet = new ResourceSetImpl();
@@ -85,7 +90,9 @@ public class ConfigServiceMetaData extends WsComponentImpl {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return baos.toByteArray();
+        byte[] result = baos.toByteArray();
+        System.out.println("Config models exported; size=" + result.length);
+        return result;
     }
     
     @Override

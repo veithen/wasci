@@ -5,6 +5,7 @@ Bundle-SymbolicName: wasci;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Import-Package: com.ibm.websphere.management,
  com.ibm.websphere.management.exception,
+ com.ibm.websphere.models.datatype,
  com.ibm.ws.exception,
  com.ibm.ws.management.collaborator,
  com.ibm.ws.management.configservice,
@@ -13,6 +14,7 @@ Import-Package: com.ibm.websphere.management,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.resource,
  org.eclipse.emf.ecore.resource.impl,
- org.eclipse.emf.ecore.util
+ org.eclipse.emf.ecore.util,
+ org.eclipse.jst.j2ee.application
 Require-Bundle: com.ibm.wsspi.extension
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
