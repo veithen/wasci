@@ -1,6 +1,6 @@
 /**
  */
-package repository.impl;
+package com.github.veithen.ramsay.ws.model.repository.impl;
 
 import java.util.Collection;
 
@@ -15,8 +15,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
-import repository.DocumentType;
-import repository.RepositoryPackage;
+import com.github.veithen.ramsay.ws.model.repository.DocumentType;
+import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -25,8 +26,8 @@ import repository.RepositoryPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link repository.impl.DocumentTypeImpl#getFilePattern <em>File Pattern</em>}</li>
- *   <li>{@link repository.impl.DocumentTypeImpl#getRootRefObjectTypes <em>Root Ref Object Types</em>}</li>
+ *   <li>{@link com.github.veithen.ramsay.ws.model.repository.impl.DocumentTypeImpl#getFilePattern <em>File Pattern</em>}</li>
+ *   <li>{@link com.github.veithen.ramsay.ws.model.repository.impl.DocumentTypeImpl#getRootRefObjectTypes <em>Root Ref Object Types</em>}</li>
  * </ul>
  * </p>
  *

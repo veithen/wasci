@@ -25,10 +25,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jst.j2ee.application.ApplicationPackage;
 
-import repository.ContextType;
-import repository.DocumentType;
-import repository.RepositoryFactory;
-
+import com.github.veithen.ramsay.ws.model.repository.ContextType;
+import com.github.veithen.ramsay.ws.model.repository.DocumentType;
+import com.github.veithen.ramsay.ws.model.repository.RepositoryFactory;
 import com.ibm.websphere.management.AdminServiceFactory;
 import com.ibm.websphere.management.exception.AdminException;
 import com.ibm.websphere.management.exception.InvalidConfigDataTypeException;

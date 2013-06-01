@@ -1,6 +1,6 @@
 /**
  */
-package repository;
+package com.github.veithen.ramsay.ws.model.repository;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see repository.RepositoryFactory
+ * @see com.github.veithen.ramsay.ws.model.repository.RepositoryFactory
  * @model kind="package"
  * @generated
  */
@@ -53,14 +53,14 @@ public interface RepositoryPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    RepositoryPackage eINSTANCE = repository.impl.RepositoryPackageImpl.init();
+    RepositoryPackage eINSTANCE = com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl.init();
 
     /**
-     * The meta object id for the '{@link repository.impl.ContextTypeImpl <em>Context Type</em>}' class.
+     * The meta object id for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl <em>Context Type</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see repository.impl.ContextTypeImpl
-     * @see repository.impl.RepositoryPackageImpl#getContextType()
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getContextType()
      * @generated
      */
     int CONTEXT_TYPE = 0;
@@ -111,11 +111,11 @@ public interface RepositoryPackage extends EPackage {
     int CONTEXT_TYPE_FEATURE_COUNT = 4;
 
     /**
-     * The meta object id for the '{@link repository.impl.DocumentTypeImpl <em>Document Type</em>}' class.
+     * The meta object id for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.DocumentTypeImpl <em>Document Type</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see repository.impl.DocumentTypeImpl
-     * @see repository.impl.RepositoryPackageImpl#getDocumentType()
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.DocumentTypeImpl
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getDocumentType()
      * @generated
      */
     int DOCUMENT_TYPE = 1;
@@ -149,86 +149,86 @@ public interface RepositoryPackage extends EPackage {
 
 
     /**
-     * Returns the meta object for class '{@link repository.ContextType <em>Context Type</em>}'.
+     * Returns the meta object for class '{@link com.github.veithen.ramsay.ws.model.repository.ContextType <em>Context Type</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>Context Type</em>'.
-     * @see repository.ContextType
+     * @see com.github.veithen.ramsay.ws.model.repository.ContextType
      * @generated
      */
     EClass getContextType();
 
     /**
-     * Returns the meta object for the attribute '{@link repository.ContextType#getName <em>Name</em>}'.
+     * Returns the meta object for the attribute '{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getName <em>Name</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Name</em>'.
-     * @see repository.ContextType#getName()
+     * @see com.github.veithen.ramsay.ws.model.repository.ContextType#getName()
      * @see #getContextType()
      * @generated
      */
     EAttribute getContextType_Name();
 
     /**
-     * Returns the meta object for the reference list '{@link repository.ContextType#getChildContextTypes <em>Child Context Types</em>}'.
+     * Returns the meta object for the reference list '{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getChildContextTypes <em>Child Context Types</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference list '<em>Child Context Types</em>'.
-     * @see repository.ContextType#getChildContextTypes()
+     * @see com.github.veithen.ramsay.ws.model.repository.ContextType#getChildContextTypes()
      * @see #getContextType()
      * @generated
      */
     EReference getContextType_ChildContextTypes();
 
     /**
-     * Returns the meta object for the reference list '{@link repository.ContextType#getChildDocumentTypes <em>Child Document Types</em>}'.
+     * Returns the meta object for the reference list '{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getChildDocumentTypes <em>Child Document Types</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference list '<em>Child Document Types</em>'.
-     * @see repository.ContextType#getChildDocumentTypes()
+     * @see com.github.veithen.ramsay.ws.model.repository.ContextType#getChildDocumentTypes()
      * @see #getContextType()
      * @generated
      */
     EReference getContextType_ChildDocumentTypes();
 
     /**
-     * Returns the meta object for the reference '{@link repository.ContextType#getRootDocumentType <em>Root Document Type</em>}'.
+     * Returns the meta object for the reference '{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getRootDocumentType <em>Root Document Type</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference '<em>Root Document Type</em>'.
-     * @see repository.ContextType#getRootDocumentType()
+     * @see com.github.veithen.ramsay.ws.model.repository.ContextType#getRootDocumentType()
      * @see #getContextType()
      * @generated
      */
     EReference getContextType_RootDocumentType();
 
     /**
-     * Returns the meta object for class '{@link repository.DocumentType <em>Document Type</em>}'.
+     * Returns the meta object for class '{@link com.github.veithen.ramsay.ws.model.repository.DocumentType <em>Document Type</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>Document Type</em>'.
-     * @see repository.DocumentType
+     * @see com.github.veithen.ramsay.ws.model.repository.DocumentType
      * @generated
      */
     EClass getDocumentType();
 
     /**
-     * Returns the meta object for the attribute '{@link repository.DocumentType#getFilePattern <em>File Pattern</em>}'.
+     * Returns the meta object for the attribute '{@link com.github.veithen.ramsay.ws.model.repository.DocumentType#getFilePattern <em>File Pattern</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>File Pattern</em>'.
-     * @see repository.DocumentType#getFilePattern()
+     * @see com.github.veithen.ramsay.ws.model.repository.DocumentType#getFilePattern()
      * @see #getDocumentType()
      * @generated
      */
     EAttribute getDocumentType_FilePattern();
 
     /**
-     * Returns the meta object for the reference list '{@link repository.DocumentType#getRootRefObjectTypes <em>Root Ref Object Types</em>}'.
+     * Returns the meta object for the reference list '{@link com.github.veithen.ramsay.ws.model.repository.DocumentType#getRootRefObjectTypes <em>Root Ref Object Types</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference list '<em>Root Ref Object Types</em>'.
-     * @see repository.DocumentType#getRootRefObjectTypes()
+     * @see com.github.veithen.ramsay.ws.model.repository.DocumentType#getRootRefObjectTypes()
      * @see #getDocumentType()
      * @generated
      */
@@ -257,11 +257,11 @@ public interface RepositoryPackage extends EPackage {
      */
     interface Literals {
         /**
-         * The meta object literal for the '{@link repository.impl.ContextTypeImpl <em>Context Type</em>}' class.
+         * The meta object literal for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl <em>Context Type</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see repository.impl.ContextTypeImpl
-         * @see repository.impl.RepositoryPackageImpl#getContextType()
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getContextType()
          * @generated
          */
         EClass CONTEXT_TYPE = eINSTANCE.getContextType();
@@ -299,11 +299,11 @@ public interface RepositoryPackage extends EPackage {
         EReference CONTEXT_TYPE__ROOT_DOCUMENT_TYPE = eINSTANCE.getContextType_RootDocumentType();
 
         /**
-         * The meta object literal for the '{@link repository.impl.DocumentTypeImpl <em>Document Type</em>}' class.
+         * The meta object literal for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.DocumentTypeImpl <em>Document Type</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see repository.impl.DocumentTypeImpl
-         * @see repository.impl.RepositoryPackageImpl#getDocumentType()
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.DocumentTypeImpl
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getDocumentType()
          * @generated
          */
         EClass DOCUMENT_TYPE = eINSTANCE.getDocumentType();

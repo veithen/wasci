@@ -9,7 +9,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="urn:repository"
-            class="repository.RepositoryPackage"
+            class="com.github.veithen.ramsay.ws.model.repository.RepositoryPackage"
             genModel="repository.genmodel"/>
    </extension>
 

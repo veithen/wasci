@@ -1,6 +1,6 @@
 /**
  */
-package repository;
+package com.github.veithen.ramsay.ws.model.repository;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -14,12 +14,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link repository.DocumentType#getFilePattern <em>File Pattern</em>}</li>
- *   <li>{@link repository.DocumentType#getRootRefObjectTypes <em>Root Ref Object Types</em>}</li>
+ *   <li>{@link com.github.veithen.ramsay.ws.model.repository.DocumentType#getFilePattern <em>File Pattern</em>}</li>
+ *   <li>{@link com.github.veithen.ramsay.ws.model.repository.DocumentType#getRootRefObjectTypes <em>Root Ref Object Types</em>}</li>
  * </ul>
  * </p>
  *
- * @see repository.RepositoryPackage#getDocumentType()
+ * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage#getDocumentType()
  * @model
  * @generated
  */
@@ -34,14 +34,14 @@ public interface DocumentType extends EObject {
      * <!-- end-user-doc -->
      * @return the value of the '<em>File Pattern</em>' attribute.
      * @see #setFilePattern(String)
-     * @see repository.RepositoryPackage#getDocumentType_FilePattern()
+     * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage#getDocumentType_FilePattern()
      * @model
      * @generated
      */
     String getFilePattern();
 
     /**
-     * Sets the value of the '{@link repository.DocumentType#getFilePattern <em>File Pattern</em>}' attribute.
+     * Sets the value of the '{@link com.github.veithen.ramsay.ws.model.repository.DocumentType#getFilePattern <em>File Pattern</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>File Pattern</em>' attribute.
@@ -60,7 +60,7 @@ public interface DocumentType extends EObject {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Root Ref Object Types</em>' reference list.
-     * @see repository.RepositoryPackage#getDocumentType_RootRefObjectTypes()
+     * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage#getDocumentType_RootRefObjectTypes()
      * @model type="org.eclipse.emf.ecore.EClass"
      * @generated
      */

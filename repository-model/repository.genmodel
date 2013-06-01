@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/repository-model/src" modelPluginID="repository-model"
-    modelName="Repository" importerID="org.eclipse.emf.importer.ecore" copyrightFields="false"
-    runtimeVersion="2.2" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.github.veithen.ramsay.ws.model.repository/src"
+    modelPluginID="repository-model" modelName="Repository" importerID="org.eclipse.emf.importer.ecore"
+    copyrightFields="false" runtimeVersion="2.2" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <foreignModel>repository.ecore</foreignModel>
-  <genPackages prefix="Repository" disposableProviderFactory="true" ecorePackage="repository.ecore#/">
-    <genClasses ecoreClass="repository.ecore#//RepositoryContextType">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute repository.ecore#//RepositoryContextType/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference repository.ecore#//RepositoryContextType/childContextTypes"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference repository.ecore#//RepositoryContextType/childDocumentTypes"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference repository.ecore#//RepositoryContextType/rootDocumentType"/>
+  <genPackages prefix="Repository" basePackage="com.github.veithen.ramsay.ws.model"
+      disposableProviderFactory="true" ecorePackage="repository.ecore#/">
+    <genClasses ecoreClass="repository.ecore#//ContextType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute repository.ecore#//ContextType/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference repository.ecore#//ContextType/childContextTypes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference repository.ecore#//ContextType/childDocumentTypes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference repository.ecore#//ContextType/rootDocumentType"/>
     </genClasses>
-    <genClasses ecoreClass="repository.ecore#//RepositoryDocumentType">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute repository.ecore#//RepositoryDocumentType/filePattern"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference repository.ecore#//RepositoryDocumentType/rootRefObjectTypes"/>
+    <genClasses ecoreClass="repository.ecore#//DocumentType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute repository.ecore#//DocumentType/filePattern"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference repository.ecore#//DocumentType/rootRefObjectTypes"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

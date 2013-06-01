@@ -1,6 +1,6 @@
 /**
  */
-package repository.util;
+package com.github.veithen.ramsay.ws.model.repository.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -9,14 +9,15 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import repository.*;
+import com.github.veithen.ramsay.ws.model.repository.*;
+
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see repository.RepositoryPackage
+ * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage
  * @generated
  */
 public class RepositoryAdapterFactory extends AdapterFactoryImpl {
@@ -91,13 +92,13 @@ public class RepositoryAdapterFactory extends AdapterFactoryImpl {
 
 
     /**
-     * Creates a new adapter for an object of class '{@link repository.ContextType <em>Context Type</em>}'.
+     * Creates a new adapter for an object of class '{@link com.github.veithen.ramsay.ws.model.repository.ContextType <em>Context Type</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see repository.ContextType
+     * @see com.github.veithen.ramsay.ws.model.repository.ContextType
      * @generated
      */
     public Adapter createContextTypeAdapter() {
@@ -105,13 +106,13 @@ public class RepositoryAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link repository.DocumentType <em>Document Type</em>}'.
+     * Creates a new adapter for an object of class '{@link com.github.veithen.ramsay.ws.model.repository.DocumentType <em>Document Type</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see repository.DocumentType
+     * @see com.github.veithen.ramsay.ws.model.repository.DocumentType
      * @generated
      */
     public Adapter createDocumentTypeAdapter() {

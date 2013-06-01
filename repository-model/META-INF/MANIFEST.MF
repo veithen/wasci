@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: repository-model;singleton:=true
+Bundle-SymbolicName: com.github.veithen.ramsay.ws.model.repository;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: repository,
- repository.impl,
- repository.util
+Export-Package: com.github.veithen.ramsay.ws.model.repository,
+ com.github.veithen.ramsay.ws.model.repository.impl,
+ com.github.veithen.ramsay.ws.model.repository.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

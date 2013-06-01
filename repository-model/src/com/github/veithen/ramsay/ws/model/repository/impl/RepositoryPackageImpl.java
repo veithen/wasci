@@ -1,6 +1,6 @@
 /**
  */
-package repository.impl;
+package com.github.veithen.ramsay.ws.model.repository.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -10,10 +10,11 @@ import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import repository.ContextType;
-import repository.DocumentType;
-import repository.RepositoryFactory;
-import repository.RepositoryPackage;
+import com.github.veithen.ramsay.ws.model.repository.ContextType;
+import com.github.veithen.ramsay.ws.model.repository.DocumentType;
+import com.github.veithen.ramsay.ws.model.repository.RepositoryFactory;
+import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -47,7 +48,7 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see org.eclipse.emf.ecore.EPackage.Registry
-     * @see repository.RepositoryPackage#eNS_URI
+     * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage#eNS_URI
      * @see #init()
      * @generated
      */

@@ -1,13 +1,14 @@
 /**
  */
-package repository.util;
+package com.github.veithen.ramsay.ws.model.repository.util;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import repository.*;
+import com.github.veithen.ramsay.ws.model.repository.*;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +20,7 @@ import repository.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see repository.RepositoryPackage
+ * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage
  * @generated
  */
 public class RepositorySwitch {

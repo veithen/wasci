@@ -1,6 +1,6 @@
 /**
  */
-package repository.impl;
+package com.github.veithen.ramsay.ws.model.repository.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -10,7 +10,8 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import repository.*;
+import com.github.veithen.ramsay.ws.model.repository.*;
+
 
 /**
  * <!-- begin-user-doc -->
