@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+    <extension id="builder"
+               point="org.eclipse.core.resources.builders"
+               name="Metadata Builder">
+        <builder hasNature="true">
+            <run class="com.github.veithen.ramsay.ws.metadata.ModelBuilder"/>
+        </builder>
+    </extension>
+    <extension id="nature"
+               name="WebSphere Configuration Metadata Project"
+               point="org.eclipse.core.resources.natures">
+        <runtime>
+            <run class="com.github.veithen.ramsay.ws.metadata.ProjectNature"/>
+        </runtime>
+        <builder id="com.github.veithen.ramsay.ws.metadata.builder"/>
+    </extension>
+</plugin>

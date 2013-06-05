@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+    <extension point="org.eclipse.ui.newWizards">
+        <category id="ramsay" name="Ramsay"/>
+        <wizard category="ramsay"
+                class="com.github.veithen.ramsay.ws.metadata.ui.NewProjectWizard"
+                id="newProjectWizard"
+                name="WebSphere Configuration Metadata Project"
+                project="true">
+        </wizard>
+    </extension>
+</plugin>
