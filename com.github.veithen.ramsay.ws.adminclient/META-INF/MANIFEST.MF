@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: WebSphere Admin Client
+Bundle-SymbolicName: com.github.veithen.ramsay.ws.adminclient
+Bundle-Version: 0.1.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: runtimes/com.ibm.ws.admin.client_8.5.0.jar,
+ .
+Export-Package: com.ibm.websphere.management,
+ com.ibm.websphere.management.exception,
+ com.ibm.websphere.management.repository,
+ com.ibm.ws.exception,
+ com.ibm.ws.management.repository.client
