@@ -64,8 +64,8 @@ public class Consolidate {
         for (File ecoreFile : ecoreFiles) {
             Resource resource = resourceSet.createResource(URI.createFileURI(ecoreFile.getAbsolutePath()));
             resource.load(null);
-            for (EPackage pkg : (List<EPackage>)resource.getContents()) {
-                registerPackage(registry, pkg);
+            for (EObject content : (List<EObject>)resource.getContents()) {
+                registerPackage(registry, (EPackage)content);
             }
         }
         registry.put("http://www.ibm.com/websphere/appserver/schemas/6.0/pmiservice.xmi", registry.get("http://www.ibm.com/websphere/appserver/schemas/5.0/pmiservice.xmi"));
