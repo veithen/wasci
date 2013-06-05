@@ -16,4 +16,10 @@
         </runtime>
         <builder id="com.github.veithen.ramsay.ws.metadata.builder"/>
     </extension>
+    <extension point="org.eclipse.core.runtime.adapters">
+        <factory adaptableType="org.eclipse.core.resources.IProject"
+                 class="com.github.veithen.ramsay.ws.metadata.ProjectAdapterFactory">
+            <adapter type="com.github.veithen.ramsay.ws.metadata.MetadataProject"/>
+        </factory>
+    </extension>
 </plugin>

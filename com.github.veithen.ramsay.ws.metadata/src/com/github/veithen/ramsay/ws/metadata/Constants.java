@@ -1,7 +1,14 @@
 package com.github.veithen.ramsay.ws.metadata;
 
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+
 public final class Constants {
-    public final static String PLUGIN_ID = "com.github.veithen.ramsay.ws.metadata";
+    public static final String PLUGIN_ID = "com.github.veithen.ramsay.ws.metadata";
+    
+    public static final IPath MODELS_PATH = new Path("models");
+    
+    public static final IPath METADATA_FILE = new Path("wsconfig.ecore");
     
     private Constants() {}
 }

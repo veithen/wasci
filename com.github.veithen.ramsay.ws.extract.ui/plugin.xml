@@ -23,6 +23,8 @@
                 <with variable="activeMenuSelection">
                     <iterate ifEmpty="false" operator="and">
                         <adapt type="org.eclipse.core.resources.IProject">
+                            <!-- TODO: doesn't work because the com.github.veithen.ramsay.ws.extract plugin is not activated early enough-->
+                            <!--adapt type="com.github.veithen.ramsay.ws.extract.ExtractionProject"/-->
                             <test property="org.eclipse.core.resources.projectNature" value="com.github.veithen.ramsay.ws.extract.nature"/>
                         </adapt>
                     </iterate>
