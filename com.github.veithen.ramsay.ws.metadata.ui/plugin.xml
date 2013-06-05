@@ -2,8 +2,8 @@
 <?eclipse version="3.4"?>
 <plugin>
     <extension point="org.eclipse.ui.newWizards">
-        <category id="ramsay" name="Ramsay"/>
-        <wizard category="ramsay"
+        <category id="com.github.veithen.ramsay" name="Ramsay"/>
+        <wizard category="com.github.veithen.ramsay"
                 class="com.github.veithen.ramsay.ws.metadata.ui.NewProjectWizard"
                 id="newProjectWizard"
                 name="WebSphere Configuration Metadata Project"

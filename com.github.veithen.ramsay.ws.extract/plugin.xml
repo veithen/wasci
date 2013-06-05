@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+    <extension id="nature"
+               name="WebSphere Configuration Extraction Project"
+               point="org.eclipse.core.resources.natures">
+        <runtime>
+            <run class="com.github.veithen.ramsay.ws.extract.ProjectNature"/>
+        </runtime>
+    </extension>
+</plugin>

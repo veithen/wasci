@@ -7,7 +7,7 @@ import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
 
 public class ProjectNature implements IProjectNature {
-    public static final String ID = "com.github.veithen.ramsay.ws.metadata.nature";
+    public static final String ID = Constants.PLUGIN_ID + ".nature";
     
     private IProject project;
 

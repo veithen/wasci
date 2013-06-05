@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
 
 public class ModelBuilder extends IncrementalProjectBuilder {
-    public static final String ID = "com.github.veithen.ramsay.ws.metadata.builder";
+    public static final String ID = Constants.PLUGIN_ID + ".builder";
     
     public static final IPath MODELS_PATH = new Path("models");
     
