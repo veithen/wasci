@@ -7,7 +7,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -61,7 +60,7 @@ public class ExtractionProject {
         EClass cellClass = modelMapper.map(metadata.getCellContextType());
         EObject cell = EcoreUtil.create(cellClass);
         ResourceSet outResourceSet = new ResourceSetImpl();
-        Resource outResource = outResourceSet.createResource(URI.createURI(outFile.toString()));
+        Resource outResource = EMFUtil.createResource(outResourceSet, outFile);
         try {
             repository.connect(props);
             outResource.getContents().addAll(new Loader(repository, registry, modelMapper).load("cells/test", "cell.xml"));
