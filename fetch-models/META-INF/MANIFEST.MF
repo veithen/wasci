@@ -4,7 +4,8 @@ Bundle-Name: Fetch-models
 Bundle-SymbolicName: fetch-models
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: com.github.veithen.ramsay.ws.model.repository,
+Import-Package: com.github.veithen.ramsay.ws.metadata,
+ com.github.veithen.ramsay.ws.model.repository,
  com.ibm.websphere.management,
  com.ibm.websphere.management.exception,
  com.ibm.websphere.management.repository,

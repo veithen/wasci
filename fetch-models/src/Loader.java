@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import com.github.veithen.ramsay.ws.metadata.ModelMapper;
 import com.ibm.websphere.management.exception.DocumentNotFoundException;
 import com.ibm.websphere.management.repository.ConfigRepository;
 

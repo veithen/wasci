@@ -18,20 +18,14 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import com.github.veithen.ramsay.ws.metadata.EMFUtil;
+import com.github.veithen.ramsay.ws.metadata.ModelMapper;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
 import com.ibm.websphere.management.AdminClient;
 import com.ibm.ws.management.repository.client.JMXRemoteConfigRepositoryClient;
 
 public class Consolidate {
-    private static void registerPackage(EPackage.Registry registry, EPackage pkg) {
-        System.out.println(pkg.getNsURI());
-        registry.put(pkg.getNsURI(), pkg);
-        for (EPackage subpkg : (List<EPackage>)pkg.getESubpackages()) {
-            registerPackage(registry, subpkg);
-        }
-    }
-    
     private static EPackage createXMIPackage() {
         EPackage pkg = EcoreFactory.eINSTANCE.createEPackage();
         pkg.setName("xmi");
@@ -49,7 +43,7 @@ public class Consolidate {
     
     public static void main(String[] args) throws Exception {
         EPackage.Registry registry = new EPackageRegistryImpl();
-        registerPackage(registry, createXMIPackage());
+        EMFUtil.registerPackage(registry, createXMIPackage());
         File[] ecoreFiles = new File("models").listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
@@ -65,7 +59,7 @@ public class Consolidate {
             Resource resource = resourceSet.createResource(URI.createFileURI(ecoreFile.getAbsolutePath()));
             resource.load(null);
             for (EObject content : (List<EObject>)resource.getContents()) {
-                registerPackage(registry, (EPackage)content);
+                EMFUtil.registerPackage(registry, (EPackage)content);
             }
         }
         registry.put("http://www.ibm.com/websphere/appserver/schemas/6.0/pmiservice.xmi", registry.get("http://www.ibm.com/websphere/appserver/schemas/5.0/pmiservice.xmi"));

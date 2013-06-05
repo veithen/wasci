@@ -1,3 +1,5 @@
+package com.github.veithen.ramsay.ws.metadata;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
