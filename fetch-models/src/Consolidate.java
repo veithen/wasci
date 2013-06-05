@@ -18,9 +18,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import repository.ContextType;
-import repository.RepositoryPackage;
-
+import com.github.veithen.ramsay.ws.model.repository.ContextType;
+import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
 import com.ibm.websphere.management.AdminClient;
 import com.ibm.ws.management.repository.client.JMXRemoteConfigRepositoryClient;
 

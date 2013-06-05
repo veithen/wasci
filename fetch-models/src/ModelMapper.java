@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 
-import repository.ContextType;
-import repository.DocumentType;
+import com.github.veithen.ramsay.ws.model.repository.ContextType;
+import com.github.veithen.ramsay.ws.model.repository.DocumentType;
 
 public class ModelMapper {
     private final EPackage rootPackage;

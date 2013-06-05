@@ -4,7 +4,8 @@ Bundle-Name: Fetch-models
 Bundle-SymbolicName: fetch-models
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: com.ibm.websphere.management,
+Import-Package: com.github.veithen.ramsay.ws.model.repository,
+ com.ibm.websphere.management,
  com.ibm.websphere.management.exception,
  com.ibm.websphere.management.repository,
  com.ibm.ws.exception,
@@ -15,5 +16,4 @@ Import-Package: com.ibm.websphere.management,
  org.eclipse.emf.ecore.resource,
  org.eclipse.emf.ecore.resource.impl,
  org.eclipse.emf.ecore.util,
- org.eclipse.emf.ecore.xmi.impl,
- repository
+ org.eclipse.emf.ecore.xmi.impl
