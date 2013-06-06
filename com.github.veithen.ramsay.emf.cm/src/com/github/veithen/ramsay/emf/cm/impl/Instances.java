@@ -6,7 +6,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.NotifyingInternalEListImpl;
 
@@ -69,7 +68,7 @@ public class Instances {
         EStructuralFeature feature = eClass.getEStructuralFeature(featureID);
         Object[] values = getValues(feature);
         Object value = values[instanceID];
-        if (value == null && feature instanceof EReference && ((EReference)feature).isMany()) {
+        if (value == null && feature.isMany()) {
             value = new NotifyingInternalEListImpl();
             values[instanceID] = value;
         }
