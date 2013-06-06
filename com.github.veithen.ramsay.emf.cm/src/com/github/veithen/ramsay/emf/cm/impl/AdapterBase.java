@@ -13,7 +13,7 @@ public abstract class AdapterBase<T extends Notifier> implements Adapter {
     }
 
     @Override
-    public final Notifier getTarget() {
+    public final T getTarget() {
         return added ? target : null;
     }
 

@@ -77,4 +77,39 @@ public class RealmTest {
         val.add(EcoreUtil.create(class2));
         val.add(EcoreUtil.create(class2));
     }
+    
+    @Test
+    public void testPreexistingSupertypeFeature() {
+        EClass superclass = EcoreFactory.eINSTANCE.createEClass();
+        EAttribute attr = EcoreFactory.eINSTANCE.createEAttribute();
+        attr.setEType(EcorePackage.eINSTANCE.getEString());
+        superclass.getEStructuralFeatures().add(attr);
+        EClass subclass = EcoreFactory.eINSTANCE.createEClass();
+        subclass.getESuperTypes().add(superclass);
+        Realm realm = new Realm();
+        EPackage ePackage = realm.createEPackage();
+        ePackage.getEClassifiers().add(subclass);
+        ePackage.getEClassifiers().add(superclass);
+        EObject object = EcoreUtil.create(subclass);
+        object.eSet(attr, "test");
+    }
+    
+    @Test
+    public void testAddingSupertypeFeature() {
+        Realm realm = new Realm();
+        EPackage ePackage = realm.createEPackage();
+        EClass superclass = EcoreFactory.eINSTANCE.createEClass();
+        superclass.setName("SuperClass");
+        ePackage.getEClassifiers().add(superclass);
+        EAttribute attr = EcoreFactory.eINSTANCE.createEAttribute();
+        attr.setName("attr");
+        attr.setEType(EcorePackage.eINSTANCE.getEInt());
+        superclass.getEStructuralFeatures().add(attr);
+        EClass subclass = EcoreFactory.eINSTANCE.createEClass();
+        subclass.setName("Subclass");
+        ePackage.getEClassifiers().add(subclass);
+        subclass.getESuperTypes().add(superclass);
+        EObject object = EcoreUtil.create(subclass);
+        object.eSet(attr, new Integer(1));
+    }
 }

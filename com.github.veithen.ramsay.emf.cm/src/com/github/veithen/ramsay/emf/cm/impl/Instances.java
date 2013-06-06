@@ -25,6 +25,10 @@ public class Instances {
     public void featureAdded(EStructuralFeature feature) {
         valueMap.put(feature, new Object[capacity]);
     }
+
+    public void featureRemoved(EStructuralFeature feature) {
+        valueMap.remove(feature);
+    }
     
     public EClass getEClass() {
         return eClass;
