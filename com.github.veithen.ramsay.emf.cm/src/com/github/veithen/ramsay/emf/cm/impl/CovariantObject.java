@@ -1,40 +1,36 @@
 package com.github.veithen.ramsay.emf.cm.impl;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EStructuralFeature.Internal.DynamicValueHolder;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-public class CovariantObject extends EObjectImpl {
+public class CovariantObject extends EObjectImpl implements EStructuralFeature.Internal.DynamicValueHolder {
     private final Instances instances;
     private final int instanceID;
     
     public CovariantObject(Instances instances, int instanceID) {
         this.instances = instances;
         this.instanceID = instanceID;
+        eSetClass(instances.getEClass());
     }
 
     @Override
-    protected EClass eStaticClass() {
-        return instances.getEClass();
+    protected DynamicValueHolder eSettings() {
+        return this;
     }
 
     @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        return instances.eGet(instanceID, featureID);
+    public Object dynamicGet(int dynamicFeatureID) {
+        return instances.get(instanceID, eStaticFeatureCount() + dynamicFeatureID);
     }
 
     @Override
-    public void eSet(EStructuralFeature feature, Object newValue) {
-        instances.eSet(instanceID, feature, newValue);
+    public void dynamicSet(int dynamicFeatureID, Object newValue) {
+        instances.set(instanceID, eStaticFeatureCount() + dynamicFeatureID, newValue);
     }
 
     @Override
-    public boolean eIsSet(EStructuralFeature feature) {
-        return instances.eIsSet(instanceID, feature);
-    }
-
-    @Override
-    public void eUnset(EStructuralFeature feature) {
+    public void dynamicUnset(int dynamicFeatureID) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException();
     }

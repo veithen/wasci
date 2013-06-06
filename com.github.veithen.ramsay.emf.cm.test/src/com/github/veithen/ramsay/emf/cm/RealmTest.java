@@ -3,7 +3,10 @@ package com.github.veithen.ramsay.emf.cm;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
+
+import java.util.Arrays;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
@@ -127,6 +130,30 @@ public class RealmTest {
                 subclass.getESuperTypes().add(superclass);
                 EObject object = EcoreUtil.create(subclass);
                 object.eSet(attr, new Integer(1));
+            }
+        });
+    }
+    
+    @Test
+    public void testContainment() {
+        execute(new Scenario() {
+            @Override
+            public void execute(EPackageFactory factory) {
+                EPackage ePackage = factory.createEPackage();
+                EClass class1 = EcoreFactory.eINSTANCE.createEClass();
+                EClass class2 = EcoreFactory.eINSTANCE.createEClass();
+                ePackage.getEClassifiers().addAll(Arrays.asList(class1, class2));
+                EReference ref = EcoreFactory.eINSTANCE.createEReference();
+                ref.setEType(class2);
+                ref.setContainment(true);
+                class1.getEStructuralFeatures().add(ref);
+                EObject object1 = EcoreUtil.create(class1);
+                EObject object2 = EcoreUtil.create(class2);
+                object1.eSet(ref, object2);
+                assertSame(object1, object2.eContainer());
+                EList<EObject> contents = object1.eContents();
+                assertEquals(1, contents.size());
+                assertSame(object2, contents.get(0));
             }
         });
     }

@@ -3,11 +3,9 @@ package com.github.veithen.ramsay.emf.cm.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.NotifyingInternalEListImpl;
 
 public class Instances {
     private final EClass eClass;
@@ -48,7 +46,8 @@ public class Instances {
         return new CovariantObject(this, instanceCount++);
     }
     
-    private Object[] getValues(EStructuralFeature feature) {
+    private Object[] getValues(int featureID) {
+        EStructuralFeature feature = eClass.getEStructuralFeature(featureID);
         Object[] values = valueMap.get(feature);
         if (values == null) {
             throw new IllegalArgumentException(feature.getName() + " is not a feature of " + eClass.getName());
@@ -56,30 +55,11 @@ public class Instances {
         return values;
     }
     
-    public boolean eIsSet(int instanceId, EStructuralFeature feature) {
-        Object value = getValues(feature)[instanceId];
-        // TODO: need to take default values into account
-        if (value == null) {
-            return false;
-        } else if (feature.isMany()) {
-            return !((EList<?>)value).isEmpty();
-        } else {
-            return true;
-        }
+    public Object get(int instanceID, int featureID) {
+        return getValues(featureID)[instanceID];
     }
     
-    public Object eGet(int instanceID, int featureID) {
-        EStructuralFeature feature = eClass.getEStructuralFeature(featureID);
-        Object[] values = getValues(feature);
-        Object value = values[instanceID];
-        if (value == null && feature.isMany()) {
-            value = new NotifyingInternalEListImpl();
-            values[instanceID] = value;
-        }
-        return value;
-    }
-    
-    public void eSet(int instanceId, EStructuralFeature feature, Object newValue) {
-        getValues(feature)[instanceId] = newValue;
+    public void set(int instanceId, int featureID, Object newValue) {
+        getValues(featureID)[instanceId] = newValue;
     }
 }
