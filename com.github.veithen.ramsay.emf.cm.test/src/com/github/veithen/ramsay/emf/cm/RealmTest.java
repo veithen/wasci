@@ -3,6 +3,7 @@ package com.github.veithen.ramsay.emf.cm;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
@@ -19,6 +20,15 @@ import com.github.veithen.ramsay.emf.cm.impl.CovariantClassAdapter;
 import com.github.veithen.ramsay.emf.cm.impl.EMFUtil;
 
 public class RealmTest {
+    private static void execute(Scenario scenario) {
+        try {
+            scenario.execute(DefaultEPackageFactory.INSTANCE);
+        } catch (AssertionError ex) {
+            fail("Invalid test case; scenario failed with standard EPackage instances");
+        }
+        scenario.execute(new CovariantEPackageFactory());
+    }
+    
     @Test
     public void testAddToRealmAfterEClassCreation() {
         EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
@@ -80,36 +90,44 @@ public class RealmTest {
     
     @Test
     public void testPreexistingSupertypeFeature() {
-        EClass superclass = EcoreFactory.eINSTANCE.createEClass();
-        EAttribute attr = EcoreFactory.eINSTANCE.createEAttribute();
-        attr.setEType(EcorePackage.eINSTANCE.getEString());
-        superclass.getEStructuralFeatures().add(attr);
-        EClass subclass = EcoreFactory.eINSTANCE.createEClass();
-        subclass.getESuperTypes().add(superclass);
-        Realm realm = new Realm();
-        EPackage ePackage = realm.createEPackage();
-        ePackage.getEClassifiers().add(subclass);
-        ePackage.getEClassifiers().add(superclass);
-        EObject object = EcoreUtil.create(subclass);
-        object.eSet(attr, "test");
+        execute(new Scenario() {
+            @Override
+            public void execute(EPackageFactory factory) {
+                EClass superclass = EcoreFactory.eINSTANCE.createEClass();
+                EAttribute attr = EcoreFactory.eINSTANCE.createEAttribute();
+                attr.setEType(EcorePackage.eINSTANCE.getEString());
+                superclass.getEStructuralFeatures().add(attr);
+                EClass subclass = EcoreFactory.eINSTANCE.createEClass();
+                subclass.getESuperTypes().add(superclass);
+                EPackage ePackage = factory.createEPackage();
+                ePackage.getEClassifiers().add(subclass);
+                ePackage.getEClassifiers().add(superclass);
+                EObject object = EcoreUtil.create(subclass);
+                object.eSet(attr, "test");
+            }
+        });
     }
     
     @Test
     public void testAddingSupertypeFeature() {
-        Realm realm = new Realm();
-        EPackage ePackage = realm.createEPackage();
-        EClass superclass = EcoreFactory.eINSTANCE.createEClass();
-        superclass.setName("SuperClass");
-        ePackage.getEClassifiers().add(superclass);
-        EAttribute attr = EcoreFactory.eINSTANCE.createEAttribute();
-        attr.setName("attr");
-        attr.setEType(EcorePackage.eINSTANCE.getEInt());
-        superclass.getEStructuralFeatures().add(attr);
-        EClass subclass = EcoreFactory.eINSTANCE.createEClass();
-        subclass.setName("Subclass");
-        ePackage.getEClassifiers().add(subclass);
-        subclass.getESuperTypes().add(superclass);
-        EObject object = EcoreUtil.create(subclass);
-        object.eSet(attr, new Integer(1));
+        execute(new Scenario() {
+            @Override
+            public void execute(EPackageFactory factory) {
+                EPackage ePackage = factory.createEPackage();
+                EClass superclass = EcoreFactory.eINSTANCE.createEClass();
+                superclass.setName("SuperClass");
+                ePackage.getEClassifiers().add(superclass);
+                EAttribute attr = EcoreFactory.eINSTANCE.createEAttribute();
+                attr.setName("attr");
+                attr.setEType(EcorePackage.eINSTANCE.getEInt());
+                superclass.getEStructuralFeatures().add(attr);
+                EClass subclass = EcoreFactory.eINSTANCE.createEClass();
+                subclass.setName("Subclass");
+                ePackage.getEClassifiers().add(subclass);
+                subclass.getESuperTypes().add(superclass);
+                EObject object = EcoreUtil.create(subclass);
+                object.eSet(attr, new Integer(1));
+            }
+        });
     }
 }
