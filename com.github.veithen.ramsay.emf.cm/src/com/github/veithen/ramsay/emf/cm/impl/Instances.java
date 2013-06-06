@@ -65,12 +65,13 @@ public class Instances {
         }
     }
     
-    public Object eGet(int instanceId, EStructuralFeature feature) {
+    public Object eGet(int instanceID, int featureID) {
+        EStructuralFeature feature = eClass.getEStructuralFeature(featureID);
         Object[] values = getValues(feature);
-        Object value = values[instanceId];
+        Object value = values[instanceID];
         if (value == null && feature instanceof EReference && ((EReference)feature).isMany()) {
             value = new NotifyingInternalEListImpl();
-            values[instanceId] = value;
+            values[instanceID] = value;
         }
         return value;
     }
