@@ -3,6 +3,7 @@ package com.github.veithen.ramsay.emf.cm.impl;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.EList;
 
 public abstract class AdapterBase<T extends Notifier> implements Adapter {
     protected final T target;
@@ -45,6 +46,11 @@ public abstract class AdapterBase<T extends Notifier> implements Adapter {
             // TODO: other cases
             case Notification.ADD:
                 set(featureId, notification.getNewValue());
+                break;
+            case Notification.ADD_MANY:
+                for (Object object : (EList<?>)notification.getNewValue()) {
+                    set(featureId, object);
+                }
                 break;
         }
     }
