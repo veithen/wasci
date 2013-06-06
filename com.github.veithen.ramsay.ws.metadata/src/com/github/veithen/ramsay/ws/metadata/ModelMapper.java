@@ -19,10 +19,12 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 
+import com.github.veithen.ramsay.emf.cm.Realm;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.DocumentType;
 
 public class ModelMapper {
+    private final Realm realm;
     private final EPackage rootPackage;
     private final EPackage contextPackage;
     private Map<EPackage,EPackage> packageMap = new HashMap<EPackage,EPackage>();
@@ -32,10 +34,11 @@ public class ModelMapper {
     private Map<EClass,EClass> classMap = new HashMap<EClass,EClass>();
     private Map<EStructuralFeature,EStructuralFeature> featureMap = new HashMap<EStructuralFeature,EStructuralFeature>();
     
-    public ModelMapper() {
-        rootPackage = EcoreFactory.eINSTANCE.createEPackage();
+    public ModelMapper(Realm realm) {
+        this.realm = realm;
+        rootPackage = realm.createEPackage();
         rootPackage.setName("wsconfig");
-        contextPackage = EcoreFactory.eINSTANCE.createEPackage();
+        contextPackage = realm.createEPackage();
         contextPackage.setName("context");
         rootPackage.getESubpackages().add(contextPackage);
     }
@@ -47,7 +50,7 @@ public class ModelMapper {
     private EPackage map(EPackage in) {
         EPackage out = packageMap.get(in);
         if (out == null) {
-            out = EcoreFactory.eINSTANCE.createEPackage();
+            out = realm.createEPackage();
             out.setName(in.getName());
             packageMap.put(in, out);
             EPackage inSuperPackage = in.getESuperPackage();

@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
+import com.github.veithen.ramsay.emf.cm.Realm;
+
 public class MetadataProject {
     private final IProject project;
 
@@ -36,6 +38,10 @@ public class MetadataProject {
             }
         }, IResource.DEPTH_ONE, 0);
         registry.put("http://www.ibm.com/websphere/appserver/schemas/6.0/pmiservice.xmi", registry.get("http://www.ibm.com/websphere/appserver/schemas/5.0/pmiservice.xmi"));
-        return new Metadata(registry, EMFUtil.load(resourceSet, repositoryMetadata), new ModelMapper());
+        Realm realm = new Realm();
+        for (Object object : registry.values()) {
+            realm.addPackage((EPackage)object);
+        }
+        return new Metadata(registry, EMFUtil.load(resourceSet, repositoryMetadata), new ModelMapper(realm));
     }
 }

@@ -1,4 +1,5 @@
 package com.github.veithen.ramsay.ws.extract;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
