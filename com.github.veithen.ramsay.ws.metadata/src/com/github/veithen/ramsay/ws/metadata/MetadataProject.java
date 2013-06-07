@@ -13,12 +13,25 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
+import com.github.veithen.ramsay.ws.model.repository.ContextType;
 
 public class MetadataProject {
     private final IProject project;
 
     public MetadataProject(IProject project) {
         this.project = project;
+    }
+    
+    public ContextType getCellContextType() throws CoreException {
+        IFolder modelsFolder = project.getFolder(Constants.MODELS_PATH);
+        IFile repositoryMetadata = modelsFolder.getFile("repository-metadata.xmi");
+        ResourceSet resourceSet = new ResourceSetImpl();
+        for (EObject object : EMFUtil.load(resourceSet, repositoryMetadata).getContents()) {
+            if (object instanceof ContextType && ((ContextType)object).getName().equals("cells")) {
+                return (ContextType)object;
+            }
+        }
+        return null;
     }
     
     public Metadata loadMetadata() throws CoreException {

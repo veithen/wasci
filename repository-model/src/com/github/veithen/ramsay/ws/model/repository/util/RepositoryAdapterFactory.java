@@ -73,6 +73,12 @@ public class RepositoryAdapterFactory extends AdapterFactoryImpl {
             public Object caseDocumentType(DocumentType object) {
                 return createDocumentTypeAdapter();
             }
+            public Object caseContext(Context object) {
+                return createContextAdapter();
+            }
+            public Object caseDocument(Document object) {
+                return createDocumentAdapter();
+            }
             public Object defaultCase(EObject object) {
                 return createEObjectAdapter();
             }
@@ -116,6 +122,34 @@ public class RepositoryAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createDocumentTypeAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link com.github.veithen.ramsay.ws.model.repository.Context <em>Context</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see com.github.veithen.ramsay.ws.model.repository.Context
+     * @generated
+     */
+    public Adapter createContextAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link com.github.veithen.ramsay.ws.model.repository.Document <em>Document</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see com.github.veithen.ramsay.ws.model.repository.Document
+     * @generated
+     */
+    public Adapter createDocumentAdapter() {
         return null;
     }
 

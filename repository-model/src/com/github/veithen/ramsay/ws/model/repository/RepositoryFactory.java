@@ -40,6 +40,24 @@ public interface RepositoryFactory extends EFactory {
     DocumentType createDocumentType();
 
     /**
+     * Returns a new object of class '<em>Context</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Context</em>'.
+     * @generated
+     */
+    Context createContext();
+
+    /**
+     * Returns a new object of class '<em>Document</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Document</em>'.
+     * @generated
+     */
+    Document createDocument();
+
+    /**
      * Returns the package supported by this factory.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

@@ -58,6 +58,8 @@ public class RepositoryFactoryImpl extends EFactoryImpl implements RepositoryFac
         switch (eClass.getClassifierID()) {
             case RepositoryPackage.CONTEXT_TYPE: return createContextType();
             case RepositoryPackage.DOCUMENT_TYPE: return createDocumentType();
+            case RepositoryPackage.CONTEXT: return createContext();
+            case RepositoryPackage.DOCUMENT: return createDocument();
             default:
                 throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
         }
@@ -81,6 +83,26 @@ public class RepositoryFactoryImpl extends EFactoryImpl implements RepositoryFac
     public DocumentType createDocumentType() {
         DocumentTypeImpl documentType = new DocumentTypeImpl();
         return documentType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Context createContext() {
+        ContextImpl context = new ContextImpl();
+        return context;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Document createDocument() {
+        DocumentImpl document = new DocumentImpl();
+        return document;
     }
 
     /**

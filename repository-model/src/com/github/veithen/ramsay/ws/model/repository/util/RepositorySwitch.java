@@ -96,6 +96,18 @@ public class RepositorySwitch {
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
+            case RepositoryPackage.CONTEXT: {
+                Context context = (Context)theEObject;
+                Object result = caseContext(context);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case RepositoryPackage.DOCUMENT: {
+                Document document = (Document)theEObject;
+                Object result = caseDocument(document);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
             default: return defaultCase(theEObject);
         }
     }
@@ -127,6 +139,36 @@ public class RepositorySwitch {
      * @generated
      */
     public Object caseDocumentType(DocumentType object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Context</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Context</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseContext(Context object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Document</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Document</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseDocument(Document object) {
         return null;
     }
 

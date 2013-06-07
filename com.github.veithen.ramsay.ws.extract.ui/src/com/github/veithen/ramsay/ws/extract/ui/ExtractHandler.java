@@ -21,7 +21,9 @@ public class ExtractHandler extends AbstractHandler {
 	        try {
 	            IProject project = (IProject)it.next();
 	            IFile outFile = project.getFile("wsconfig.xmi");
-                ((ExtractionProject)project.getAdapter(ExtractionProject.class)).extract(outFile);
+	            ExtractionProject extractionProject = (ExtractionProject)project.getAdapter(ExtractionProject.class);
+	            extractionProject.extractRaw();
+                extractionProject.extract(outFile);
                 outFile.refreshLocal(IResource.DEPTH_ONE, null);
             } catch (CoreException ex) {
                 // TODO
