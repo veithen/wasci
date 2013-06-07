@@ -10,17 +10,15 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import com.github.veithen.ramsay.emf.xmi.XmiPackage;
 import com.github.veithen.ramsay.ws.metadata.EMFUtil;
 import com.github.veithen.ramsay.ws.metadata.Metadata;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
@@ -34,21 +32,6 @@ public class ExtractionProject {
 
     public ExtractionProject(IProject project) {
         this.project = project;
-    }
-    
-    public static EPackage createXMIPackage() {
-        EPackage pkg = EcoreFactory.eINSTANCE.createEPackage();
-        pkg.setName("xmi");
-        pkg.setNsPrefix("xmi");
-        pkg.setNsURI("http://www.omg.org/XMI");
-        EClass clazz = EcoreFactory.eINSTANCE.createEClass();
-        clazz.setName("Documentation");
-        EAttribute att = EcoreFactory.eINSTANCE.createEAttribute();
-        att.setName("contact");
-        att.setEType(EcorePackage.eINSTANCE.getEString());
-        clazz.getEStructuralFeatures().add(att);
-        pkg.getEClassifiers().add(clazz);
-        return pkg;
     }
     
     private ConfigRepository connect() throws CoreException {
@@ -68,7 +51,7 @@ public class ExtractionProject {
     public void extract(IFile outFile) throws CoreException {
         Metadata metadata = getMetadataProject().loadMetadata();
         EPackage.Registry registry = metadata.getRegistry();
-        EMFUtil.registerPackage(registry, createXMIPackage());
+        EMFUtil.registerPackage(registry, XmiPackage.eINSTANCE);
         ModelMapper modelMapper = metadata.getModelMapper();
         EClass cellClass = modelMapper.map(metadata.getCellContextType());
         EObject cell = EcoreUtil.create(cellClass);
