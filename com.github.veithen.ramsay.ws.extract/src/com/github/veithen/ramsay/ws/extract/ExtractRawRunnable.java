@@ -1,11 +1,14 @@
 package com.github.veithen.ramsay.ws.extract;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -36,6 +39,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
     private IProgressMonitor monitor;
     private Set<String> resourceNames;
     private ResourceSet resourceSet;
+    private Set<IResource> resourcesToDelete = new HashSet<IResource>();
     
     public ExtractRawRunnable(MetadataProject metadataProject, IFolder folder, ConfigRepository repository) {
         this.metadataProject = metadataProject;
@@ -45,16 +49,50 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
 
     @Override
     public void run(IProgressMonitor monitor) throws CoreException {
+        if (folder.exists()) {
+            folder.accept(new IResourceVisitor() {
+                @Override
+                public boolean visit(IResource resource) throws CoreException {
+                    resourcesToDelete.add(resource);
+                    return true;
+                }
+            });
+            resourcesToDelete.remove(folder);
+        } else {
+            folder.create(false, true, monitor);
+        }
         resourceNames = new HashSet<String>(Arrays.asList(repository.listResourceNames("", 3, Integer.MAX_VALUE)));
         Context cellContext = buildContext("cells/test", metadataProject.getCellContextType(), "test");
         resourceSet = new ResourceSetImpl();
         Registry registry = metadataProject.loadMetadata().getRegistry();
         EMFUtil.registerPackage(registry, XmiPackage.eINSTANCE);
         resourceSet.setPackageRegistry(registry);
-        Resource index = EMFUtil.createResource(resourceSet, folder.getFile("index.xmi"));
+        IFile indexFile = folder.getFile("index.xmi");
+        resourcesToDelete.remove(indexFile);
+        Resource index = EMFUtil.createResource(resourceSet, indexFile);
         index.getContents().add(cellContext);
         extractDocuments("cells/test", cellContext, folder);
         EMFUtil.save(index);
+        for (IResource resource : resourcesToDelete) {
+            resource.delete(false, monitor);
+        }
+    }
+    
+    private void create(IFolder folder) throws CoreException {
+        if (folder.exists()) {
+            resourcesToDelete.remove(folder);
+        } else {
+            folder.create(false, true, monitor);
+        }
+    }
+    
+    private void create(IFile file, InputStream source) throws CoreException {
+        if (file.exists()) {
+            resourcesToDelete.remove(file);
+            file.setContents(source, false, true, monitor);
+        } else {
+            file.create(source, false, monitor);
+        }
     }
     
     private Context buildContext(String uri, ContextType type, String name) {
@@ -98,7 +136,6 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
     }
     
     private void extractDocuments(String uri, Context context, IFolder folder) throws CoreException {
-        folder.create(true, true, monitor);
         Document rootDocument = context.getRootDocument();
         if (rootDocument != null) {
             extractDocument(repository, uri, rootDocument, folder, resourceSet);
@@ -107,7 +144,10 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
             extractDocument(repository, uri, childDocument, folder, resourceSet);
         }
         for (Context childContext : (EList<Context>)context.getChildContexts()) {
-            IFolder childFolder = folder.getFolder(childContext.getType().getName() + "_" + childContext.getName());
+            IFolder childFolder = folder.getFolder(childContext.getType().getName());
+            create(childFolder);
+            childFolder = childFolder.getFolder(childContext.getName());
+            create(childFolder);
             extractDocuments(uri + "/" + childContext.getType().getName() + "/" + childContext.getName(), childContext, childFolder);
         }
     }
@@ -120,7 +160,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
         String uri = contextURI + "/" + fileName;
         IFile file = folder.getFile(fileName);
         try {
-            file.create(repository.extract(uri).getSource(), true, monitor);
+            create(file, repository.extract(uri).getSource());
         } catch (RepositoryException ex) {
             throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Error extracting document " + uri, ex));
         }
