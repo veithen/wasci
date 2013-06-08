@@ -9,12 +9,15 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 public class Instances {
     private final EClass eClass;
+    private EObject[] instances;
     private final Map<EStructuralFeature,Object[]> valueMap = new HashMap<EStructuralFeature,Object[]>();
-    private int capacity = 10;
+    private int capacity;
     private int instanceCount;
 
     public Instances(EClass eClass) {
         this.eClass = eClass;
+        capacity = 10;
+        instances = new EObject[capacity];
         for (EStructuralFeature feature : eClass.getEAllStructuralFeatures()) {
             featureAdded(feature);
         }
@@ -35,6 +38,9 @@ public class Instances {
     public EObject newInstance() {
         if (instanceCount == capacity) {
             int newCapacity = capacity*2;
+            EObject[] newInstances = new EObject[newCapacity];
+            System.arraycopy(instances, 0, newInstances, 0, capacity);
+            instances = newInstances;
             for (Map.Entry<EStructuralFeature,Object[]> entry : valueMap.entrySet()) {
                 Object[] oldValues = entry.getValue();
                 Object[] newValues = new Object[newCapacity];
@@ -43,7 +49,16 @@ public class Instances {
             }
             capacity = newCapacity;
         }
-        return new CovariantObject(this, instanceCount++);
+        int instanceID = instanceCount++;
+        EObject instance = new CovariantObject(this, instanceID);
+        instances[instanceID] = instance;
+        return instance;
+    }
+    
+    public EObject[] getInstances() {
+        EObject[] result = new EObject[instanceCount];
+        System.arraycopy(instances, 0, result, 0, instanceCount);
+        return result;
     }
     
     private Object[] getValues(int featureID) {
@@ -59,7 +74,7 @@ public class Instances {
         return getValues(featureID)[instanceID];
     }
     
-    public void set(int instanceId, int featureID, Object newValue) {
-        getValues(featureID)[instanceId] = newValue;
+    public void set(int instanceID, int featureID, Object newValue) {
+        getValues(featureID)[instanceID] = newValue;
     }
 }

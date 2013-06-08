@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 
@@ -36,6 +37,20 @@ public class Realm {
         ePackage.eAdapters().add(adapter);
         ePackage.setEFactoryInstance(new FactoryWrapper(ePackage.getEFactoryInstance()));
         packageAdapters.add(adapter);
+    }
+
+    public EPackage getPackage(String uri) {
+        for (CovariantPackageAdapter adapter : packageAdapters) {
+            EPackage ePackage = adapter.getTarget();
+            if (uri.equals(ePackage.getNsURI())) {
+                return ePackage;
+            }
+        }
+        return null;
+    }
+    
+    public EObject[] getInstances(EClass eClass) {
+        return EMFUtil.getAdapter(CovariantClassAdapter.class, eClass).getInstances().getInstances();
     }
     
     // TODO: internal method

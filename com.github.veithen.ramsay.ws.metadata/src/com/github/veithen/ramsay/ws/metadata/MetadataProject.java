@@ -59,6 +59,6 @@ public class MetadataProject {
         }
         EMFUtil.registerPackage(registry, XmiPackage.eINSTANCE);
         EMFUtil.registerPackage(registry, RepositoryPackage.eINSTANCE);
-        return new Metadata(registry, EMFUtil.load(resourceSet, repositoryMetadata), new ModelMapper(realm));
+        return new Metadata(realm, registry, EMFUtil.load(resourceSet, repositoryMetadata), new ModelMapper(realm));
     }
 }
