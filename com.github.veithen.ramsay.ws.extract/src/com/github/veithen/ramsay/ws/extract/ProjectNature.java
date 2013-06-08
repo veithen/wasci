@@ -9,11 +9,11 @@ public class ProjectNature extends AbstractProjectNature {
     
     @Override
     public void configure() throws CoreException {
-        
+        installBuilder(Builder.ID);
     }
 
     @Override
     public void deconfigure() throws CoreException {
-        
+        removeBuilder(Builder.ID);
     }
 }

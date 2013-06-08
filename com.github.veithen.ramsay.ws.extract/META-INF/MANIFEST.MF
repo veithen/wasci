@@ -9,7 +9,6 @@ Require-Bundle: org.eclipse.core.resources,
 Export-Package: com.github.veithen.ramsay.ws.extract
 Bundle-ActivationPolicy: lazy
 Import-Package: com.github.veithen.ramsay.emf.cm,
- com.github.veithen.ramsay.emf.xmi,
  com.github.veithen.ramsay.util,
  com.github.veithen.ramsay.ws.metadata,
  com.github.veithen.ramsay.ws.model.repository,

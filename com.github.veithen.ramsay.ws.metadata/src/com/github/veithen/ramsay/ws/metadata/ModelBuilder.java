@@ -1,11 +1,13 @@
 package com.github.veithen.ramsay.ws.metadata;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -21,7 +23,13 @@ public class ModelBuilder extends SimpleBuilder {
     }
 
     @Override
-    protected void doBuild(IProgressMonitor monitor) throws CoreException {
+    protected IPath getOutputPath() {
+        // TODO
+        return new Path("dummy");
+    }
+
+    @Override
+    protected void doBuild(IFolder inputFolder, IFolder outputFolder, IProgressMonitor monitor) throws CoreException {
         IProject project = getProject();
         MetadataProject metadataProject = (MetadataProject)project.getAdapter(MetadataProject.class);
         Metadata metadata = metadataProject.loadMetadata();

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+    <extension id="builder"
+               point="org.eclipse.core.resources.builders"
+               name="Transformed Model Builder">
+        <builder hasNature="true">
+            <run class="com.github.veithen.ramsay.ws.extract.Builder"/>
+        </builder>
+    </extension>
     <extension id="nature"
                name="WebSphere Configuration Extraction Project"
                point="org.eclipse.core.resources.natures">
         <runtime>
             <run class="com.github.veithen.ramsay.ws.extract.ProjectNature"/>
         </runtime>
+        <builder id="com.github.veithen.ramsay.ws.extract.builder"/>
     </extension>
     <extension point="org.eclipse.core.runtime.adapters">
         <factory adaptableType="org.eclipse.core.resources.IProject"

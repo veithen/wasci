@@ -13,7 +13,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
+import com.github.veithen.ramsay.emf.xmi.XmiPackage;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
+import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
 
 public class MetadataProject {
     private final IProject project;
@@ -55,6 +57,8 @@ public class MetadataProject {
         for (Object object : registry.values()) {
             realm.addPackage((EPackage)object);
         }
+        EMFUtil.registerPackage(registry, XmiPackage.eINSTANCE);
+        EMFUtil.registerPackage(registry, RepositoryPackage.eINSTANCE);
         return new Metadata(registry, EMFUtil.load(resourceSet, repositoryMetadata), new ModelMapper(realm));
     }
 }

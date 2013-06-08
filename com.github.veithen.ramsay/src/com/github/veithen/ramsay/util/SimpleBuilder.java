@@ -2,6 +2,7 @@ package com.github.veithen.ramsay.util;
 
 import java.util.Map;
 
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
@@ -19,9 +20,11 @@ public abstract class SimpleBuilder extends IncrementalProjectBuilder {
     protected final IProject[] build(int kind, Map<String,String> args, IProgressMonitor monitor) throws CoreException {
         IProject project = getProject();
         IResourceDelta delta = getDelta(project);
+        IPath inputPath = getInputPath();
         // Note: delta == null means unspecified changes
-        if (kind == FULL_BUILD || delta == null || delta.findMember(getInputPath()) != null) {
-            doBuild(monitor);
+        if (kind == FULL_BUILD || delta == null || delta.findMember(inputPath) != null) {
+            // TODO: create/clean output folder
+            doBuild(project.getFolder(inputPath), project.getFolder(getOutputPath()), monitor);
         }
         return null;
     }
@@ -33,5 +36,12 @@ public abstract class SimpleBuilder extends IncrementalProjectBuilder {
      */
     protected abstract IPath getInputPath();
     
-    protected abstract void doBuild(IProgressMonitor monitor) throws CoreException;
+    /**
+     * Get the path to the output folder relative to the project.
+     * 
+     * @return the path to the output folder
+     */
+    protected abstract IPath getOutputPath();
+    
+    protected abstract void doBuild(IFolder inputFolder, IFolder outputFolder, IProgressMonitor monitor) throws CoreException;
 }

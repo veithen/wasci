@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com.github.veithen.ramsay.emf.xmi.XmiPackage;
 import com.github.veithen.ramsay.ws.metadata.EMFUtil;
 import com.github.veithen.ramsay.ws.metadata.Metadata;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
@@ -51,7 +50,6 @@ public class ExtractionProject {
     public void extract(IFile outFile) throws CoreException {
         Metadata metadata = getMetadataProject().loadMetadata();
         EPackage.Registry registry = metadata.getRegistry();
-        EMFUtil.registerPackage(registry, XmiPackage.eINSTANCE);
         ModelMapper modelMapper = metadata.getModelMapper();
         EClass cellClass = modelMapper.map(metadata.getCellContextType());
         EObject cell = EcoreUtil.create(cellClass);
@@ -93,7 +91,7 @@ public class ExtractionProject {
     
     public void extractRaw(IProgressMonitor monitor) throws CoreException {
         MetadataProject metadataProject = getMetadataProject();
-        IFolder folder = project.getFolder("raw");
+        IFolder folder = project.getFolder(Constants.RAW_PATH);
         ConfigRepository repository = connect();
         project.getWorkspace().run(new ExtractRawRunnable(metadataProject, folder, repository),
                 null, IWorkspace.AVOID_UPDATE, monitor);

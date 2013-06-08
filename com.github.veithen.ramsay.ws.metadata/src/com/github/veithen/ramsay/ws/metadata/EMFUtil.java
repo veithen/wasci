@@ -23,9 +23,13 @@ public final class EMFUtil {
         }
     }
     
-    public static Resource createResource(ResourceSet resourceSet, IFile file) {
+    public static URI createURI(IFile file) {
         // See http://wiki.eclipse.org/EMF/FAQ#How_do_I_map_between_an_EMF_Resource_and_an_Eclipse_IFile.3F
-        return resourceSet.createResource(URI.createPlatformResourceURI(file.getFullPath().toString(), true));
+        return URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+    }
+    
+    public static Resource createResource(ResourceSet resourceSet, IFile file) {
+        return resourceSet.createResource(createURI(file));
     }
     
     public static Resource load(ResourceSet resourceSet, IFile file) throws CoreException {

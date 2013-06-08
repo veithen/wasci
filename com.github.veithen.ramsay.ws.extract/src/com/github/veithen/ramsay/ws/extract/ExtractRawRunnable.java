@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import com.github.veithen.ramsay.emf.xmi.XmiPackage;
 import com.github.veithen.ramsay.ws.metadata.EMFUtil;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
 import com.github.veithen.ramsay.ws.model.repository.Context;
@@ -65,7 +64,6 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
         Context cellContext = buildContext("cells/test", metadataProject.getCellContextType(), "test");
         resourceSet = new ResourceSetImpl();
         Registry registry = metadataProject.loadMetadata().getRegistry();
-        EMFUtil.registerPackage(registry, XmiPackage.eINSTANCE);
         resourceSet.setPackageRegistry(registry);
         IFile indexFile = folder.getFile("index.xmi");
         resourcesToDelete.remove(indexFile);
