@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.github.veithen.ramsay.emf.cm.cmml/src" modelPluginID="com.github.veithen.ramsay.emf.cm.cmml"
+    modelName="CMML" testsDirectory="" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>cmml.ecore</foreignModel>
+  <genPackages prefix="CMML" basePackage="com.github.veithen.ramsay.emf.cm" disposableProviderFactory="true"
+      ecorePackage="cmml.ecore#/">
+    <genClasses image="false" ecoreClass="cmml.ecore#//Transformation"/>
+    <genClasses ecoreClass="cmml.ecore#//Transformations">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cmml.ecore#//Transformations/transformation"/>
+    </genClasses>
+    <genClasses ecoreClass="cmml.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cmml.ecore#//Type/nsURI"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cmml.ecore#//Type/name"/>
+    </genClasses>
+    <genClasses ecoreClass="cmml.ecore#//KeyMapping">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cmml.ecore#//KeyMapping/from"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cmml.ecore#//KeyMapping/to"/>
+    </genClasses>
+    <genClasses ecoreClass="cmml.ecore#//OppositeReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cmml.ecore#//OppositeReference/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cmml.ecore#//OppositeReference/keyMappings"/>
+    </genClasses>
+    <genClasses ecoreClass="cmml.ecore#//Join">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cmml.ecore#//Join/from"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cmml.ecore#//Join/to"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cmml.ecore#//Join/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cmml.ecore#//Join/keyMappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cmml.ecore#//Join/oppositeReference"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
