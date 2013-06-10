@@ -10,7 +10,7 @@ import com.github.veithen.ramsay.emf.cm.cmml.Join;
 import com.github.veithen.ramsay.emf.cm.cmml.KeyMapping;
 import com.github.veithen.ramsay.emf.cm.cmml.RemoveFeature;
 import com.github.veithen.ramsay.emf.cm.cmml.Transformation;
-import com.github.veithen.ramsay.emf.cm.cmml.Transformations;
+import com.github.veithen.ramsay.emf.cm.cmml.TransformationChain;
 import com.github.veithen.ramsay.emf.cm.cmml.Type;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -39,7 +39,7 @@ public class CMMLPackageImpl extends EPackageImpl implements CMMLPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    private EClass transformationsEClass = null;
+    private EClass transformationChainEClass = null;
 
     /**
      * <!-- begin-user-doc -->
@@ -158,8 +158,8 @@ public class CMMLPackageImpl extends EPackageImpl implements CMMLPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EClass getTransformations() {
-        return transformationsEClass;
+    public EClass getTransformationChain() {
+        return transformationChainEClass;
     }
 
     /**
@@ -167,8 +167,8 @@ public class CMMLPackageImpl extends EPackageImpl implements CMMLPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getTransformations_Transformation() {
-        return (EReference)transformationsEClass.getEStructuralFeatures().get(0);
+    public EReference getTransformationChain_Transformations() {
+        return (EReference)transformationChainEClass.getEStructuralFeatures().get(0);
     }
 
     /**
@@ -381,8 +381,8 @@ public class CMMLPackageImpl extends EPackageImpl implements CMMLPackage {
         // Create classes and their features
         transformationEClass = createEClass(TRANSFORMATION);
 
-        transformationsEClass = createEClass(TRANSFORMATIONS);
-        createEReference(transformationsEClass, TRANSFORMATIONS__TRANSFORMATION);
+        transformationChainEClass = createEClass(TRANSFORMATION_CHAIN);
+        createEReference(transformationChainEClass, TRANSFORMATION_CHAIN__TRANSFORMATIONS);
 
         typeEClass = createEClass(TYPE);
         createEAttribute(typeEClass, TYPE__NS_URI);
@@ -447,8 +447,8 @@ public class CMMLPackageImpl extends EPackageImpl implements CMMLPackage {
         // Initialize classes and features; add operations and parameters
         initEClass(transformationEClass, Transformation.class, "Transformation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-        initEClass(transformationsEClass, Transformations.class, "Transformations", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getTransformations_Transformation(), this.getTransformation(), null, "transformation", null, 0, -1, Transformations.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(transformationChainEClass, TransformationChain.class, "TransformationChain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getTransformationChain_Transformations(), this.getTransformation(), null, "transformations", null, 0, -1, TransformationChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getType_NsURI(), ecorePackage.getEString(), "nsURI", null, 1, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

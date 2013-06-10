@@ -5,7 +5,7 @@ package com.github.veithen.ramsay.emf.cm.cmml.provider;
 
 import com.github.veithen.ramsay.emf.cm.cmml.CMMLFactory;
 import com.github.veithen.ramsay.emf.cm.cmml.CMMLPackage;
-import com.github.veithen.ramsay.emf.cm.cmml.Transformations;
+import com.github.veithen.ramsay.emf.cm.cmml.TransformationChain;
 
 import java.util.Collection;
 import java.util.List;
@@ -27,12 +27,12 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link com.github.veithen.ramsay.emf.cm.cmml.Transformations} object.
+ * This is the item provider adapter for a {@link com.github.veithen.ramsay.emf.cm.cmml.TransformationChain} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TransformationsItemProvider
+public class TransformationChainItemProvider
     extends ItemProviderAdapter
     implements
         IEditingDomainItemProvider,
@@ -46,7 +46,7 @@ public class TransformationsItemProvider
      * <!-- end-user-doc -->
      * @generated
      */
-    public TransformationsItemProvider(AdapterFactory adapterFactory) {
+    public TransformationChainItemProvider(AdapterFactory adapterFactory) {
         super(adapterFactory);
     }
 
@@ -77,7 +77,7 @@ public class TransformationsItemProvider
     public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
         if (childrenFeatures == null) {
             super.getChildrenFeatures(object);
-            childrenFeatures.add(CMMLPackage.Literals.TRANSFORMATIONS__TRANSFORMATION);
+            childrenFeatures.add(CMMLPackage.Literals.TRANSFORMATION_CHAIN__TRANSFORMATIONS);
         }
         return childrenFeatures;
     }
@@ -96,14 +96,14 @@ public class TransformationsItemProvider
     }
 
     /**
-     * This returns Transformations.gif.
+     * This returns TransformationChain.gif.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     @Override
     public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/Transformations"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/TransformationChain"));
     }
 
     /**
@@ -114,7 +114,7 @@ public class TransformationsItemProvider
      */
     @Override
     public String getText(Object object) {
-        return getString("_UI_Transformations_type");
+        return getString("_UI_TransformationChain_type");
     }
 
     /**
@@ -128,8 +128,8 @@ public class TransformationsItemProvider
     public void notifyChanged(Notification notification) {
         updateChildren(notification);
 
-        switch (notification.getFeatureID(Transformations.class)) {
-            case CMMLPackage.TRANSFORMATIONS__TRANSFORMATION:
+        switch (notification.getFeatureID(TransformationChain.class)) {
+            case CMMLPackage.TRANSFORMATION_CHAIN__TRANSFORMATIONS:
                 fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
                 return;
         }
@@ -149,17 +149,17 @@ public class TransformationsItemProvider
 
         newChildDescriptors.add
             (createChildParameter
-                (CMMLPackage.Literals.TRANSFORMATIONS__TRANSFORMATION,
+                (CMMLPackage.Literals.TRANSFORMATION_CHAIN__TRANSFORMATIONS,
                  CMMLFactory.eINSTANCE.createJoin()));
 
         newChildDescriptors.add
             (createChildParameter
-                (CMMLPackage.Literals.TRANSFORMATIONS__TRANSFORMATION,
+                (CMMLPackage.Literals.TRANSFORMATION_CHAIN__TRANSFORMATIONS,
                  CMMLFactory.eINSTANCE.createChangeMultiplicity()));
 
         newChildDescriptors.add
             (createChildParameter
-                (CMMLPackage.Literals.TRANSFORMATIONS__TRANSFORMATION,
+                (CMMLPackage.Literals.TRANSFORMATION_CHAIN__TRANSFORMATIONS,
                  CMMLFactory.eINSTANCE.createRemoveFeature()));
     }
 

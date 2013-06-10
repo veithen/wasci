@@ -4,51 +4,52 @@ package com.github.veithen.ramsay.emf.cm.cmml.impl;
 
 import com.github.veithen.ramsay.emf.cm.cmml.CMMLPackage;
 import com.github.veithen.ramsay.emf.cm.cmml.Transformation;
-import com.github.veithen.ramsay.emf.cm.cmml.Transformations;
+import com.github.veithen.ramsay.emf.cm.cmml.TransformationChain;
 
 import java.util.Collection;
-import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Transformations</b></em>'.
+ * An implementation of the model object '<em><b>Transformation Chain</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.github.veithen.ramsay.emf.cm.cmml.impl.TransformationsImpl#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link com.github.veithen.ramsay.emf.cm.cmml.impl.TransformationChainImpl#getTransformations <em>Transformations</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TransformationsImpl extends EObjectImpl implements Transformations {
+public class TransformationChainImpl extends EObjectImpl implements TransformationChain {
     /**
-     * The cached value of the '{@link #getTransformation() <em>Transformation</em>}' containment reference list.
+     * The cached value of the '{@link #getTransformations() <em>Transformations</em>}' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getTransformation()
+     * @see #getTransformations()
      * @generated
      * @ordered
      */
-    protected EList<Transformation> transformation;
+    protected EList<Transformation> transformations;
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected TransformationsImpl() {
+    protected TransformationChainImpl() {
         super();
     }
 
@@ -59,7 +60,7 @@ public class TransformationsImpl extends EObjectImpl implements Transformations 
      */
     @Override
     protected EClass eStaticClass() {
-        return CMMLPackage.Literals.TRANSFORMATIONS;
+        return CMMLPackage.Literals.TRANSFORMATION_CHAIN;
     }
 
     /**
@@ -67,11 +68,11 @@ public class TransformationsImpl extends EObjectImpl implements Transformations 
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<Transformation> getTransformation() {
-        if (transformation == null) {
-            transformation = new EObjectContainmentEList<Transformation>(Transformation.class, this, CMMLPackage.TRANSFORMATIONS__TRANSFORMATION);
+    public EList<Transformation> getTransformations() {
+        if (transformations == null) {
+            transformations = new EObjectContainmentEList<Transformation>(Transformation.class, this, CMMLPackage.TRANSFORMATION_CHAIN__TRANSFORMATIONS);
         }
-        return transformation;
+        return transformations;
     }
 
     /**
@@ -82,8 +83,8 @@ public class TransformationsImpl extends EObjectImpl implements Transformations 
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-            case CMMLPackage.TRANSFORMATIONS__TRANSFORMATION:
-                return ((InternalEList<?>)getTransformation()).basicRemove(otherEnd, msgs);
+            case CMMLPackage.TRANSFORMATION_CHAIN__TRANSFORMATIONS:
+                return ((InternalEList<?>)getTransformations()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -96,8 +97,8 @@ public class TransformationsImpl extends EObjectImpl implements Transformations 
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case CMMLPackage.TRANSFORMATIONS__TRANSFORMATION:
-                return getTransformation();
+            case CMMLPackage.TRANSFORMATION_CHAIN__TRANSFORMATIONS:
+                return getTransformations();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -111,9 +112,9 @@ public class TransformationsImpl extends EObjectImpl implements Transformations 
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case CMMLPackage.TRANSFORMATIONS__TRANSFORMATION:
-                getTransformation().clear();
-                getTransformation().addAll((Collection<? extends Transformation>)newValue);
+            case CMMLPackage.TRANSFORMATION_CHAIN__TRANSFORMATIONS:
+                getTransformations().clear();
+                getTransformations().addAll((Collection<? extends Transformation>)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -127,8 +128,8 @@ public class TransformationsImpl extends EObjectImpl implements Transformations 
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case CMMLPackage.TRANSFORMATIONS__TRANSFORMATION:
-                getTransformation().clear();
+            case CMMLPackage.TRANSFORMATION_CHAIN__TRANSFORMATIONS:
+                getTransformations().clear();
                 return;
         }
         super.eUnset(featureID);
@@ -142,10 +143,10 @@ public class TransformationsImpl extends EObjectImpl implements Transformations 
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case CMMLPackage.TRANSFORMATIONS__TRANSFORMATION:
-                return transformation != null && !transformation.isEmpty();
+            case CMMLPackage.TRANSFORMATION_CHAIN__TRANSFORMATIONS:
+                return transformations != null && !transformations.isEmpty();
         }
         return super.eIsSet(featureID);
     }
 
-} //TransformationsImpl
+} //TransformationChainImpl

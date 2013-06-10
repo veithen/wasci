@@ -56,7 +56,7 @@ public class CMMLFactoryImpl extends EFactoryImpl implements CMMLFactory {
     @Override
     public EObject create(EClass eClass) {
         switch (eClass.getClassifierID()) {
-            case CMMLPackage.TRANSFORMATIONS: return createTransformations();
+            case CMMLPackage.TRANSFORMATION_CHAIN: return createTransformationChain();
             case CMMLPackage.TYPE: return createType();
             case CMMLPackage.KEY_MAPPING: return createKeyMapping();
             case CMMLPackage.JOIN: return createJoin();
@@ -72,9 +72,9 @@ public class CMMLFactoryImpl extends EFactoryImpl implements CMMLFactory {
      * <!-- end-user-doc -->
      * @generated
      */
-    public Transformations createTransformations() {
-        TransformationsImpl transformations = new TransformationsImpl();
-        return transformations;
+    public TransformationChain createTransformationChain() {
+        TransformationChainImpl transformationChain = new TransformationChainImpl();
+        return transformationChain;
     }
 
     /**

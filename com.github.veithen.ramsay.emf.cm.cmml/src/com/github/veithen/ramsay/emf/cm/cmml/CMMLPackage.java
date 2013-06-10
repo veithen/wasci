@@ -75,32 +75,32 @@ public interface CMMLPackage extends EPackage {
     int TRANSFORMATION_FEATURE_COUNT = 0;
 
     /**
-     * The meta object id for the '{@link com.github.veithen.ramsay.emf.cm.cmml.impl.TransformationsImpl <em>Transformations</em>}' class.
+     * The meta object id for the '{@link com.github.veithen.ramsay.emf.cm.cmml.impl.TransformationChainImpl <em>Transformation Chain</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see com.github.veithen.ramsay.emf.cm.cmml.impl.TransformationsImpl
-     * @see com.github.veithen.ramsay.emf.cm.cmml.impl.CMMLPackageImpl#getTransformations()
+     * @see com.github.veithen.ramsay.emf.cm.cmml.impl.TransformationChainImpl
+     * @see com.github.veithen.ramsay.emf.cm.cmml.impl.CMMLPackageImpl#getTransformationChain()
      * @generated
      */
-    int TRANSFORMATIONS = 1;
+    int TRANSFORMATION_CHAIN = 1;
 
     /**
-     * The feature id for the '<em><b>Transformation</b></em>' containment reference list.
+     * The feature id for the '<em><b>Transformations</b></em>' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int TRANSFORMATIONS__TRANSFORMATION = 0;
+    int TRANSFORMATION_CHAIN__TRANSFORMATIONS = 0;
 
     /**
-     * The number of structural features of the '<em>Transformations</em>' class.
+     * The number of structural features of the '<em>Transformation Chain</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int TRANSFORMATIONS_FEATURE_COUNT = 1;
+    int TRANSFORMATION_CHAIN_FEATURE_COUNT = 1;
 
     /**
      * The meta object id for the '{@link com.github.veithen.ramsay.emf.cm.cmml.impl.TypeImpl <em>Type</em>}' class.
@@ -390,25 +390,25 @@ public interface CMMLPackage extends EPackage {
     EClass getTransformation();
 
     /**
-     * Returns the meta object for class '{@link com.github.veithen.ramsay.emf.cm.cmml.Transformations <em>Transformations</em>}'.
+     * Returns the meta object for class '{@link com.github.veithen.ramsay.emf.cm.cmml.TransformationChain <em>Transformation Chain</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for class '<em>Transformations</em>'.
-     * @see com.github.veithen.ramsay.emf.cm.cmml.Transformations
+     * @return the meta object for class '<em>Transformation Chain</em>'.
+     * @see com.github.veithen.ramsay.emf.cm.cmml.TransformationChain
      * @generated
      */
-    EClass getTransformations();
+    EClass getTransformationChain();
 
     /**
-     * Returns the meta object for the containment reference list '{@link com.github.veithen.ramsay.emf.cm.cmml.Transformations#getTransformation <em>Transformation</em>}'.
+     * Returns the meta object for the containment reference list '{@link com.github.veithen.ramsay.emf.cm.cmml.TransformationChain#getTransformations <em>Transformations</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for the containment reference list '<em>Transformation</em>'.
-     * @see com.github.veithen.ramsay.emf.cm.cmml.Transformations#getTransformation()
-     * @see #getTransformations()
+     * @return the meta object for the containment reference list '<em>Transformations</em>'.
+     * @see com.github.veithen.ramsay.emf.cm.cmml.TransformationChain#getTransformations()
+     * @see #getTransformationChain()
      * @generated
      */
-    EReference getTransformations_Transformation();
+    EReference getTransformationChain_Transformations();
 
     /**
      * Returns the meta object for class '{@link com.github.veithen.ramsay.emf.cm.cmml.Type <em>Type</em>}'.
@@ -657,22 +657,22 @@ public interface CMMLPackage extends EPackage {
         EClass TRANSFORMATION = eINSTANCE.getTransformation();
 
         /**
-         * The meta object literal for the '{@link com.github.veithen.ramsay.emf.cm.cmml.impl.TransformationsImpl <em>Transformations</em>}' class.
+         * The meta object literal for the '{@link com.github.veithen.ramsay.emf.cm.cmml.impl.TransformationChainImpl <em>Transformation Chain</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see com.github.veithen.ramsay.emf.cm.cmml.impl.TransformationsImpl
-         * @see com.github.veithen.ramsay.emf.cm.cmml.impl.CMMLPackageImpl#getTransformations()
+         * @see com.github.veithen.ramsay.emf.cm.cmml.impl.TransformationChainImpl
+         * @see com.github.veithen.ramsay.emf.cm.cmml.impl.CMMLPackageImpl#getTransformationChain()
          * @generated
          */
-        EClass TRANSFORMATIONS = eINSTANCE.getTransformations();
+        EClass TRANSFORMATION_CHAIN = eINSTANCE.getTransformationChain();
 
         /**
-         * The meta object literal for the '<em><b>Transformation</b></em>' containment reference list feature.
+         * The meta object literal for the '<em><b>Transformations</b></em>' containment reference list feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference TRANSFORMATIONS__TRANSFORMATION = eINSTANCE.getTransformations_Transformation();
+        EReference TRANSFORMATION_CHAIN__TRANSFORMATIONS = eINSTANCE.getTransformationChain_Transformations();
 
         /**
          * The meta object literal for the '{@link com.github.veithen.ramsay.emf.cm.cmml.impl.TypeImpl <em>Type</em>}' class.

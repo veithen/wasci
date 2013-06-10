@@ -72,26 +72,26 @@ public class CMMLItemProviderAdapterFactory extends CMMLAdapterFactory implement
     }
 
     /**
-     * This keeps track of the one adapter used for all {@link com.github.veithen.ramsay.emf.cm.cmml.Transformations} instances.
+     * This keeps track of the one adapter used for all {@link com.github.veithen.ramsay.emf.cm.cmml.TransformationChain} instances.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected TransformationsItemProvider transformationsItemProvider;
+    protected TransformationChainItemProvider transformationChainItemProvider;
 
     /**
-     * This creates an adapter for a {@link com.github.veithen.ramsay.emf.cm.cmml.Transformations}.
+     * This creates an adapter for a {@link com.github.veithen.ramsay.emf.cm.cmml.TransformationChain}.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     @Override
-    public Adapter createTransformationsAdapter() {
-        if (transformationsItemProvider == null) {
-            transformationsItemProvider = new TransformationsItemProvider(this);
+    public Adapter createTransformationChainAdapter() {
+        if (transformationChainItemProvider == null) {
+            transformationChainItemProvider = new TransformationChainItemProvider(this);
         }
 
-        return transformationsItemProvider;
+        return transformationChainItemProvider;
     }
 
     /**
@@ -308,7 +308,7 @@ public class CMMLItemProviderAdapterFactory extends CMMLAdapterFactory implement
      * @generated
      */
     public void dispose() {
-        if (transformationsItemProvider != null) transformationsItemProvider.dispose();
+        if (transformationChainItemProvider != null) transformationChainItemProvider.dispose();
         if (typeItemProvider != null) typeItemProvider.dispose();
         if (keyMappingItemProvider != null) keyMappingItemProvider.dispose();
         if (joinItemProvider != null) joinItemProvider.dispose();

@@ -2,8 +2,8 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cmml" nsURI="http://github.com/veithen/ramsay/cm/cmml" nsPrefix="cmml">
   <eClassifiers xsi:type="ecore:EClass" name="Transformation" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Transformations">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" upperBound="-1"
+  <eClassifiers xsi:type="ecore:EClass" name="TransformationChain">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transformations" upperBound="-1"
         eType="#//Transformation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Type">

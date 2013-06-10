@@ -10,20 +10,17 @@ import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EPackage.Registry;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com.github.veithen.ramsay.emf.cm.Realm;
+import com.github.veithen.ramsay.emf.cm.cmml.CMMLFactory;
+import com.github.veithen.ramsay.emf.cm.cmml.Join;
+import com.github.veithen.ramsay.emf.cm.cmml.KeyMapping;
+import com.github.veithen.ramsay.emf.cm.cmml.Type;
+import com.github.veithen.ramsay.emf.cm.transform.TransformerFactory;
 import com.github.veithen.ramsay.util.SimpleBuilder;
 import com.github.veithen.ramsay.ws.metadata.EMFUtil;
 import com.github.veithen.ramsay.ws.metadata.Metadata;
@@ -61,35 +58,23 @@ public class Builder extends SimpleBuilder {
             }
         });
         
-        Realm realm = metadata.getRealm();
-        EPackage processPackage = realm.getPackage("http://www.ibm.com/websphere/appserver/schemas/5.0/process.xmi");
-        EClass serverClass = (EClass)processPackage.getEClassifier("Server");
-        EPackage clusterPackage = realm.getPackage("http://www.ibm.com/websphere/appserver/schemas/5.0/topology.cluster.xmi");
-        EClass clusterMemberClass = (EClass)clusterPackage.getEClassifier("ClusterMember");
-        
-        EStructuralFeature serverNameFeature = serverClass.getEStructuralFeature("name");
+        Join join = CMMLFactory.eINSTANCE.createJoin();
+        Type from = CMMLFactory.eINSTANCE.createType();
+        from.setNsURI("http://www.ibm.com/websphere/appserver/schemas/5.0/topology.cluster.xmi");
+        from.setName("ClusterMember");
+        join.setFrom(from);
+        Type to = CMMLFactory.eINSTANCE.createType();
+        to.setNsURI("http://www.ibm.com/websphere/appserver/schemas/5.0/process.xmi");
+        to.setName("Server");
+        join.setTo(to);
+        join.setReferenceName("server");
+        join.setOppositeReferenceName("clusterMember");
         // TODO: also need to take into account node name
-        Map<String,EObject> serverMap = new HashMap<String,EObject>();
-        for (EObject server : realm.getInstances(serverClass)) {
-            serverMap.put((String)server.eGet(serverNameFeature), server);
-        }
-        EReference clusterMemberFeature = EcoreFactory.eINSTANCE.createEReference();
-        clusterMemberFeature.setName("clusterMember");
-        clusterMemberFeature.setEType(clusterMemberClass);
-        serverClass.getEStructuralFeatures().add(clusterMemberFeature);
-        
-        EStructuralFeature memberNameFeature = clusterMemberClass.getEStructuralFeature("memberName");
-        EReference serverFeature = EcoreFactory.eINSTANCE.createEReference();
-        serverFeature.setName("server");
-        serverFeature.setEType(serverClass);
-        serverFeature.setLowerBound(1);
-        serverFeature.setEOpposite(clusterMemberFeature);
-        clusterMemberClass.getEStructuralFeatures().add(serverFeature);
-        for (EObject clusterMember : realm.getInstances(clusterMemberClass)) {
-            String memberName = (String)clusterMember.eGet(memberNameFeature);
-            clusterMember.eSet(serverFeature, serverMap.get(memberName));
-        }
-        clusterMemberClass.getEStructuralFeatures().remove(memberNameFeature);
+        KeyMapping keyMapping = CMMLFactory.eINSTANCE.createKeyMapping();
+        keyMapping.setFrom("memberName");
+        keyMapping.setTo("name");
+        join.getKeyMappings().add(keyMapping);
+        TransformerFactory.INSTANCE.createTransformer(join).transform(metadata.getRealm());
         
         // Before changing the URIs we need to make sure that all proxies are resolved.
         // If we don't do this, the output files may contain references to the input files

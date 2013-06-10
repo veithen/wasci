@@ -22,13 +22,13 @@ public interface CMMLFactory extends EFactory {
     CMMLFactory eINSTANCE = com.github.veithen.ramsay.emf.cm.cmml.impl.CMMLFactoryImpl.init();
 
     /**
-     * Returns a new object of class '<em>Transformations</em>'.
+     * Returns a new object of class '<em>Transformation Chain</em>'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>Transformations</em>'.
+     * @return a new object of class '<em>Transformation Chain</em>'.
      * @generated
      */
-    Transformations createTransformations();
+    TransformationChain createTransformationChain();
 
     /**
      * Returns a new object of class '<em>Type</em>'.

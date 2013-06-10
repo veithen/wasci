@@ -72,8 +72,8 @@ public class CMMLAdapterFactory extends AdapterFactoryImpl {
                 return createTransformationAdapter();
             }
             @Override
-            public Adapter caseTransformations(Transformations object) {
-                return createTransformationsAdapter();
+            public Adapter caseTransformationChain(TransformationChain object) {
+                return createTransformationChainAdapter();
             }
             @Override
             public Adapter caseType(Type object) {
@@ -134,16 +134,16 @@ public class CMMLAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link com.github.veithen.ramsay.emf.cm.cmml.Transformations <em>Transformations</em>}'.
+     * Creates a new adapter for an object of class '{@link com.github.veithen.ramsay.emf.cm.cmml.TransformationChain <em>Transformation Chain</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see com.github.veithen.ramsay.emf.cm.cmml.Transformations
+     * @see com.github.veithen.ramsay.emf.cm.cmml.TransformationChain
      * @generated
      */
-    public Adapter createTransformationsAdapter() {
+    public Adapter createTransformationChainAdapter() {
         return null;
     }
 
