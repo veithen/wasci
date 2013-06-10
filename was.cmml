@@ -10,4 +10,9 @@
     <to nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/process.xmi" name="Server"/>
     <keyMappings from="serverName" to="name"/>
   </transformations>
+  <transformations xsi:type="cmml:Join" referenceName="node" oppositeReferenceName="nodeGroupMembers">
+    <from nsURI="http://www.ibm.com/websphere/appserver/schemas/6.0/topology.nodegroup.xmi" name="NodeGroupMember"/>
+    <to nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/topology.node.xmi" name="Node"/>
+    <keyMappings from="nodeName" to="name"/>
+  </transformations>
 </cmml:TransformationChain>
