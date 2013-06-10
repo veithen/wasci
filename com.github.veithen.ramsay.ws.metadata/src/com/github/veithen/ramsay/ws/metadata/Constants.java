@@ -8,6 +8,10 @@ public final class Constants {
     
     public static final IPath MODELS_PATH = new Path("models");
     
+    public static final IPath TRANSFORMATIONS_PATH = new Path("transformations");
+    
+    public static final IPath TRANSFORMED_PATH = new Path("transformed");
+    
     public static final IPath METADATA_FILE = new Path("wsconfig.ecore");
     
     private Constants() {}

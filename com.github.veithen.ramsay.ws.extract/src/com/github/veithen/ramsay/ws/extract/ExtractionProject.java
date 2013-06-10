@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com.github.veithen.ramsay.ws.metadata.EMFUtil;
+import com.github.veithen.ramsay.util.EMFUtil;
 import com.github.veithen.ramsay.ws.metadata.Metadata;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
 import com.github.veithen.ramsay.ws.metadata.ModelMapper;

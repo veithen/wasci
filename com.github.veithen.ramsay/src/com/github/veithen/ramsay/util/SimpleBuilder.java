@@ -11,30 +11,43 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
- * Base class for simple builders that take the files in an input folder and transform them to a new
- * set of files written to an output folder. Note that this type of builder is not really
- * incremental. It will do a full build each time a file in the input directory is modified.
+ * Base class for simple builders that take the files in one or more input folders and transform
+ * them to a new set of files written to an output folder. Note that this type of builder is not
+ * really incremental. It will do a full build each time a file in the input directory is modified.
  */
 public abstract class SimpleBuilder extends IncrementalProjectBuilder {
     @Override
     protected final IProject[] build(int kind, Map<String,String> args, IProgressMonitor monitor) throws CoreException {
         IProject project = getProject();
         IResourceDelta delta = getDelta(project);
-        IPath inputPath = getInputPath();
+        IPath[] inputPaths = getInputPaths();
         // Note: delta == null means unspecified changes
-        if (kind == FULL_BUILD || delta == null || delta.findMember(inputPath) != null) {
+        boolean buildRequired = kind == FULL_BUILD || delta == null;
+        if (!buildRequired) {
+            for (IPath inputPath : inputPaths) {
+                if (delta.findMember(inputPath) != null) {
+                    buildRequired = true;
+                    break;
+                }
+            }
+        }
+        if (buildRequired) {
             // TODO: create/clean output folder
-            doBuild(project.getFolder(inputPath), project.getFolder(getOutputPath()), monitor);
+            IFolder[] inputFolders = new IFolder[inputPaths.length];
+            for (int i=0; i<inputPaths.length; i++) {
+                inputFolders[i] = project.getFolder(inputPaths[i]);
+            }
+            doBuild(inputFolders, project.getFolder(getOutputPath()), monitor);
         }
         return null;
     }
     
     /**
-     * Get the path to the input folder relative to the project.
+     * Get the paths to the input folders relative to the project.
      * 
      * @return the path to the input folder
      */
-    protected abstract IPath getInputPath();
+    protected abstract IPath[] getInputPaths();
     
     /**
      * Get the path to the output folder relative to the project.
@@ -43,5 +56,5 @@ public abstract class SimpleBuilder extends IncrementalProjectBuilder {
      */
     protected abstract IPath getOutputPath();
     
-    protected abstract void doBuild(IFolder inputFolder, IFolder outputFolder, IProgressMonitor monitor) throws CoreException;
+    protected abstract void doBuild(IFolder[] inputFolders, IFolder outputFolder, IProgressMonitor monitor) throws CoreException;
 }

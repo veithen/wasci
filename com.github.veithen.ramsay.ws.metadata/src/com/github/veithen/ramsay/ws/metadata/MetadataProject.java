@@ -1,5 +1,8 @@
 package com.github.veithen.ramsay.ws.metadata;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -13,7 +16,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
+import com.github.veithen.ramsay.emf.cm.transform.Transformer;
+import com.github.veithen.ramsay.emf.cm.transform.TransformerFactory;
 import com.github.veithen.ramsay.emf.xmi.XmiPackage;
+import com.github.veithen.ramsay.util.EMFUtil;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
 
@@ -59,6 +65,23 @@ public class MetadataProject {
         }
         EMFUtil.registerPackage(registry, XmiPackage.eINSTANCE);
         EMFUtil.registerPackage(registry, RepositoryPackage.eINSTANCE);
-        return new Metadata(realm, registry, EMFUtil.load(resourceSet, repositoryMetadata), new ModelMapper(realm));
+        return new Metadata(resourceSet, realm, registry, EMFUtil.load(resourceSet, repositoryMetadata), new ModelMapper(realm));
+    }
+    
+    public Transformer getTransformer() throws CoreException {
+        final List<Transformer> transformers = new ArrayList<Transformer>();
+        IFolder folder = project.getFolder(Constants.TRANSFORMATIONS_PATH);
+        if (folder.exists()) {
+            folder.accept(new IResourceVisitor() {
+                @Override
+                public boolean visit(IResource resource) throws CoreException {
+                    if (resource.getType() == IResource.FILE && resource.getName().endsWith(".cmml")) {
+                        transformers.add(TransformerFactory.INSTANCE.createTransformer((IFile)resource));
+                    }
+                    return true;
+                }
+            });
+        }
+        return TransformerFactory.INSTANCE.createTransformer(transformers);
     }
 }

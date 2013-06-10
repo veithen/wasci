@@ -1,9 +1,10 @@
-package com.github.veithen.ramsay.ws.metadata;
+package com.github.veithen.ramsay.util;
 
 import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -23,9 +24,18 @@ public final class EMFUtil {
         }
     }
     
-    public static URI createURI(IFile file) {
+    public static URI createURI(IResource resource) {
         // See http://wiki.eclipse.org/EMF/FAQ#How_do_I_map_between_an_EMF_Resource_and_an_Eclipse_IFile.3F
-        return URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+        String path = resource.getFullPath().toString();
+        if (resource.getType() == IResource.FOLDER) {
+            path += "/";
+        }
+        return URI.createPlatformResourceURI(path, true);
+    }
+    
+    public static boolean isPrefix(URI prefix, URI uri) {
+        URI relativeURI = uri.deresolve(prefix);
+        return relativeURI.isRelative() && !relativeURI.segment(0).equals("..");
     }
     
     public static Resource createResource(ResourceSet resourceSet, IFile file) {

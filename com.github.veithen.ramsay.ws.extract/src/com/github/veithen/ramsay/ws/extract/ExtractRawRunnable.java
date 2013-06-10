@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import com.github.veithen.ramsay.ws.metadata.EMFUtil;
+import com.github.veithen.ramsay.util.EMFUtil;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
 import com.github.veithen.ramsay.ws.model.repository.Context;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
