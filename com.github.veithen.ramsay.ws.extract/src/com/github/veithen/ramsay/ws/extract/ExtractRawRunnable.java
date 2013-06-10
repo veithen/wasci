@@ -136,10 +136,10 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
     private void extractDocuments(String uri, Context context, IFolder folder) throws CoreException {
         Document rootDocument = context.getRootDocument();
         if (rootDocument != null) {
-            extractDocument(repository, uri, rootDocument, folder, resourceSet);
+            extractDocument(uri, rootDocument, folder);
         }
         for (Document childDocument : (EList<Document>)context.getChildDocuments()) {
-            extractDocument(repository, uri, childDocument, folder, resourceSet);
+            extractDocument(uri, childDocument, folder);
         }
         for (Context childContext : (EList<Context>)context.getChildContexts()) {
             IFolder childFolder = folder.getFolder(childContext.getType().getName());
@@ -150,7 +150,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
         }
     }
     
-    private void extractDocument(ConfigRepository repository, String contextURI, Document document, IFolder folder, ResourceSet resourceSet) throws CoreException {
+    private void extractDocument(String contextURI, Document document, IFolder folder) throws CoreException {
         String fileName = document.getType().getFilePattern();
         if (fileName.equals("ws-security.xml")) {
             return; // TODO: hack!
