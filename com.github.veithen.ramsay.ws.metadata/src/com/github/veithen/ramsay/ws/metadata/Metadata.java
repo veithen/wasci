@@ -1,8 +1,5 @@
 package com.github.veithen.ramsay.ws.metadata;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
@@ -14,7 +11,6 @@ import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
-import com.github.veithen.ramsay.emf.cm.transform.Transformer;
 import com.github.veithen.ramsay.emf.cm.transform.TransformerFactory;
 import com.github.veithen.ramsay.util.FolderSubset;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
@@ -66,25 +62,19 @@ public class Metadata {
         return null;
     }
     
-    public Transformer getTransformer() throws CoreException {
-        final List<Transformer> transformers = new ArrayList<Transformer>();
-        transformers.add(new Transformer() {
-            @Override
-            public void transform(Realm realm) throws CoreException {
-                folderSubset.mapTo(outputFolder);
-            }
-        });
+    public void transform() throws CoreException {
+        folderSubset.mapTo(outputFolder);
         if (transformationsFolder.exists()) {
+            final Realm realm = this.realm;
             transformationsFolder.accept(new IResourceVisitor() {
                 @Override
                 public boolean visit(IResource resource) throws CoreException {
                     if (resource.getType() == IResource.FILE && resource.getName().endsWith(".cmml")) {
-                        transformers.add(TransformerFactory.INSTANCE.createTransformer((IFile)resource));
+                        TransformerFactory.INSTANCE.createTransformer((IFile)resource).transform(realm);
                     }
                     return true;
                 }
             });
         }
-        return TransformerFactory.INSTANCE.createTransformer(transformers);
     }
 }

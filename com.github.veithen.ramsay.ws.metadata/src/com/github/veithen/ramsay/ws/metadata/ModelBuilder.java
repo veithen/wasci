@@ -29,7 +29,7 @@ public class ModelBuilder extends SimpleBuilder {
         MetadataProject metadataProject = (MetadataProject)project.getAdapter(MetadataProject.class);
         ResourceSet resourceSet = new ResourceSetImpl();
         Metadata metadata = metadataProject.loadMetadata(resourceSet);
-        metadata.getTransformer().transform(metadata.getRealm());
+        metadata.transform();
         metadata.getFolderSubset().save();
     }
     

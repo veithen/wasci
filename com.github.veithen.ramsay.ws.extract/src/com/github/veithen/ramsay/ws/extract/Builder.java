@@ -1,8 +1,5 @@
 package com.github.veithen.ramsay.ws.extract;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -44,7 +41,7 @@ public class Builder extends SimpleBuilder {
         // TODO: need to pass this to the metadata project so that it can transform contexts
         folderSubset.getResource(inputFolder.getFile("index.xmi"));
         
-        metadata.getTransformer().transform(metadata.getRealm());
+        metadata.transform();
 
         folderSubset.mapTo(outputFolder);
         folderSubset.save();
