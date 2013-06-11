@@ -63,7 +63,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
         resourceNames = new HashSet<String>(Arrays.asList(repository.listResourceNames("", 3, Integer.MAX_VALUE)));
         Context cellContext = buildContext("cells/test", metadataProject.getCellContextType(), "test");
         resourceSet = new ResourceSetImpl();
-        Registry registry = metadataProject.loadMetadata().getRegistry();
+        Registry registry = metadataProject.loadMetadata(resourceSet).getRegistry();
         resourceSet.setPackageRegistry(registry);
         IFile indexFile = folder.getFile("index.xmi");
         resourcesToDelete.remove(indexFile);

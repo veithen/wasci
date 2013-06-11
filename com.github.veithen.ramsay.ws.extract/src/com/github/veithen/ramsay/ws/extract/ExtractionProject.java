@@ -48,12 +48,12 @@ public class ExtractionProject {
     }
     
     public void extract(IFile outFile) throws CoreException {
-        Metadata metadata = getMetadataProject().loadMetadata();
+        ResourceSet outResourceSet = new ResourceSetImpl();
+        Metadata metadata = getMetadataProject().loadMetadata(outResourceSet);
         EPackage.Registry registry = metadata.getRegistry();
         ModelMapper modelMapper = metadata.getModelMapper();
         EClass cellClass = modelMapper.map(metadata.getCellContextType());
         EObject cell = EcoreUtil.create(cellClass);
-        ResourceSet outResourceSet = new ResourceSetImpl();
         Resource outResource = EMFUtil.createResource(outResourceSet, outFile);
         try {
             outResource.getContents().addAll(new Loader(connect(), registry, modelMapper).load("cells/test", "cell.xml"));

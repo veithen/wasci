@@ -1,25 +1,20 @@
 package com.github.veithen.ramsay.ws.metadata;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
-import com.github.veithen.ramsay.emf.cm.transform.Transformer;
-import com.github.veithen.ramsay.emf.cm.transform.TransformerFactory;
 import com.github.veithen.ramsay.emf.xmi.XmiPackage;
 import com.github.veithen.ramsay.util.EMFUtil;
+import com.github.veithen.ramsay.util.FolderSubset;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
 
@@ -42,22 +37,19 @@ public class MetadataProject {
         return null;
     }
     
-    public Metadata loadMetadata() throws CoreException {
+    public Metadata loadMetadata(final ResourceSet resourceSet) throws CoreException {
         IFolder modelsFolder = project.getFolder(Constants.MODELS_PATH);
         IFile repositoryMetadata = modelsFolder.getFile("repository-metadata.xmi");
         final EPackage.Registry registry = new EPackageRegistryImpl();
-        final ResourceSet resourceSet = new ResourceSetImpl();
-        modelsFolder.accept(new IResourceVisitor() {
-            @Override
-            public boolean visit(IResource resource) throws CoreException {
-                if (resource.getType() == IResource.FILE && resource.getName().endsWith(".ecore")) {
-                    for (EObject content : EMFUtil.load(resourceSet, (IFile)resource).getContents()) {
-                        EMFUtil.registerPackage(registry, (EPackage)content);
-                    }
+        FolderSubset folderSubset = new FolderSubset(resourceSet, modelsFolder);
+        folderSubset.load();
+        for (Resource resource : resourceSet.getResources()) {
+            if (resource.getURI().lastSegment().endsWith(".ecore")) {
+                for (EObject content : resource.getContents()) {
+                    EMFUtil.registerPackage(registry, (EPackage)content);
                 }
-                return true;
             }
-        }, IResource.DEPTH_ONE, 0);
+        }
         registry.put("http://www.ibm.com/websphere/appserver/schemas/6.0/pmiservice.xmi", registry.get("http://www.ibm.com/websphere/appserver/schemas/5.0/pmiservice.xmi"));
         Realm realm = new Realm();
         for (Object object : registry.values()) {
@@ -65,23 +57,6 @@ public class MetadataProject {
         }
         EMFUtil.registerPackage(registry, XmiPackage.eINSTANCE);
         EMFUtil.registerPackage(registry, RepositoryPackage.eINSTANCE);
-        return new Metadata(resourceSet, realm, registry, EMFUtil.load(resourceSet, repositoryMetadata), new ModelMapper(realm));
-    }
-    
-    public Transformer getTransformer() throws CoreException {
-        final List<Transformer> transformers = new ArrayList<Transformer>();
-        IFolder folder = project.getFolder(Constants.TRANSFORMATIONS_PATH);
-        if (folder.exists()) {
-            folder.accept(new IResourceVisitor() {
-                @Override
-                public boolean visit(IResource resource) throws CoreException {
-                    if (resource.getType() == IResource.FILE && resource.getName().endsWith(".cmml")) {
-                        transformers.add(TransformerFactory.INSTANCE.createTransformer((IFile)resource));
-                    }
-                    return true;
-                }
-            });
-        }
-        return TransformerFactory.INSTANCE.createTransformer(transformers);
+        return new Metadata(folderSubset, project.getFolder(Constants.TRANSFORMATIONS_PATH), project.getFolder(Constants.TRANSFORMED_PATH), realm, registry, EMFUtil.load(resourceSet, repositoryMetadata), new ModelMapper(realm));
     }
 }
