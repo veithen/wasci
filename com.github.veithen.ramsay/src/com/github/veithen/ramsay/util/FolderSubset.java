@@ -60,6 +60,14 @@ public class FolderSubset {
         folder = newFolder;
     }
     
+    public Resource createResource(IPath path) {
+        // TODO: we should check that the path actually refers to a location in the folder
+        IFile file = folder.getFile(path);
+        Resource resource = EMFUtil.createResource(resourceSet, file);
+        resourceMap.put(file, resource);
+        return resource;
+    }
+    
     public void save() throws CoreException {
         for (Resource resource : resourceMap.values()) {
             EMFUtil.save(resource);

@@ -12,6 +12,7 @@ import com.github.veithen.ramsay.util.FolderSubset;
 import com.github.veithen.ramsay.util.SimpleBuilder;
 import com.github.veithen.ramsay.ws.metadata.Metadata;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
+import com.github.veithen.ramsay.ws.model.repository.Context;
 
 public class Builder extends SimpleBuilder {
     public static final String ID = Constants.PLUGIN_ID + ".builder";
@@ -37,12 +38,8 @@ public class Builder extends SimpleBuilder {
         resourceSet.setPackageRegistry(registry);
         FolderSubset folderSubset = new FolderSubset(resourceSet, inputFolder);
         folderSubset.load();
-        
-        // TODO: need to pass this to the metadata project so that it can transform contexts
-        folderSubset.getResource(inputFolder.getFile("index.xmi"));
-        
+        metadata.setRootContext((Context)folderSubset.getResource(inputFolder.getFile("index.xmi")).getContents().get(0));
         metadata.transform();
-
         folderSubset.mapTo(outputFolder);
         folderSubset.save();
     }
