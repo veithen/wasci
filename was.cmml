@@ -6,11 +6,13 @@
   <transformations xsi:type="cmml:Join" referenceName="server" oppositeReferenceName="clusterMember">
     <from nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/topology.cluster.xmi" name="ClusterMember"/>
     <to nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/process.xmi" name="Server"/>
+    <keyMappings from="nodeName" to="node.name"/>
     <keyMappings from="memberName" to="name"/>
   </transformations>
   <transformations xsi:type="cmml:Join" referenceName="server" oppositeReferenceName="coreGroupServer">
     <from nsURI="http://www.ibm.com/websphere/appserver/schemas/6.0/coregroup.xmi" name="CoreGroupServer"/>
     <to nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/process.xmi" name="Server"/>
+    <keyMappings from="nodeName" to="node.name"/>
     <keyMappings from="serverName" to="name"/>
   </transformations>
   <transformations xsi:type="cmml:Join" referenceName="node" oppositeReferenceName="nodeGroupMembers">
