@@ -15,9 +15,30 @@
     <keyMappings from="nodeName" to="node.name"/>
     <keyMappings from="serverName" to="name"/>
   </transformations>
+  <transformations xsi:type="cmml:Join" referenceName="coreGroup">
+    <from nsURI="http://www.ibm.com/websphere/appserver/schemas/6.0/coregroupbridgeservice.xmi" name="CoreGroupAccessPoint"/>
+    <to nsURI="http://www.ibm.com/websphere/appserver/schemas/6.0/coregroup.xmi" name="CoreGroup"/>
+    <keyMappings from="coreGroup" to="name"/>
+  </transformations>
   <transformations xsi:type="cmml:Join" referenceName="node" oppositeReferenceName="nodeGroupMembers">
     <from nsURI="http://www.ibm.com/websphere/appserver/schemas/6.0/topology.nodegroup.xmi" name="NodeGroupMember"/>
     <to nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/topology.node.xmi" name="Node"/>
     <keyMappings from="nodeName" to="name"/>
+  </transformations>
+  <transformations xsi:type="cmml:Join" referenceName="nodeGroup">
+    <from nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/topology.cluster.xmi" name="ServerCluster"/>
+    <to nsURI="http://www.ibm.com/websphere/appserver/schemas/6.0/topology.nodegroup.xmi" name="NodeGroup"/>
+    <keyMappings from="nodeGroupName" to="name"/>
+  </transformations>
+  <transformations xsi:type="cmml:Join" referenceName="server">
+    <from nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/appdeployment.xmi" name="ServerTarget"/>
+    <to nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/process.xmi" name="Server"/>
+    <keyMappings from="nodeName" to="node.name"/>
+    <keyMappings from="name" to="name"/>
+  </transformations>
+  <transformations xsi:type="cmml:Join" referenceName="cluster">
+    <from nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/appdeployment.xmi" name="ClusteredTarget"/>
+    <to nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/topology.cluster.xmi" name="ServerCluster"/>
+    <keyMappings from="name" to="name"/>
   </transformations>
 </cmml:TransformationChain>
