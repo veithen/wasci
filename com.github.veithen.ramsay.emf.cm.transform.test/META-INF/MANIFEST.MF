@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: com.github.veithen.ramsay.emf.cm.transform.test
+Bundle-Version: 0.1.0.qualifier
+Fragment-Host: com.github.veithen.ramsay.emf.cm.transform
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.junit

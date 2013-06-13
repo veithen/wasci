@@ -1,11 +1,14 @@
 package com.github.veithen.ramsay.emf.cm.impl;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EStructuralFeature.Internal.SettingDelegate;
 
 public class Instances {
     private final EClass eClass;
@@ -76,5 +79,30 @@ public class Instances {
     
     public void set(int instanceID, int featureID, Object newValue) {
         getValues(featureID)[instanceID] = newValue;
+    }
+    
+    public void resetFeature(EStructuralFeature feature, SettingDelegate settingDelegate) {
+        EStructuralFeature.Internal internal = (EStructuralFeature.Internal)feature;
+        Object[] values = valueMap.get(feature);
+        for (int i=0; i<instanceCount; i++) {
+            if (values[i] != null) {
+                EObject instance = instances[i];
+                SettingDelegate savedSettingsDelegate = internal.getSettingDelegate();
+                internal.setSettingDelegate(settingDelegate);
+                if (feature.isMany()) {
+                    EList<EObject> collection = (EList<EObject>)instance.eGet(feature);
+                    EObject[] objects = collection.toArray(new EObject[collection.size()]);
+                    collection.clear();
+                    values[i] = null;
+                    internal.setSettingDelegate(savedSettingsDelegate);
+                    ((EList<EObject>)instance.eGet(feature)).addAll(Arrays.asList(objects));
+                } else {
+                    Object object = instance.eGet(feature);
+                    instance.eSet(feature, null);
+                    internal.setSettingDelegate(savedSettingsDelegate);
+                    instance.eSet(feature, object);
+                }
+            }
+        }
     }
 }

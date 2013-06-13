@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.github.veithen.ramsay.emf.cm.cmml.ChangeMultiplicity;
+import com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference;
 import com.github.veithen.ramsay.emf.cm.cmml.Join;
 import com.github.veithen.ramsay.emf.cm.cmml.RemoveFeature;
 import com.github.veithen.ramsay.emf.cm.cmml.Transformation;
@@ -28,27 +29,36 @@ import com.github.veithen.ramsay.util.EMFUtil;
 public class TransformerFactoryImpl extends CMMLSwitch<Transformer> implements TransformerFactory {
     @Override
     public Transformer createTransformer(Transformation transformation) {
-        return doSwitch(transformation);
+        Transformer transformer = doSwitch(transformation);
+        if (transformer == null) {
+            throw new IllegalArgumentException("Unknown transformation type " + transformation.eClass().getName());
+        }
+        return transformer;
     }
 
     @Override
-    public Transformer caseJoin(Join config) {
-        return new JoinTransformer(config);
+    public Transformer caseJoin(Join spec) {
+        return new JoinTransformer(spec);
     }
 
     @Override
-    public Transformer caseChangeMultiplicity(ChangeMultiplicity config) {
-        return new ChangeMultiplicityTransformer(config);
+    public Transformer caseChangeMultiplicity(ChangeMultiplicity spec) {
+        return new ChangeMultiplicityTransformer(spec);
     }
 
     @Override
-    public Transformer caseRemoveFeature(RemoveFeature config) {
-        return new RemoveFeatureTransformer(config);
+    public Transformer caseRemoveFeature(RemoveFeature spec) {
+        return new RemoveFeatureTransformer(spec);
     }
 
     @Override
-    public Transformer caseTransformationChain(TransformationChain config) {
-        return createTransformer(config);
+    public Transformer caseCreateOppositeReference(CreateOppositeReference spec) {
+        return new CreateOppositeReferenceTransformer(spec);
+    }
+
+    @Override
+    public Transformer caseTransformationChain(TransformationChain spec) {
+        return createTransformer(spec);
     }
 
     @Override

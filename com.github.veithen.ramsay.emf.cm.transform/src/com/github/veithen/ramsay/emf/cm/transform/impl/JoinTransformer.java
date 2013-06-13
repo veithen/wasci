@@ -54,8 +54,8 @@ public class JoinTransformer implements Transformer {
             oppositeReference.setEType(from);
             oppositeReference.setUpperBound(-1);
             oppositeReference.setEOpposite(reference);
-            reference.setEOpposite(oppositeReference);
             to.getEStructuralFeatures().add(oppositeReference);
+            reference.setEOpposite(oppositeReference);
         }
         
         // Create index

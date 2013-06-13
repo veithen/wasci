@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cmml:TransformationChain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmml="http://github.com/veithen/ramsay/cm/cmml">
+  <transformations xsi:type="cmml:CreateOppositeReference" referenceName="servers" oppositeReferenceName="node" lowerBound="1" upperBound="1">
+    <type nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/topology.node.xmi" name="Node"/>
+  </transformations>
   <transformations xsi:type="cmml:Join" referenceName="server" oppositeReferenceName="clusterMember">
     <from nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/topology.cluster.xmi" name="ClusterMember"/>
     <to nsURI="http://www.ibm.com/websphere/appserver/schemas/5.0/process.xmi" name="Server"/>

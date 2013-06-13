@@ -120,6 +120,13 @@ public class CMMLSwitch<T> extends Switch<T> {
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
+            case CMMLPackage.CREATE_OPPOSITE_REFERENCE: {
+                CreateOppositeReference createOppositeReference = (CreateOppositeReference)theEObject;
+                T result = caseCreateOppositeReference(createOppositeReference);
+                if (result == null) result = caseTransformation(createOppositeReference);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
             default: return defaultCase(theEObject);
         }
     }
@@ -241,6 +248,21 @@ public class CMMLSwitch<T> extends Switch<T> {
      * @generated
      */
     public T caseRemoveFeature(RemoveFeature object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Create Opposite Reference</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Create Opposite Reference</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseCreateOppositeReference(CreateOppositeReference object) {
         return null;
     }
 

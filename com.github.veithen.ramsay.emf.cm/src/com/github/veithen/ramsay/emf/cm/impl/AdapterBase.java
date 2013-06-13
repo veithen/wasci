@@ -44,6 +44,14 @@ public abstract class AdapterBase<T extends Notifier> implements Adapter {
         int featureId = notification.getFeatureID(null);
         switch (notification.getEventType()) {
             // TODO: other cases
+            case Notification.SET:
+                Object newValue = notification.getNewValue();
+                if (newValue == null) {
+                    unset(featureId, notification.getOldValue());
+                } else {
+                    set(featureId, newValue);
+                }
+                break;
             case Notification.ADD:
                 set(featureId, notification.getNewValue());
                 break;

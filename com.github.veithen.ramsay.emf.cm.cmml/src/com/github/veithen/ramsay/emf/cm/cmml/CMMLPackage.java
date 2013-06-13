@@ -380,6 +380,70 @@ public interface CMMLPackage extends EPackage {
 
 
     /**
+     * The meta object id for the '{@link com.github.veithen.ramsay.emf.cm.cmml.impl.CreateOppositeReferenceImpl <em>Create Opposite Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.github.veithen.ramsay.emf.cm.cmml.impl.CreateOppositeReferenceImpl
+     * @see com.github.veithen.ramsay.emf.cm.cmml.impl.CMMLPackageImpl#getCreateOppositeReference()
+     * @generated
+     */
+    int CREATE_OPPOSITE_REFERENCE = 8;
+
+    /**
+     * The feature id for the '<em><b>Type</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CREATE_OPPOSITE_REFERENCE__TYPE = TRANSFORMATION_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>Reference Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CREATE_OPPOSITE_REFERENCE__REFERENCE_NAME = TRANSFORMATION_FEATURE_COUNT + 1;
+
+    /**
+     * The feature id for the '<em><b>Opposite Reference Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CREATE_OPPOSITE_REFERENCE__OPPOSITE_REFERENCE_NAME = TRANSFORMATION_FEATURE_COUNT + 2;
+
+    /**
+     * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CREATE_OPPOSITE_REFERENCE__LOWER_BOUND = TRANSFORMATION_FEATURE_COUNT + 3;
+
+    /**
+     * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CREATE_OPPOSITE_REFERENCE__UPPER_BOUND = TRANSFORMATION_FEATURE_COUNT + 4;
+
+    /**
+     * The number of structural features of the '<em>Create Opposite Reference</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CREATE_OPPOSITE_REFERENCE_FEATURE_COUNT = TRANSFORMATION_FEATURE_COUNT + 5;
+
+    /**
      * Returns the meta object for class '{@link com.github.veithen.ramsay.emf.cm.cmml.Transformation <em>Transformation</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -625,6 +689,71 @@ public interface CMMLPackage extends EPackage {
     EAttribute getRemoveFeature_ConsistencyCheck();
 
     /**
+     * Returns the meta object for class '{@link com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference <em>Create Opposite Reference</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Create Opposite Reference</em>'.
+     * @see com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference
+     * @generated
+     */
+    EClass getCreateOppositeReference();
+
+    /**
+     * Returns the meta object for the containment reference '{@link com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference#getType <em>Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Type</em>'.
+     * @see com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference#getType()
+     * @see #getCreateOppositeReference()
+     * @generated
+     */
+    EReference getCreateOppositeReference_Type();
+
+    /**
+     * Returns the meta object for the attribute '{@link com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference#getReferenceName <em>Reference Name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Reference Name</em>'.
+     * @see com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference#getReferenceName()
+     * @see #getCreateOppositeReference()
+     * @generated
+     */
+    EAttribute getCreateOppositeReference_ReferenceName();
+
+    /**
+     * Returns the meta object for the attribute '{@link com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference#getOppositeReferenceName <em>Opposite Reference Name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Opposite Reference Name</em>'.
+     * @see com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference#getOppositeReferenceName()
+     * @see #getCreateOppositeReference()
+     * @generated
+     */
+    EAttribute getCreateOppositeReference_OppositeReferenceName();
+
+    /**
+     * Returns the meta object for the attribute '{@link com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference#getLowerBound <em>Lower Bound</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Lower Bound</em>'.
+     * @see com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference#getLowerBound()
+     * @see #getCreateOppositeReference()
+     * @generated
+     */
+    EAttribute getCreateOppositeReference_LowerBound();
+
+    /**
+     * Returns the meta object for the attribute '{@link com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference#getUpperBound <em>Upper Bound</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Upper Bound</em>'.
+     * @see com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference#getUpperBound()
+     * @see #getCreateOppositeReference()
+     * @generated
+     */
+    EAttribute getCreateOppositeReference_UpperBound();
+
+    /**
      * Returns the factory that creates the instances of the model.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -845,6 +974,56 @@ public interface CMMLPackage extends EPackage {
          * @generated
          */
         EAttribute REMOVE_FEATURE__CONSISTENCY_CHECK = eINSTANCE.getRemoveFeature_ConsistencyCheck();
+
+        /**
+         * The meta object literal for the '{@link com.github.veithen.ramsay.emf.cm.cmml.impl.CreateOppositeReferenceImpl <em>Create Opposite Reference</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see com.github.veithen.ramsay.emf.cm.cmml.impl.CreateOppositeReferenceImpl
+         * @see com.github.veithen.ramsay.emf.cm.cmml.impl.CMMLPackageImpl#getCreateOppositeReference()
+         * @generated
+         */
+        EClass CREATE_OPPOSITE_REFERENCE = eINSTANCE.getCreateOppositeReference();
+
+        /**
+         * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference CREATE_OPPOSITE_REFERENCE__TYPE = eINSTANCE.getCreateOppositeReference_Type();
+
+        /**
+         * The meta object literal for the '<em><b>Reference Name</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute CREATE_OPPOSITE_REFERENCE__REFERENCE_NAME = eINSTANCE.getCreateOppositeReference_ReferenceName();
+
+        /**
+         * The meta object literal for the '<em><b>Opposite Reference Name</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute CREATE_OPPOSITE_REFERENCE__OPPOSITE_REFERENCE_NAME = eINSTANCE.getCreateOppositeReference_OppositeReferenceName();
+
+        /**
+         * The meta object literal for the '<em><b>Lower Bound</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute CREATE_OPPOSITE_REFERENCE__LOWER_BOUND = eINSTANCE.getCreateOppositeReference_LowerBound();
+
+        /**
+         * The meta object literal for the '<em><b>Upper Bound</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute CREATE_OPPOSITE_REFERENCE__UPPER_BOUND = eINSTANCE.getCreateOppositeReference_UpperBound();
 
     }
 

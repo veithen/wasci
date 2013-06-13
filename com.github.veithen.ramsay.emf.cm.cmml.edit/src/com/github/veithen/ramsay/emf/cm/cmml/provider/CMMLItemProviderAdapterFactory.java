@@ -210,6 +210,29 @@ public class CMMLItemProviderAdapterFactory extends CMMLAdapterFactory implement
     }
 
     /**
+     * This keeps track of the one adapter used for all {@link com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected CreateOppositeReferenceItemProvider createOppositeReferenceItemProvider;
+
+    /**
+     * This creates an adapter for a {@link com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createCreateOppositeReferenceAdapter() {
+        if (createOppositeReferenceItemProvider == null) {
+            createOppositeReferenceItemProvider = new CreateOppositeReferenceItemProvider(this);
+        }
+
+        return createOppositeReferenceItemProvider;
+    }
+
+    /**
      * This returns the root adapter factory that contains this factory.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -314,6 +337,7 @@ public class CMMLItemProviderAdapterFactory extends CMMLAdapterFactory implement
         if (joinItemProvider != null) joinItemProvider.dispose();
         if (changeMultiplicityItemProvider != null) changeMultiplicityItemProvider.dispose();
         if (removeFeatureItemProvider != null) removeFeatureItemProvider.dispose();
+        if (createOppositeReferenceItemProvider != null) createOppositeReferenceItemProvider.dispose();
     }
 
 }

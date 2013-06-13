@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EStructuralFeature.Internal.SettingDelegate;
 import org.eclipse.emf.ecore.EcorePackage;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
@@ -26,6 +27,9 @@ public class CovariantClassAdapter extends AdapterBase<EClass> {
     @Override
     protected void added() {
         subclassAdapters = getRealm().getSubclassAdapters(target);
+        for (EStructuralFeature feature : target.getEStructuralFeatures()) {
+            feature.eAdapters().add(new CovariantFeatureAdapter((EStructuralFeature.Internal)feature));
+        }
     }
 
     @Override
@@ -35,10 +39,13 @@ public class CovariantClassAdapter extends AdapterBase<EClass> {
     @Override
     protected void set(int featureId, Object value) {
         switch (featureId) {
-            case EcorePackage.ECLASS__ESTRUCTURAL_FEATURES:
-                featureAdded((EStructuralFeature)value);
+            case EcorePackage.ECLASS__ESTRUCTURAL_FEATURES: {
+                EStructuralFeature.Internal feature = (EStructuralFeature.Internal)value;
+                feature.eAdapters().add(new CovariantFeatureAdapter(feature));
+                featureAdded(feature);
                 break;
-            case EcorePackage.ECLASS__ESUPER_TYPES:
+            }
+            case EcorePackage.ECLASS__ESUPER_TYPES: {
                 EClass superclass = (EClass)value;
                 CovariantClassAdapter superClassAdapter = EMFUtil.getAdapter(CovariantClassAdapter.class, superclass);
                 if (superClassAdapter != null) {
@@ -49,6 +56,7 @@ public class CovariantClassAdapter extends AdapterBase<EClass> {
                     featureAdded(feature);
                 }
                 break;
+            }
         }
     }
     
@@ -78,6 +86,13 @@ public class CovariantClassAdapter extends AdapterBase<EClass> {
         instances.featureRemoved(feature);
         for (CovariantClassAdapter subclassAdapter : subclassAdapters) {
             subclassAdapter.featureAdded(feature);
+        }
+    }
+    
+    public void resetFeature(EStructuralFeature feature, SettingDelegate settingDelegate) {
+        instances.resetFeature(feature, settingDelegate);
+        for (CovariantClassAdapter subclassAdapter : subclassAdapters) {
+            subclassAdapter.resetFeature(feature, settingDelegate);
         }
     }
 

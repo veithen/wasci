@@ -76,6 +76,15 @@ public interface CMMLFactory extends EFactory {
     RemoveFeature createRemoveFeature();
 
     /**
+     * Returns a new object of class '<em>Create Opposite Reference</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Create Opposite Reference</em>'.
+     * @generated
+     */
+    CreateOppositeReference createCreateOppositeReference();
+
+    /**
      * Returns the package supported by this factory.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

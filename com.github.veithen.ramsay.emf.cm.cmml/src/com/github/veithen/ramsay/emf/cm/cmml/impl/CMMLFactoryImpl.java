@@ -62,6 +62,7 @@ public class CMMLFactoryImpl extends EFactoryImpl implements CMMLFactory {
             case CMMLPackage.JOIN: return createJoin();
             case CMMLPackage.CHANGE_MULTIPLICITY: return createChangeMultiplicity();
             case CMMLPackage.REMOVE_FEATURE: return createRemoveFeature();
+            case CMMLPackage.CREATE_OPPOSITE_REFERENCE: return createCreateOppositeReference();
             default:
                 throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
         }
@@ -125,6 +126,16 @@ public class CMMLFactoryImpl extends EFactoryImpl implements CMMLFactory {
     public RemoveFeature createRemoveFeature() {
         RemoveFeatureImpl removeFeature = new RemoveFeatureImpl();
         return removeFeature;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public CreateOppositeReference createCreateOppositeReference() {
+        CreateOppositeReferenceImpl createOppositeReference = new CreateOppositeReferenceImpl();
+        return createOppositeReference;
     }
 
     /**

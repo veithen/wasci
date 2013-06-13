@@ -161,6 +161,11 @@ public class TransformationChainItemProvider
             (createChildParameter
                 (CMMLPackage.Literals.TRANSFORMATION_CHAIN__TRANSFORMATIONS,
                  CMMLFactory.eINSTANCE.createRemoveFeature()));
+
+        newChildDescriptors.add
+            (createChildParameter
+                (CMMLPackage.Literals.TRANSFORMATION_CHAIN__TRANSFORMATIONS,
+                 CMMLFactory.eINSTANCE.createCreateOppositeReference()));
     }
 
     /**

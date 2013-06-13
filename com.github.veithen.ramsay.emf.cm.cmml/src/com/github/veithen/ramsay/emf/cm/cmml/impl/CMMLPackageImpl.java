@@ -5,6 +5,7 @@ package com.github.veithen.ramsay.emf.cm.cmml.impl;
 import com.github.veithen.ramsay.emf.cm.cmml.CMMLFactory;
 import com.github.veithen.ramsay.emf.cm.cmml.CMMLPackage;
 import com.github.veithen.ramsay.emf.cm.cmml.ChangeMultiplicity;
+import com.github.veithen.ramsay.emf.cm.cmml.CreateOppositeReference;
 import com.github.veithen.ramsay.emf.cm.cmml.FeatureTransformation;
 import com.github.veithen.ramsay.emf.cm.cmml.Join;
 import com.github.veithen.ramsay.emf.cm.cmml.KeyMapping;
@@ -82,6 +83,13 @@ public class CMMLPackageImpl extends EPackageImpl implements CMMLPackage {
      * @generated
      */
     private EClass removeFeatureEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass createOppositeReferenceEClass = null;
 
     /**
      * Creates an instance of the model <b>Package</b>, registered with
@@ -356,6 +364,60 @@ public class CMMLPackageImpl extends EPackageImpl implements CMMLPackage {
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getCreateOppositeReference() {
+        return createOppositeReferenceEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getCreateOppositeReference_Type() {
+        return (EReference)createOppositeReferenceEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getCreateOppositeReference_ReferenceName() {
+        return (EAttribute)createOppositeReferenceEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getCreateOppositeReference_OppositeReferenceName() {
+        return (EAttribute)createOppositeReferenceEClass.getEStructuralFeatures().get(2);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getCreateOppositeReference_LowerBound() {
+        return (EAttribute)createOppositeReferenceEClass.getEStructuralFeatures().get(3);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getCreateOppositeReference_UpperBound() {
+        return (EAttribute)createOppositeReferenceEClass.getEStructuralFeatures().get(4);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public CMMLFactory getCMMLFactory() {
         return (CMMLFactory)getEFactoryInstance();
     }
@@ -409,6 +471,13 @@ public class CMMLPackageImpl extends EPackageImpl implements CMMLPackage {
 
         removeFeatureEClass = createEClass(REMOVE_FEATURE);
         createEAttribute(removeFeatureEClass, REMOVE_FEATURE__CONSISTENCY_CHECK);
+
+        createOppositeReferenceEClass = createEClass(CREATE_OPPOSITE_REFERENCE);
+        createEReference(createOppositeReferenceEClass, CREATE_OPPOSITE_REFERENCE__TYPE);
+        createEAttribute(createOppositeReferenceEClass, CREATE_OPPOSITE_REFERENCE__REFERENCE_NAME);
+        createEAttribute(createOppositeReferenceEClass, CREATE_OPPOSITE_REFERENCE__OPPOSITE_REFERENCE_NAME);
+        createEAttribute(createOppositeReferenceEClass, CREATE_OPPOSITE_REFERENCE__LOWER_BOUND);
+        createEAttribute(createOppositeReferenceEClass, CREATE_OPPOSITE_REFERENCE__UPPER_BOUND);
     }
 
     /**
@@ -443,6 +512,7 @@ public class CMMLPackageImpl extends EPackageImpl implements CMMLPackage {
         featureTransformationEClass.getESuperTypes().add(this.getTransformation());
         changeMultiplicityEClass.getESuperTypes().add(this.getFeatureTransformation());
         removeFeatureEClass.getESuperTypes().add(this.getFeatureTransformation());
+        createOppositeReferenceEClass.getESuperTypes().add(this.getTransformation());
 
         // Initialize classes and features; add operations and parameters
         initEClass(transformationEClass, Transformation.class, "Transformation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -475,6 +545,13 @@ public class CMMLPackageImpl extends EPackageImpl implements CMMLPackage {
 
         initEClass(removeFeatureEClass, RemoveFeature.class, "RemoveFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getRemoveFeature_ConsistencyCheck(), ecorePackage.getEString(), "consistencyCheck", null, 0, 1, RemoveFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(createOppositeReferenceEClass, CreateOppositeReference.class, "CreateOppositeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getCreateOppositeReference_Type(), this.getType(), null, "type", null, 1, 1, CreateOppositeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getCreateOppositeReference_ReferenceName(), ecorePackage.getEString(), "referenceName", null, 1, 1, CreateOppositeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getCreateOppositeReference_OppositeReferenceName(), ecorePackage.getEString(), "oppositeReferenceName", null, 1, 1, CreateOppositeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getCreateOppositeReference_LowerBound(), ecorePackage.getEInt(), "lowerBound", "0", 0, 1, CreateOppositeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getCreateOppositeReference_UpperBound(), ecorePackage.getEInt(), "upperBound", "-1", 0, 1, CreateOppositeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         // Create resource
         createResource(eNS_URI);
