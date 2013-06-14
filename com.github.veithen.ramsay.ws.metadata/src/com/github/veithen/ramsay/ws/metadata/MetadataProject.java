@@ -3,7 +3,9 @@ package com.github.veithen.ramsay.ws.metadata;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
@@ -58,5 +60,10 @@ public class MetadataProject {
         EMFUtil.registerPackage(registry, XmiPackage.eINSTANCE);
         EMFUtil.registerPackage(registry, RepositoryPackage.eINSTANCE);
         return new Metadata(folderSubset, project.getFolder(Constants.TRANSFORMATIONS_PATH), project.getFolder(Constants.TRANSFORMED_PATH), realm, registry, EMFUtil.load(resourceSet, repositoryMetadata), new ModelMapper(realm));
+    }
+
+    public void extractRaw(IProgressMonitor monitor) throws CoreException {
+        project.getWorkspace().run(new ExtractRawRunnable(project.getFolder("raw")),
+                null, IWorkspace.AVOID_UPDATE, monitor);
     }
 }

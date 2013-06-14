@@ -10,4 +10,33 @@
                 project="true">
         </wizard>
     </extension>
+    <extension point="org.eclipse.ui.commands">
+        <category id="com.github.veithen.ramsay.ws.metadata.ui.commands.category" name="Sample Category"/>
+        <command categoryId="com.github.veithen.ramsay.ws.metadata.ui.commands.category"
+                 id="com.github.veithen.ramsay.ws.metadata.ui.commands.extractCommand"
+                 name="Extract configuration metadata"/>
+    </extension>
+    <extension point="org.eclipse.ui.handlers">
+        <handler class="com.github.veithen.ramsay.ws.metadata.ui.ExtractHandler"
+                 commandId="com.github.veithen.ramsay.ws.metadata.ui.commands.extractCommand">
+            <enabledWhen>
+                <with variable="activeMenuSelection">
+                    <iterate ifEmpty="false" operator="and">
+                        <adapt type="org.eclipse.core.resources.IProject">
+                            <test property="org.eclipse.core.resources.projectNature" value="com.github.veithen.ramsay.ws.metadata.nature"/>
+                        </adapt>
+                    </iterate>
+                </with>
+            </enabledWhen>
+        </handler>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
+            <menu label="Ramsay">
+                <command commandId="com.github.veithen.ramsay.ws.metadata.ui.commands.extractCommand"
+                         label="Extract WebSphere configuration metadata"
+                         mnemonic="x"/>
+            </menu>
+        </menuContribution>
+    </extension>
 </plugin>
