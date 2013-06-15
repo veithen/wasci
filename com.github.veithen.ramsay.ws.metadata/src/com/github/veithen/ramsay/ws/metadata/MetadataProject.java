@@ -1,6 +1,5 @@
 package com.github.veithen.ramsay.ws.metadata;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -11,13 +10,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
 import com.github.veithen.ramsay.emf.xmi.XmiPackage;
 import com.github.veithen.ramsay.util.EMFUtil;
 import com.github.veithen.ramsay.util.FolderSubset;
-import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
 
@@ -26,18 +23,6 @@ public class MetadataProject {
 
     public MetadataProject(IProject project) {
         this.project = project;
-    }
-    
-    public ContextType getCellContextType() throws CoreException {
-        IFolder modelsFolder = project.getFolder(Constants.RAW_PATH);
-        IFile repositoryMetadata = modelsFolder.getFile("repository-metadata.xmi");
-        ResourceSet resourceSet = new ResourceSetImpl();
-        for (ContextType contextType : ((RepositoryMetadata)EMFUtil.load(resourceSet, repositoryMetadata).getContents().get(0)).getContextTypes()) {
-            if (contextType.getName().equals("cells")) {
-                return contextType;
-            }
-        }
-        return null;
     }
     
     public Metadata loadMetadata(final ResourceSet resourceSet) throws CoreException {
