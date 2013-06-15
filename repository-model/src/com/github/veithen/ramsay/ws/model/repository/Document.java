@@ -61,9 +61,9 @@ public interface Document extends EObject {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Contents</em>' reference list.
      * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage#getDocument_Contents()
-     * @model type="org.eclipse.emf.ecore.EObject"
+     * @model
      * @generated
      */
-    EList getContents();
+    EList<EObject> getContents();
 
 } // Document

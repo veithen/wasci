@@ -2,6 +2,8 @@
  */
 package com.github.veithen.ramsay.ws.model.repository.impl;
 
+import com.github.veithen.ramsay.ws.model.repository.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -9,9 +11,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import com.github.veithen.ramsay.ws.model.repository.*;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -54,6 +53,7 @@ public class RepositoryFactoryImpl extends EFactoryImpl implements RepositoryFac
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EObject create(EClass eClass) {
         switch (eClass.getClassifierID()) {
             case RepositoryPackage.CONTEXT_TYPE: return createContextType();
@@ -120,6 +120,7 @@ public class RepositoryFactoryImpl extends EFactoryImpl implements RepositoryFac
      * @deprecated
      * @generated
      */
+    @Deprecated
     public static RepositoryPackage getPackage() {
         return RepositoryPackage.eINSTANCE;
     }

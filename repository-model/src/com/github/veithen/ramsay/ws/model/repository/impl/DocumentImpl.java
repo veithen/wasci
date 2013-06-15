@@ -54,7 +54,7 @@ public class DocumentImpl extends EObjectImpl implements Document {
      * @generated
      * @ordered
      */
-    protected EList contents;
+    protected EList<EObject> contents;
 
     /**
      * <!-- begin-user-doc -->
@@ -70,6 +70,7 @@ public class DocumentImpl extends EObjectImpl implements Document {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     protected EClass eStaticClass() {
         return RepositoryPackage.Literals.DOCUMENT;
     }
@@ -117,9 +118,9 @@ public class DocumentImpl extends EObjectImpl implements Document {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList getContents() {
+    public EList<EObject> getContents() {
         if (contents == null) {
-            contents = new EObjectResolvingEList(EObject.class, this, RepositoryPackage.DOCUMENT__CONTENTS);
+            contents = new EObjectResolvingEList<EObject>(EObject.class, this, RepositoryPackage.DOCUMENT__CONTENTS);
         }
         return contents;
     }
@@ -129,6 +130,7 @@ public class DocumentImpl extends EObjectImpl implements Document {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
             case RepositoryPackage.DOCUMENT__TYPE:
@@ -145,6 +147,8 @@ public class DocumentImpl extends EObjectImpl implements Document {
      * <!-- end-user-doc -->
      * @generated
      */
+    @SuppressWarnings("unchecked")
+    @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
             case RepositoryPackage.DOCUMENT__TYPE:
@@ -152,7 +156,7 @@ public class DocumentImpl extends EObjectImpl implements Document {
                 return;
             case RepositoryPackage.DOCUMENT__CONTENTS:
                 getContents().clear();
-                getContents().addAll((Collection)newValue);
+                getContents().addAll((Collection<? extends EObject>)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -163,6 +167,7 @@ public class DocumentImpl extends EObjectImpl implements Document {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void eUnset(int featureID) {
         switch (featureID) {
             case RepositoryPackage.DOCUMENT__TYPE:
@@ -180,6 +185,7 @@ public class DocumentImpl extends EObjectImpl implements Document {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
             case RepositoryPackage.DOCUMENT__TYPE:

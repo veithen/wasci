@@ -2,13 +2,12 @@
  */
 package com.github.veithen.ramsay.ws.model.repository.util;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-
 import com.github.veithen.ramsay.ws.model.repository.*;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+
+import org.eclipse.emf.ecore.util.Switch;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +22,7 @@ import com.github.veithen.ramsay.ws.model.repository.*;
  * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage
  * @generated
  */
-public class RepositorySwitch {
+public class RepositorySwitch<T> extends Switch<T> {
     /**
      * The cached model package
      * <!-- begin-user-doc -->
@@ -45,14 +44,16 @@ public class RepositorySwitch {
     }
 
     /**
-     * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+     * Checks whether this is a switch for the given package.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the first non-null result returned by a <code>caseXXX</code> call.
+     * @parameter ePackage the package in question.
+     * @return whether this is a switch for the given package.
      * @generated
      */
-    public Object doSwitch(EObject theEObject) {
-        return doSwitch(theEObject.eClass(), theEObject);
+    @Override
+    protected boolean isSwitchFor(EPackage ePackage) {
+        return ePackage == modelPackage;
     }
 
     /**
@@ -62,49 +63,30 @@ public class RepositorySwitch {
      * @return the first non-null result returned by a <code>caseXXX</code> call.
      * @generated
      */
-    protected Object doSwitch(EClass theEClass, EObject theEObject) {
-        if (theEClass.eContainer() == modelPackage) {
-            return doSwitch(theEClass.getClassifierID(), theEObject);
-        }
-        else {
-            List eSuperTypes = theEClass.getESuperTypes();
-            return
-                eSuperTypes.isEmpty() ?
-                    defaultCase(theEObject) :
-                    doSwitch((EClass)eSuperTypes.get(0), theEObject);
-        }
-    }
-
-    /**
-     * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the first non-null result returned by a <code>caseXXX</code> call.
-     * @generated
-     */
-    protected Object doSwitch(int classifierID, EObject theEObject) {
+    @Override
+    protected T doSwitch(int classifierID, EObject theEObject) {
         switch (classifierID) {
             case RepositoryPackage.CONTEXT_TYPE: {
                 ContextType contextType = (ContextType)theEObject;
-                Object result = caseContextType(contextType);
+                T result = caseContextType(contextType);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
             case RepositoryPackage.DOCUMENT_TYPE: {
                 DocumentType documentType = (DocumentType)theEObject;
-                Object result = caseDocumentType(documentType);
+                T result = caseDocumentType(documentType);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
             case RepositoryPackage.CONTEXT: {
                 Context context = (Context)theEObject;
-                Object result = caseContext(context);
+                T result = caseContext(context);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
             case RepositoryPackage.DOCUMENT: {
                 Document document = (Document)theEObject;
-                Object result = caseDocument(document);
+                T result = caseDocument(document);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
@@ -123,7 +105,7 @@ public class RepositorySwitch {
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public Object caseContextType(ContextType object) {
+    public T caseContextType(ContextType object) {
         return null;
     }
 
@@ -138,7 +120,7 @@ public class RepositorySwitch {
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public Object caseDocumentType(DocumentType object) {
+    public T caseDocumentType(DocumentType object) {
         return null;
     }
 
@@ -153,7 +135,7 @@ public class RepositorySwitch {
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public Object caseContext(Context object) {
+    public T caseContext(Context object) {
         return null;
     }
 
@@ -168,7 +150,7 @@ public class RepositorySwitch {
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public Object caseDocument(Document object) {
+    public T caseDocument(Document object) {
         return null;
     }
 
@@ -183,7 +165,8 @@ public class RepositorySwitch {
      * @see #doSwitch(org.eclipse.emf.ecore.EObject)
      * @generated
      */
-    public Object defaultCase(EObject object) {
+    @Override
+    public T defaultCase(EObject object) {
         return null;
     }
 

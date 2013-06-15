@@ -147,7 +147,6 @@ public interface RepositoryPackage extends EPackage {
      */
     int DOCUMENT_TYPE_FEATURE_COUNT = 2;
 
-
     /**
      * The meta object id for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextImpl <em>Context</em>}' class.
      * <!-- begin-user-doc -->

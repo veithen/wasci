@@ -63,10 +63,10 @@ public interface ContextType extends EObject {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Child Context Types</em>' reference list.
      * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage#getContextType_ChildContextTypes()
-     * @model type="com.github.veithen.ramsay.ws.model.repository.ContextType"
+     * @model
      * @generated
      */
-    EList getChildContextTypes();
+    EList<ContextType> getChildContextTypes();
 
     /**
      * Returns the value of the '<em><b>Child Document Types</b></em>' reference list.
@@ -79,10 +79,10 @@ public interface ContextType extends EObject {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Child Document Types</em>' reference list.
      * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage#getContextType_ChildDocumentTypes()
-     * @model type="com.github.veithen.ramsay.ws.model.repository.DocumentType"
+     * @model
      * @generated
      */
-    EList getChildDocumentTypes();
+    EList<DocumentType> getChildDocumentTypes();
 
     /**
      * Returns the value of the '<em><b>Root Document Type</b></em>' reference.

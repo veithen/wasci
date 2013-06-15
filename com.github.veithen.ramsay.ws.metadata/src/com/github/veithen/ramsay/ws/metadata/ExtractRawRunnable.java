@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -129,7 +130,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable, ConfigMetadataCal
 
     @Override
     public void addRootRefObjectType(String documentTypeName, String nsURI, String name) {
-        documentTypeMap.get(documentTypeName).getRootRefObjectTypes().add(packageMap.get(nsURI).getEClassifier(name));
+        documentTypeMap.get(documentTypeName).getRootRefObjectTypes().add((EClass)packageMap.get(nsURI).getEClassifier(name));
     }
 
     @Override

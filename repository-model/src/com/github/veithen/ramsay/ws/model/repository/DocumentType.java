@@ -4,6 +4,7 @@ package com.github.veithen.ramsay.ws.model.repository;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -61,9 +62,9 @@ public interface DocumentType extends EObject {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Root Ref Object Types</em>' reference list.
      * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage#getDocumentType_RootRefObjectTypes()
-     * @model type="org.eclipse.emf.ecore.EClass"
+     * @model
      * @generated
      */
-    EList getRootRefObjectTypes();
+    EList<EClass> getRootRefObjectTypes();
 
 } // DocumentType

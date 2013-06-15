@@ -14,7 +14,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -101,7 +100,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
         if (rootDocumentType != null) {
             context.setRootDocument(searchDocument(uri, rootDocumentType));
         }
-        for (DocumentType childDocumentType : (EList<DocumentType>)type.getChildDocumentTypes()) {
+        for (DocumentType childDocumentType : type.getChildDocumentTypes()) {
             if (childDocumentType != rootDocumentType) {
                 Document document = searchDocument(uri, childDocumentType);
                 if (document != null) {
@@ -109,7 +108,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
                 }
             }
         }
-        for (ContextType childContextType : (EList<ContextType>)type.getChildContextTypes()) {
+        for (ContextType childContextType : type.getChildContextTypes()) {
             if (childContextType.getName().equals("repository") || childContextType.getName().equals("bver") || childContextType.getName().equals("cver")) {
                 continue; // TODO: hack!
             }
@@ -138,10 +137,10 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
         if (rootDocument != null) {
             extractDocument(uri, rootDocument, folder);
         }
-        for (Document childDocument : (EList<Document>)context.getChildDocuments()) {
+        for (Document childDocument : context.getChildDocuments()) {
             extractDocument(uri, childDocument, folder);
         }
-        for (Context childContext : (EList<Context>)context.getChildContexts()) {
+        for (Context childContext : context.getChildContexts()) {
             IFolder childFolder = folder.getFolder(childContext.getType().getName());
             create(childFolder);
             childFolder = childFolder.getFolder(childContext.getName());

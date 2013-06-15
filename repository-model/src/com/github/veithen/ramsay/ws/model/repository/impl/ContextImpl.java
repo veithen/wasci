@@ -89,7 +89,7 @@ public class ContextImpl extends EObjectImpl implements Context {
      * @generated
      * @ordered
      */
-    protected EList childDocuments;
+    protected EList<Document> childDocuments;
 
     /**
      * The cached value of the '{@link #getChildContexts() <em>Child Contexts</em>}' containment reference list.
@@ -99,7 +99,7 @@ public class ContextImpl extends EObjectImpl implements Context {
      * @generated
      * @ordered
      */
-    protected EList childContexts;
+    protected EList<Context> childContexts;
 
     /**
      * <!-- begin-user-doc -->
@@ -115,6 +115,7 @@ public class ContextImpl extends EObjectImpl implements Context {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     protected EClass eStaticClass() {
         return RepositoryPackage.Literals.CONTEXT;
     }
@@ -226,9 +227,9 @@ public class ContextImpl extends EObjectImpl implements Context {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList getChildDocuments() {
+    public EList<Document> getChildDocuments() {
         if (childDocuments == null) {
-            childDocuments = new EObjectContainmentEList(Document.class, this, RepositoryPackage.CONTEXT__CHILD_DOCUMENTS);
+            childDocuments = new EObjectContainmentEList<Document>(Document.class, this, RepositoryPackage.CONTEXT__CHILD_DOCUMENTS);
         }
         return childDocuments;
     }
@@ -238,9 +239,9 @@ public class ContextImpl extends EObjectImpl implements Context {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList getChildContexts() {
+    public EList<Context> getChildContexts() {
         if (childContexts == null) {
-            childContexts = new EObjectContainmentEList(Context.class, this, RepositoryPackage.CONTEXT__CHILD_CONTEXTS);
+            childContexts = new EObjectContainmentEList<Context>(Context.class, this, RepositoryPackage.CONTEXT__CHILD_CONTEXTS);
         }
         return childContexts;
     }
@@ -250,14 +251,15 @@ public class ContextImpl extends EObjectImpl implements Context {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
             case RepositoryPackage.CONTEXT__ROOT_DOCUMENT:
                 return basicSetRootDocument(null, msgs);
             case RepositoryPackage.CONTEXT__CHILD_DOCUMENTS:
-                return ((InternalEList)getChildDocuments()).basicRemove(otherEnd, msgs);
+                return ((InternalEList<?>)getChildDocuments()).basicRemove(otherEnd, msgs);
             case RepositoryPackage.CONTEXT__CHILD_CONTEXTS:
-                return ((InternalEList)getChildContexts()).basicRemove(otherEnd, msgs);
+                return ((InternalEList<?>)getChildContexts()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -267,6 +269,7 @@ public class ContextImpl extends EObjectImpl implements Context {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
             case RepositoryPackage.CONTEXT__TYPE:
@@ -289,6 +292,8 @@ public class ContextImpl extends EObjectImpl implements Context {
      * <!-- end-user-doc -->
      * @generated
      */
+    @SuppressWarnings("unchecked")
+    @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
             case RepositoryPackage.CONTEXT__TYPE:
@@ -302,11 +307,11 @@ public class ContextImpl extends EObjectImpl implements Context {
                 return;
             case RepositoryPackage.CONTEXT__CHILD_DOCUMENTS:
                 getChildDocuments().clear();
-                getChildDocuments().addAll((Collection)newValue);
+                getChildDocuments().addAll((Collection<? extends Document>)newValue);
                 return;
             case RepositoryPackage.CONTEXT__CHILD_CONTEXTS:
                 getChildContexts().clear();
-                getChildContexts().addAll((Collection)newValue);
+                getChildContexts().addAll((Collection<? extends Context>)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -317,6 +322,7 @@ public class ContextImpl extends EObjectImpl implements Context {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void eUnset(int featureID) {
         switch (featureID) {
             case RepositoryPackage.CONTEXT__TYPE:
@@ -343,6 +349,7 @@ public class ContextImpl extends EObjectImpl implements Context {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
             case RepositoryPackage.CONTEXT__TYPE:
@@ -364,6 +371,7 @@ public class ContextImpl extends EObjectImpl implements Context {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public String toString() {
         if (eIsProxy()) return super.toString();
 

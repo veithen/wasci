@@ -2,15 +2,14 @@
  */
 package com.github.veithen.ramsay.ws.model.repository.util;
 
+import com.github.veithen.ramsay.ws.model.repository.*;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
-
-import com.github.veithen.ramsay.ws.model.repository.*;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -49,6 +48,7 @@ public class RepositoryAdapterFactory extends AdapterFactoryImpl {
      * @return whether this factory is applicable for the type of the object.
      * @generated
      */
+    @Override
     public boolean isFactoryForType(Object object) {
         if (object == modelPackage) {
             return true;
@@ -65,21 +65,26 @@ public class RepositoryAdapterFactory extends AdapterFactoryImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    protected RepositorySwitch modelSwitch =
-        new RepositorySwitch() {
-            public Object caseContextType(ContextType object) {
+    protected RepositorySwitch<Adapter> modelSwitch =
+        new RepositorySwitch<Adapter>() {
+            @Override
+            public Adapter caseContextType(ContextType object) {
                 return createContextTypeAdapter();
             }
-            public Object caseDocumentType(DocumentType object) {
+            @Override
+            public Adapter caseDocumentType(DocumentType object) {
                 return createDocumentTypeAdapter();
             }
-            public Object caseContext(Context object) {
+            @Override
+            public Adapter caseContext(Context object) {
                 return createContextAdapter();
             }
-            public Object caseDocument(Document object) {
+            @Override
+            public Adapter caseDocument(Document object) {
                 return createDocumentAdapter();
             }
-            public Object defaultCase(EObject object) {
+            @Override
+            public Adapter defaultCase(EObject object) {
                 return createEObjectAdapter();
             }
         };
@@ -92,8 +97,9 @@ public class RepositoryAdapterFactory extends AdapterFactoryImpl {
      * @return the adapter for the <code>target</code>.
      * @generated
      */
+    @Override
     public Adapter createAdapter(Notifier target) {
-        return (Adapter)modelSwitch.doSwitch((EObject)target);
+        return modelSwitch.doSwitch((EObject)target);
     }
 
 

@@ -2,6 +2,10 @@
  */
 package com.github.veithen.ramsay.ws.model.repository.impl;
 
+import com.github.veithen.ramsay.ws.model.repository.ContextType;
+import com.github.veithen.ramsay.ws.model.repository.DocumentType;
+import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -15,11 +19,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
-import com.github.veithen.ramsay.ws.model.repository.ContextType;
-import com.github.veithen.ramsay.ws.model.repository.DocumentType;
-import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -66,7 +65,7 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * @generated
      * @ordered
      */
-    protected EList childContextTypes;
+    protected EList<ContextType> childContextTypes;
 
     /**
      * The cached value of the '{@link #getChildDocumentTypes() <em>Child Document Types</em>}' reference list.
@@ -76,7 +75,7 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * @generated
      * @ordered
      */
-    protected EList childDocumentTypes;
+    protected EList<DocumentType> childDocumentTypes;
 
     /**
      * The cached value of the '{@link #getRootDocumentType() <em>Root Document Type</em>}' reference.
@@ -102,6 +101,7 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     protected EClass eStaticClass() {
         return RepositoryPackage.Literals.CONTEXT_TYPE;
     }
@@ -132,9 +132,9 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList getChildContextTypes() {
+    public EList<ContextType> getChildContextTypes() {
         if (childContextTypes == null) {
-            childContextTypes = new EObjectResolvingEList(ContextType.class, this, RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPES);
+            childContextTypes = new EObjectResolvingEList<ContextType>(ContextType.class, this, RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPES);
         }
         return childContextTypes;
     }
@@ -144,9 +144,9 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList getChildDocumentTypes() {
+    public EList<DocumentType> getChildDocumentTypes() {
         if (childDocumentTypes == null) {
-            childDocumentTypes = new EObjectResolvingEList(DocumentType.class, this, RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPES);
+            childDocumentTypes = new EObjectResolvingEList<DocumentType>(DocumentType.class, this, RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPES);
         }
         return childDocumentTypes;
     }
@@ -194,6 +194,7 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
             case RepositoryPackage.CONTEXT_TYPE__NAME:
@@ -214,6 +215,8 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * <!-- end-user-doc -->
      * @generated
      */
+    @SuppressWarnings("unchecked")
+    @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
             case RepositoryPackage.CONTEXT_TYPE__NAME:
@@ -221,11 +224,11 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
                 return;
             case RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPES:
                 getChildContextTypes().clear();
-                getChildContextTypes().addAll((Collection)newValue);
+                getChildContextTypes().addAll((Collection<? extends ContextType>)newValue);
                 return;
             case RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPES:
                 getChildDocumentTypes().clear();
-                getChildDocumentTypes().addAll((Collection)newValue);
+                getChildDocumentTypes().addAll((Collection<? extends DocumentType>)newValue);
                 return;
             case RepositoryPackage.CONTEXT_TYPE__ROOT_DOCUMENT_TYPE:
                 setRootDocumentType((DocumentType)newValue);
@@ -239,6 +242,7 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void eUnset(int featureID) {
         switch (featureID) {
             case RepositoryPackage.CONTEXT_TYPE__NAME:
@@ -262,6 +266,7 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
             case RepositoryPackage.CONTEXT_TYPE__NAME:
@@ -281,6 +286,7 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public String toString() {
         if (eIsProxy()) return super.toString();
 

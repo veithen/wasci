@@ -2,6 +2,9 @@
  */
 package com.github.veithen.ramsay.ws.model.repository.impl;
 
+import com.github.veithen.ramsay.ws.model.repository.DocumentType;
+import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -14,10 +17,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
-import com.github.veithen.ramsay.ws.model.repository.DocumentType;
-import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -62,7 +61,7 @@ public class DocumentTypeImpl extends EObjectImpl implements DocumentType {
      * @generated
      * @ordered
      */
-    protected EList rootRefObjectTypes;
+    protected EList<EClass> rootRefObjectTypes;
 
     /**
      * <!-- begin-user-doc -->
@@ -78,6 +77,7 @@ public class DocumentTypeImpl extends EObjectImpl implements DocumentType {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     protected EClass eStaticClass() {
         return RepositoryPackage.Literals.DOCUMENT_TYPE;
     }
@@ -108,9 +108,9 @@ public class DocumentTypeImpl extends EObjectImpl implements DocumentType {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList getRootRefObjectTypes() {
+    public EList<EClass> getRootRefObjectTypes() {
         if (rootRefObjectTypes == null) {
-            rootRefObjectTypes = new EObjectResolvingEList(EClass.class, this, RepositoryPackage.DOCUMENT_TYPE__ROOT_REF_OBJECT_TYPES);
+            rootRefObjectTypes = new EObjectResolvingEList<EClass>(EClass.class, this, RepositoryPackage.DOCUMENT_TYPE__ROOT_REF_OBJECT_TYPES);
         }
         return rootRefObjectTypes;
     }
@@ -120,6 +120,7 @@ public class DocumentTypeImpl extends EObjectImpl implements DocumentType {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
             case RepositoryPackage.DOCUMENT_TYPE__FILE_PATTERN:
@@ -135,6 +136,8 @@ public class DocumentTypeImpl extends EObjectImpl implements DocumentType {
      * <!-- end-user-doc -->
      * @generated
      */
+    @SuppressWarnings("unchecked")
+    @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
             case RepositoryPackage.DOCUMENT_TYPE__FILE_PATTERN:
@@ -142,7 +145,7 @@ public class DocumentTypeImpl extends EObjectImpl implements DocumentType {
                 return;
             case RepositoryPackage.DOCUMENT_TYPE__ROOT_REF_OBJECT_TYPES:
                 getRootRefObjectTypes().clear();
-                getRootRefObjectTypes().addAll((Collection)newValue);
+                getRootRefObjectTypes().addAll((Collection<? extends EClass>)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -153,6 +156,7 @@ public class DocumentTypeImpl extends EObjectImpl implements DocumentType {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void eUnset(int featureID) {
         switch (featureID) {
             case RepositoryPackage.DOCUMENT_TYPE__FILE_PATTERN:
@@ -170,6 +174,7 @@ public class DocumentTypeImpl extends EObjectImpl implements DocumentType {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
             case RepositoryPackage.DOCUMENT_TYPE__FILE_PATTERN:
@@ -185,6 +190,7 @@ public class DocumentTypeImpl extends EObjectImpl implements DocumentType {
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public String toString() {
         if (eIsProxy()) return super.toString();
 

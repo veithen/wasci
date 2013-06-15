@@ -68,7 +68,7 @@ public class ModelMapper {
         if (clazz == null) {
             DocumentType rootDocumentType = contextType.getRootDocumentType();
             if (rootDocumentType != null) {
-                List<EClass> rootRefObjectTypes = (List<EClass>)rootDocumentType.getRootRefObjectTypes();
+                List<EClass> rootRefObjectTypes = rootDocumentType.getRootRefObjectTypes();
                 if (rootRefObjectTypes.size() == 1) {
                     clazz = map(rootRefObjectTypes.get(0));
                 } else if (rootRefObjectTypes.size() > 1) {
@@ -88,7 +88,7 @@ public class ModelMapper {
                 }
                 contextPackage.getEClassifiers().add(clazz);
             }
-            for (ContextType childContextType : (List<ContextType>)contextType.getChildContextTypes()) {
+            for (ContextType childContextType : contextType.getChildContextTypes()) {
                 if (childContextType.getName().equals("repository")) {
                     continue;
                 }
@@ -109,7 +109,7 @@ public class ModelMapper {
                 ref.getEAnnotations().add(ann);
                 clazz.getEStructuralFeatures().add(ref);
             }
-            for (DocumentType childDocumentType : (List<DocumentType>)contextType.getChildDocumentTypes()) {
+            for (DocumentType childDocumentType : contextType.getChildDocumentTypes()) {
                 if (childDocumentType == rootDocumentType || childDocumentType.getRootRefObjectTypes().isEmpty()) {
                     continue;
                 }
@@ -134,7 +134,7 @@ public class ModelMapper {
         EClass clazz = documentTypeMap.get(documentType);
         if (clazz == null) {
             List<EClass> classes = new ArrayList<EClass>();
-            for (EClass in : (List<EClass>)documentType.getRootRefObjectTypes()) {
+            for (EClass in : documentType.getRootRefObjectTypes()) {
                 classes.add(map(in));
             }
             // TODO: if there are multiple classes, we should get the commons superclass
@@ -161,7 +161,7 @@ public class ModelMapper {
             if (in instanceof EEnum) {
                 EEnum inEnum = (EEnum)in;
                 EEnum outEnum = (EEnum)out;
-                for (EEnumLiteral inLiteral : (List<EEnumLiteral>)inEnum.getELiterals()) {
+                for (EEnumLiteral inLiteral : inEnum.getELiterals()) {
                     EEnumLiteral outLiteral = EcoreFactory.eINSTANCE.createEEnumLiteral();
                     outLiteral.setName(inLiteral.getName());
                     outLiteral.setValue(inLiteral.getValue());
@@ -180,10 +180,10 @@ public class ModelMapper {
             map(in.getEPackage()).getEClassifiers().add(out);
             out.setName(in.getName());
             classMap.put(in, out);
-            for (EClass superType : (List<EClass>)in.getESuperTypes()) {
+            for (EClass superType : in.getESuperTypes()) {
                 out.getESuperTypes().add(map(superType));
             }
-            for (EStructuralFeature feature : (List<EStructuralFeature>)in.getEStructuralFeatures()) {
+            for (EStructuralFeature feature : in.getEStructuralFeatures()) {
                 out.getEStructuralFeatures().add(map(feature));
             }
         }

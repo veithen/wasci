@@ -92,13 +92,13 @@ public class Metadata {
         
         Map<ContextType,EClass> contextTypeMap = new HashMap<ContextType,EClass>();
         Map<DocumentType,EClass> documentTypeMap = new HashMap<DocumentType,EClass>();
-        for (EObject metadataObject : (EList<EObject>)repositoryMetadata.getContents()) {
+        for (EObject metadataObject : repositoryMetadata.getContents()) {
             if (metadataObject instanceof ContextType) {
                 ContextType contextType = (ContextType)metadataObject;
                 DocumentType rootDocumentType = contextType.getRootDocumentType();
                 EClass clazz = null;
                 if (rootDocumentType != null) {
-                    List<EClass> rootRefObjectTypes = (List<EClass>)rootDocumentType.getRootRefObjectTypes();
+                    List<EClass> rootRefObjectTypes = rootDocumentType.getRootRefObjectTypes();
                     if (rootRefObjectTypes.size() == 1) {
                         clazz = rootRefObjectTypes.get(0);
                     } else if (rootRefObjectTypes.size() > 1) {
@@ -121,7 +121,7 @@ public class Metadata {
                 contextTypeMap.put(contextType, clazz);
             } else if (metadataObject instanceof DocumentType) {
                 DocumentType documentType = (DocumentType)metadataObject;
-                List<EClass> classes = (List<EClass>)documentType.getRootRefObjectTypes();
+                List<EClass> classes = documentType.getRootRefObjectTypes();
                 // TODO: if there are multiple classes, we should get the common superclass
                 documentTypeMap.put(documentType, classes.size() == 1 ? classes.get(0) : EcorePackage.eINSTANCE.getEObject());
             }
@@ -129,7 +129,7 @@ public class Metadata {
         for (Map.Entry<ContextType,EClass> entry : contextTypeMap.entrySet()) {
             ContextType contextType = entry.getKey();
             EClass clazz = entry.getValue();
-            for (ContextType childContextType : (List<ContextType>)contextType.getChildContextTypes()) {
+            for (ContextType childContextType : contextType.getChildContextTypes()) {
                 if (childContextType.getName().equals("repository")) {
                     continue;
                 }
@@ -140,7 +140,7 @@ public class Metadata {
                 ref.setContainment(true);
                 clazz.getEStructuralFeatures().add(ref);
             }
-            for (DocumentType childDocumentType : (List<DocumentType>)contextType.getChildDocumentTypes()) {
+            for (DocumentType childDocumentType : contextType.getChildDocumentTypes()) {
                 if (childDocumentType == contextType.getRootDocumentType() || childDocumentType.getRootRefObjectTypes().isEmpty()) {
                     continue;
                 }
@@ -177,8 +177,8 @@ public class Metadata {
     }
     
     private void processContext(Context context) {
-        EObject object = (EObject)context.getRootDocument().getContents().get(0);
-        for (Context childContext : (EList<Context>)context.getChildContexts()) {
+        EObject object = context.getRootDocument().getContents().get(0);
+        for (Context childContext : context.getChildContexts()) {
             Document rootDocument = childContext.getRootDocument();
             if (rootDocument != null) {
                 EReference ref = (EReference)object.eClass().getEStructuralFeature(childContext.getType().getName());
@@ -186,7 +186,7 @@ public class Metadata {
                 processContext(childContext);
             }
         }
-        for (Document childDocument : (EList<Document>)context.getChildDocuments()) {
+        for (Document childDocument : context.getChildDocuments()) {
             if (childDocument.getType().getFilePattern().equals("ws-security.xml")) {
                 continue; // TODO: hack!
             }
