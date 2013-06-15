@@ -58,7 +58,7 @@ public class MetadataProject {
         }
         EMFUtil.registerPackage(registry, XmiPackage.eINSTANCE);
         EMFUtil.registerPackage(registry, RepositoryPackage.eINSTANCE);
-        return new Metadata(folderSubset, project.getFolder(Constants.TRANSFORMATIONS_PATH), project.getFolder(Constants.TRANSFORMED_PATH), realm, registry, folderSubset.getResource(modelsFolder.getFile("repository-metadata.xmi")), new ModelMapper(realm));
+        return new Metadata(folderSubset, project.getFolder(Constants.TRANSFORMATIONS_PATH), project.getFolder(Constants.TRANSFORMED_PATH), realm, registry, folderSubset.getResource(modelsFolder.getFile("repository-metadata.xmi")));
     }
 
     public void extractRaw(IProgressMonitor monitor) throws CoreException {

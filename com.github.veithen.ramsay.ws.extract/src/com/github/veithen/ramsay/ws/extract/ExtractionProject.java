@@ -2,7 +2,6 @@ package com.github.veithen.ramsay.ws.extract;
 
 import java.util.Properties;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -10,18 +9,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com.github.veithen.ramsay.util.EMFUtil;
-import com.github.veithen.ramsay.ws.metadata.Metadata;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
-import com.github.veithen.ramsay.ws.metadata.ModelMapper;
 import com.ibm.websphere.management.AdminClient;
 import com.ibm.websphere.management.repository.ConfigRepository;
 import com.ibm.ws.management.repository.client.JMXRemoteConfigRepositoryClient;
@@ -45,22 +34,6 @@ public class ExtractionProject {
             throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Failed to connect to WebSphere", ex));
         }
         return repository;
-    }
-    
-    public void extract(IFile outFile) throws CoreException {
-        ResourceSet outResourceSet = new ResourceSetImpl();
-        Metadata metadata = getMetadataProject().loadMetadata(outResourceSet);
-        EPackage.Registry registry = metadata.getRegistry();
-        ModelMapper modelMapper = metadata.getModelMapper();
-        EClass cellClass = modelMapper.map(metadata.getCellContextType());
-        EObject cell = EcoreUtil.create(cellClass);
-        Resource outResource = EMFUtil.createResource(outResourceSet, outFile);
-        try {
-            outResource.getContents().addAll(new Loader(connect(), registry, modelMapper).load("cells/test", "cell.xml"));
-        } catch (Exception ex) {
-            throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Failed to extract configuration", ex));
-        }
-        EMFUtil.save(outResource);
     }
     
     /**

@@ -8,7 +8,6 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -41,13 +40,6 @@ public class ExtractHandler extends AbstractHandler {
                 StatusManager.getManager().handle(((CoreException)ex.getCause()).getStatus(), StatusManager.SHOW);
             } catch (InterruptedException ex) {
                 return null;
-            }
-            try {
-                extractionProject.extract(outFile);
-                outFile.refreshLocal(IResource.DEPTH_ONE, null);
-            } catch (CoreException ex) {
-                // TODO
-                throw new ExecutionException("FAILED", ex);
             }
 	    }
 		return null;

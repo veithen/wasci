@@ -35,17 +35,15 @@ public class Metadata {
     private final Realm realm;
     private final EPackage.Registry registry;
     private final Resource repositoryMetadata;
-    private final ModelMapper modelMapper;
     private Context rootContext;
     
-    public Metadata(FolderSubset folderSubset, IFolder transformationsFolder, IFolder outputFolder, Realm realm, Registry registry, Resource repositoryMetadata, ModelMapper modelMapper) {
+    public Metadata(FolderSubset folderSubset, IFolder transformationsFolder, IFolder outputFolder, Realm realm, Registry registry, Resource repositoryMetadata) {
         this.folderSubset = folderSubset;
         this.transformationsFolder = transformationsFolder;
         this.outputFolder = outputFolder;
         this.realm = realm;
         this.registry = registry;
         this.repositoryMetadata = repositoryMetadata;
-        this.modelMapper = modelMapper;
     }
     
     public FolderSubset getFolderSubset() {
@@ -58,10 +56,6 @@ public class Metadata {
 
     public EPackage.Registry getRegistry() {
         return registry;
-    }
-
-    public ModelMapper getModelMapper() {
-        return modelMapper;
     }
 
     public ContextType getCellContextType() {
