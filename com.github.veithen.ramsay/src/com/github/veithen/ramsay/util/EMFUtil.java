@@ -42,6 +42,10 @@ public final class EMFUtil {
         return resourceSet.createResource(createURI(file));
     }
     
+    public static Resource getResource(ResourceSet resourceSet, IFile file) {
+        return resourceSet.getResource(createURI(file), true);
+    }
+    
     public static Resource load(ResourceSet resourceSet, IFile file) throws CoreException {
         Resource resource = createResource(resourceSet, file);
         try {
@@ -50,6 +54,14 @@ public final class EMFUtil {
             throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Failed to load file " + file.getName(), ex));
         }
         return resource;
+    }
+    
+    public static void load(Resource resource) throws CoreException {
+        try {
+            resource.load(null);
+        } catch (IOException ex) {
+            throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Failed to load resource " + resource.getURI(), ex));
+        }
     }
     
     public static void save(Resource resource) throws CoreException {

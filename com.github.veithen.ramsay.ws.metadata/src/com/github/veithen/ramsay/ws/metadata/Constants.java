@@ -6,7 +6,7 @@ import org.eclipse.core.runtime.Path;
 public final class Constants {
     public static final String PLUGIN_ID = "com.github.veithen.ramsay.ws.metadata";
     
-    public static final IPath MODELS_PATH = new Path("models");
+    public static final IPath RAW_PATH = new Path("raw");
     
     public static final IPath TRANSFORMATIONS_PATH = new Path("transformations");
     

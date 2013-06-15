@@ -5,5 +5,6 @@ package com.github.veithen.ramsay.ws.metadata.extractor;
  * class loader.
  */
 public interface MetadataExtractor {
-    void extract(MetadataExtractorCallback callback) throws Exception;
+    void extractConfigMetadata(ConfigMetadataCallback callback) throws Exception;
+    void extractRepositoryMetadata(String dir, RepositoryMetadataCallback callback) throws Exception;
 }

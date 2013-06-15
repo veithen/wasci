@@ -28,7 +28,7 @@ public class MetadataProject {
     }
     
     public ContextType getCellContextType() throws CoreException {
-        IFolder modelsFolder = project.getFolder(Constants.MODELS_PATH);
+        IFolder modelsFolder = project.getFolder(Constants.RAW_PATH);
         IFile repositoryMetadata = modelsFolder.getFile("repository-metadata.xmi");
         ResourceSet resourceSet = new ResourceSetImpl();
         for (EObject object : EMFUtil.load(resourceSet, repositoryMetadata).getContents()) {
@@ -40,8 +40,7 @@ public class MetadataProject {
     }
     
     public Metadata loadMetadata(final ResourceSet resourceSet) throws CoreException {
-        IFolder modelsFolder = project.getFolder(Constants.MODELS_PATH);
-        IFile repositoryMetadata = modelsFolder.getFile("repository-metadata.xmi");
+        IFolder modelsFolder = project.getFolder(Constants.RAW_PATH);
         final EPackage.Registry registry = new EPackageRegistryImpl();
         FolderSubset folderSubset = new FolderSubset(resourceSet, modelsFolder);
         folderSubset.load();
@@ -59,11 +58,11 @@ public class MetadataProject {
         }
         EMFUtil.registerPackage(registry, XmiPackage.eINSTANCE);
         EMFUtil.registerPackage(registry, RepositoryPackage.eINSTANCE);
-        return new Metadata(folderSubset, project.getFolder(Constants.TRANSFORMATIONS_PATH), project.getFolder(Constants.TRANSFORMED_PATH), realm, registry, EMFUtil.load(resourceSet, repositoryMetadata), new ModelMapper(realm));
+        return new Metadata(folderSubset, project.getFolder(Constants.TRANSFORMATIONS_PATH), project.getFolder(Constants.TRANSFORMED_PATH), realm, registry, folderSubset.getResource(modelsFolder.getFile("repository-metadata.xmi")), new ModelMapper(realm));
     }
 
     public void extractRaw(IProgressMonitor monitor) throws CoreException {
-        project.getWorkspace().run(new ExtractRawRunnable(project.getFolder("raw")),
+        project.getWorkspace().run(new ExtractRawRunnable(project.getFolder(Constants.RAW_PATH)),
                 null, IWorkspace.AVOID_UPDATE, monitor);
     }
 }

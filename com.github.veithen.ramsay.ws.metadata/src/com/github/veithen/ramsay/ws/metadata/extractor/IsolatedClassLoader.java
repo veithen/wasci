@@ -15,7 +15,9 @@ public class IsolatedClassLoader extends URLClassLoader {
      * plug-in and the custom code running in the isolated class loader.
      */
     private static final Set<String> classesLoadedFromParent = new HashSet<String>(Arrays.asList(
-            MetadataExtractor.class.getName(), MetadataExtractorCallback.class.getName()));
+            MetadataExtractor.class.getName(),
+            ConfigMetadataCallback.class.getName(),
+            RepositoryMetadataCallback.class.getName()));
 
     /**
      * Classes that are injected into the isolated class loader. The class loader will load the

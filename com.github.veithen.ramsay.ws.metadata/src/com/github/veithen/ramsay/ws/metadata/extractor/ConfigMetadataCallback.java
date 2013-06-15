@@ -5,7 +5,7 @@ import java.io.OutputStream;
 
 import org.eclipse.emf.ecore.EPackage;
 
-public interface MetadataExtractorCallback {
+public interface ConfigMetadataCallback {
     /**
      * Get a destination URI for the given {@link EPackage}.
      * 
@@ -13,12 +13,14 @@ public interface MetadataExtractorCallback {
      *            the name of the package as returned by {@link EPackage#getName()}
      * @param ePackageNsURI
      *            the namespace URI of the package as returned by {@link EPackage#getNsURI()}
+     * @param ePackageNsPrefix
+     *            the namespace prefix of the package as returned by {@link EPackage#getNsPrefix()}
      * @param javaPackageName
      *            the name of the Java package from which the {@link EPackage} has been loaded
      * @return the URI of the output Ecore file; this value will later be passed to
      *         {@link #createOutputStream(String)} to create an output stream for the file
      */
-    String getEcoreFileURI(String ePackageName, String ePackageNsURI, String javaPackageName);
+    String getEcoreFileURI(String ePackageName, String ePackageNsURI, String ePackageNsPrefix, String javaPackageName);
 
     /**
      * Create an output stream for the given URI (returned by

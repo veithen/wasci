@@ -31,7 +31,7 @@ public class FolderSubset {
             public boolean visit(IResource resource) throws CoreException {
                 if (resource.getType() == IResource.FILE) {
                     IFile file = (IFile)resource;
-                    resourceMap.put(file, EMFUtil.load(resourceSet, file));
+                    resourceMap.put(file, EMFUtil.getResource(resourceSet, file));
                 }
                 return true;
             }

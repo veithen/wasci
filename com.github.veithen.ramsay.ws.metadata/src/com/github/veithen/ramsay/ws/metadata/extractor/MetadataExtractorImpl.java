@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,7 +26,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import com.ibm.websphere.management.exception.InvalidConfigDataTypeException;
 import com.ibm.ws.management.configservice.TypeRegistry;
+import com.ibm.ws.sm.workspace.metadata.RepositoryContextType;
+import com.ibm.ws.sm.workspace.metadata.RepositoryDocumentType;
+import com.ibm.ws.sm.workspace.metadata.RepositoryMetaData;
+import com.ibm.ws.sm.workspace.metadata.RepositoryMetaDataFactory;
 
 public class MetadataExtractorImpl implements MetadataExtractor {
     /**
@@ -37,7 +43,7 @@ public class MetadataExtractorImpl implements MetadataExtractor {
             "application.xmi"));
     
     @Override
-    public void extract(MetadataExtractorCallback callback) throws Exception {
+    public void extractConfigMetadata(ConfigMetadataCallback callback) throws Exception {
         Collection<EPackage> ePackages = new HashSet<EPackage>();
         Map<String,String> javaPackageNames = new HashMap<String,String>();
         
@@ -102,7 +108,7 @@ public class MetadataExtractorImpl implements MetadataExtractor {
         ResourceSet resourceSet = new ResourceSetImpl();
         List<Resource> resources = new ArrayList<Resource>();
         for (EPackage ePackage : ePackages) {
-            Resource resource = resourceSet.createResource(URI.createURI(callback.getEcoreFileURI(ePackage.getName(), ePackage.getNsURI(), javaPackageNames.get(ePackage.getNsURI()))));
+            Resource resource = resourceSet.createResource(URI.createURI(callback.getEcoreFileURI(ePackage.getName(), ePackage.getNsURI(), ePackage.getNsPrefix(), javaPackageNames.get(ePackage.getNsURI()))));
             resource.getContents().add(ePackage);
             resources.add(resource);
         }
@@ -115,6 +121,37 @@ public class MetadataExtractorImpl implements MetadataExtractor {
                 resource.save(out, null);
             } finally {
                 out.close();
+            }
+        }
+    }
+
+    @Override
+    public void extractRepositoryMetadata(String dir, RepositoryMetadataCallback callback) throws Exception {
+        RepositoryMetaData repositoryMetaData = RepositoryMetaDataFactory.getFactory().getMetaData(dir);
+        for (Iterator<RepositoryDocumentType> it = repositoryMetaData.getDocumentTypeAccess(); it.hasNext(); ) {
+            RepositoryDocumentType documentType = it.next();
+            callback.createDocumentType(documentType.getDisplayName(), documentType.getFilePattern());
+            for (String rootRefObjectType : documentType.getRootRefObjectTypes()) {
+                try {
+                    EClass eClass = TypeRegistry.getMetaObject(rootRefObjectType);
+                    callback.addRootRefObjectType(documentType.getDisplayName(), eClass.getEPackage().getNsURI(), eClass.getName());
+                } catch (InvalidConfigDataTypeException e) {
+                    System.out.println("Config object type " + rootRefObjectType + " not found");
+                }
+            }
+        }
+        for (Iterator<RepositoryContextType> it = repositoryMetaData.getContextTypeAccess(); it.hasNext(); ) {
+            RepositoryContextType contextType = it.next();
+            RepositoryDocumentType rootDocumentType = contextType.getRootDocumentType();
+            callback.createContextType(contextType.getName(), rootDocumentType == null ? null : rootDocumentType.getDisplayName());
+            for (RepositoryDocumentType childDocumentType : contextType.getChildDocumentTypes()) {
+                callback.linkDocumentTypeToContextType(contextType.getName(), childDocumentType.getDisplayName());
+            }
+        }
+        for (Iterator<RepositoryContextType> it = repositoryMetaData.getContextTypeAccess(); it.hasNext(); ) {
+            RepositoryContextType contextType = it.next();
+            for (RepositoryContextType childContextType : contextType.getChildContextTypes()) {
+                callback.linkContextTypes(contextType.getName(), childContextType.getName());
             }
         }
     }

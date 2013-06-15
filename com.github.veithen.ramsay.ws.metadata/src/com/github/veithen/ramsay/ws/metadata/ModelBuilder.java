@@ -15,7 +15,7 @@ public class ModelBuilder extends SimpleBuilder {
     
     @Override
     protected IPath[] getInputPaths() {
-        return new IPath[] { Constants.MODELS_PATH, Constants.TRANSFORMATIONS_PATH };
+        return new IPath[] { Constants.RAW_PATH, Constants.TRANSFORMATIONS_PATH };
     }
 
     @Override
