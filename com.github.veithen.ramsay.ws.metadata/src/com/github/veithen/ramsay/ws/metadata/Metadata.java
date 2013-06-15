@@ -27,6 +27,7 @@ import com.github.veithen.ramsay.ws.model.repository.Context;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.Document;
 import com.github.veithen.ramsay.ws.model.repository.DocumentType;
+import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
 
 public class Metadata {
     private final FolderSubset folderSubset;
@@ -34,10 +35,10 @@ public class Metadata {
     private final IFolder outputFolder;
     private final Realm realm;
     private final EPackage.Registry registry;
-    private final Resource repositoryMetadata;
+    private final RepositoryMetadata repositoryMetadata;
     private Context rootContext;
     
-    public Metadata(FolderSubset folderSubset, IFolder transformationsFolder, IFolder outputFolder, Realm realm, Registry registry, Resource repositoryMetadata) {
+    public Metadata(FolderSubset folderSubset, IFolder transformationsFolder, IFolder outputFolder, Realm realm, Registry registry, RepositoryMetadata repositoryMetadata) {
         this.folderSubset = folderSubset;
         this.transformationsFolder = transformationsFolder;
         this.outputFolder = outputFolder;
@@ -59,12 +60,9 @@ public class Metadata {
     }
 
     public ContextType getCellContextType() {
-        for (EObject object : repositoryMetadata.getContents()) {
-            if (object instanceof ContextType) {
-                ContextType contextType = (ContextType)object;
-                if (contextType.getName().equals("cells")) {
-                    return contextType;
-                }
+        for (ContextType contextType : repositoryMetadata.getContextTypes()) {
+            if (contextType.getName().equals("cells")) {
+                return contextType;
             }
         }
         return null;
@@ -86,39 +84,36 @@ public class Metadata {
         
         Map<ContextType,EClass> contextTypeMap = new HashMap<ContextType,EClass>();
         Map<DocumentType,EClass> documentTypeMap = new HashMap<DocumentType,EClass>();
-        for (EObject metadataObject : repositoryMetadata.getContents()) {
-            if (metadataObject instanceof ContextType) {
-                ContextType contextType = (ContextType)metadataObject;
-                DocumentType rootDocumentType = contextType.getRootDocumentType();
-                EClass clazz = null;
-                if (rootDocumentType != null) {
-                    List<EClass> rootRefObjectTypes = rootDocumentType.getRootRefObjectTypes();
-                    if (rootRefObjectTypes.size() == 1) {
-                        clazz = rootRefObjectTypes.get(0);
-                    } else if (rootRefObjectTypes.size() > 1) {
-                        System.out.println(rootDocumentType.getFilePattern());
-                        System.out.println(rootDocumentType.getRootRefObjectTypes());
-                        // TODO
-                        continue;
-                    }
+        for (ContextType contextType : repositoryMetadata.getContextTypes()) {
+            DocumentType rootDocumentType = contextType.getRootDocumentType();
+            EClass clazz = null;
+            if (rootDocumentType != null) {
+                List<EClass> rootRefObjectTypes = rootDocumentType.getRootRefObjectTypes();
+                if (rootRefObjectTypes.size() == 1) {
+                    clazz = rootRefObjectTypes.get(0);
+                } else if (rootRefObjectTypes.size() > 1) {
+                    System.out.println(rootDocumentType.getFilePattern());
+                    System.out.println(rootDocumentType.getRootRefObjectTypes());
+                    // TODO
+                    continue;
                 }
-                if (clazz == null) {
-                    clazz = EcoreFactory.eINSTANCE.createEClass();
-                    if (contextType.getName().length() == 0) {
-                        clazz.setName("RootContext");
-                    } else {
-                        clazz.setName(contextType.getName());
-                        // TODO: add name attribute
-                    }
-                    contextPackage.getEClassifiers().add(clazz);
-                }
-                contextTypeMap.put(contextType, clazz);
-            } else if (metadataObject instanceof DocumentType) {
-                DocumentType documentType = (DocumentType)metadataObject;
-                List<EClass> classes = documentType.getRootRefObjectTypes();
-                // TODO: if there are multiple classes, we should get the common superclass
-                documentTypeMap.put(documentType, classes.size() == 1 ? classes.get(0) : EcorePackage.eINSTANCE.getEObject());
             }
+            if (clazz == null) {
+                clazz = EcoreFactory.eINSTANCE.createEClass();
+                if (contextType.getName().length() == 0) {
+                    clazz.setName("RootContext");
+                } else {
+                    clazz.setName(contextType.getName());
+                    // TODO: add name attribute
+                }
+                contextPackage.getEClassifiers().add(clazz);
+            }
+            contextTypeMap.put(contextType, clazz);
+        }
+        for (DocumentType documentType : repositoryMetadata.getDocumentTypes()) {
+            List<EClass> classes = documentType.getRootRefObjectTypes();
+            // TODO: if there are multiple classes, we should get the common superclass
+            documentTypeMap.put(documentType, classes.size() == 1 ? classes.get(0) : EcorePackage.eINSTANCE.getEObject());
         }
         for (Map.Entry<ContextType,EClass> entry : contextTypeMap.entrySet()) {
             ContextType contextType = entry.getKey();

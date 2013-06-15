@@ -250,6 +250,44 @@ public interface RepositoryPackage extends EPackage {
 
 
     /**
+     * The meta object id for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.RepositoryMetadataImpl <em>Metadata</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryMetadataImpl
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getRepositoryMetadata()
+     * @generated
+     */
+    int REPOSITORY_METADATA = 4;
+
+    /**
+     * The feature id for the '<em><b>Context Types</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int REPOSITORY_METADATA__CONTEXT_TYPES = 0;
+
+    /**
+     * The feature id for the '<em><b>Document Types</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int REPOSITORY_METADATA__DOCUMENT_TYPES = 1;
+
+    /**
+     * The number of structural features of the '<em>Metadata</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int REPOSITORY_METADATA_FEATURE_COUNT = 2;
+
+
+    /**
      * Returns the meta object for class '{@link com.github.veithen.ramsay.ws.model.repository.ContextType <em>Context Type</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -433,6 +471,38 @@ public interface RepositoryPackage extends EPackage {
     EReference getDocument_Contents();
 
     /**
+     * Returns the meta object for class '{@link com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata <em>Metadata</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Metadata</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata
+     * @generated
+     */
+    EClass getRepositoryMetadata();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata#getContextTypes <em>Context Types</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Context Types</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata#getContextTypes()
+     * @see #getRepositoryMetadata()
+     * @generated
+     */
+    EReference getRepositoryMetadata_ContextTypes();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata#getDocumentTypes <em>Document Types</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Document Types</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata#getDocumentTypes()
+     * @see #getRepositoryMetadata()
+     * @generated
+     */
+    EReference getRepositoryMetadata_DocumentTypes();
+
+    /**
      * Returns the factory that creates the instances of the model.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -597,6 +667,32 @@ public interface RepositoryPackage extends EPackage {
          * @generated
          */
         EReference DOCUMENT__CONTENTS = eINSTANCE.getDocument_Contents();
+
+        /**
+         * The meta object literal for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.RepositoryMetadataImpl <em>Metadata</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryMetadataImpl
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getRepositoryMetadata()
+         * @generated
+         */
+        EClass REPOSITORY_METADATA = eINSTANCE.getRepositoryMetadata();
+
+        /**
+         * The meta object literal for the '<em><b>Context Types</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference REPOSITORY_METADATA__CONTEXT_TYPES = eINSTANCE.getRepositoryMetadata_ContextTypes();
+
+        /**
+         * The meta object literal for the '<em><b>Document Types</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference REPOSITORY_METADATA__DOCUMENT_TYPES = eINSTANCE.getRepositoryMetadata_DocumentTypes();
 
     }
 

@@ -18,6 +18,7 @@ import com.github.veithen.ramsay.emf.xmi.XmiPackage;
 import com.github.veithen.ramsay.util.EMFUtil;
 import com.github.veithen.ramsay.util.FolderSubset;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
+import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
 
 public class MetadataProject {
@@ -31,9 +32,9 @@ public class MetadataProject {
         IFolder modelsFolder = project.getFolder(Constants.RAW_PATH);
         IFile repositoryMetadata = modelsFolder.getFile("repository-metadata.xmi");
         ResourceSet resourceSet = new ResourceSetImpl();
-        for (EObject object : EMFUtil.load(resourceSet, repositoryMetadata).getContents()) {
-            if (object instanceof ContextType && ((ContextType)object).getName().equals("cells")) {
-                return (ContextType)object;
+        for (ContextType contextType : ((RepositoryMetadata)EMFUtil.load(resourceSet, repositoryMetadata).getContents().get(0)).getContextTypes()) {
+            if (contextType.getName().equals("cells")) {
+                return contextType;
             }
         }
         return null;
@@ -58,7 +59,7 @@ public class MetadataProject {
         }
         EMFUtil.registerPackage(registry, XmiPackage.eINSTANCE);
         EMFUtil.registerPackage(registry, RepositoryPackage.eINSTANCE);
-        return new Metadata(folderSubset, project.getFolder(Constants.TRANSFORMATIONS_PATH), project.getFolder(Constants.TRANSFORMED_PATH), realm, registry, folderSubset.getResource(modelsFolder.getFile("repository-metadata.xmi")));
+        return new Metadata(folderSubset, project.getFolder(Constants.TRANSFORMATIONS_PATH), project.getFolder(Constants.TRANSFORMED_PATH), realm, registry, (RepositoryMetadata)folderSubset.getResource(modelsFolder.getFile("repository-metadata.xmi")).getContents().get(0));
     }
 
     public void extractRaw(IProgressMonitor monitor) throws CoreException {

@@ -60,6 +60,7 @@ public class RepositoryFactoryImpl extends EFactoryImpl implements RepositoryFac
             case RepositoryPackage.DOCUMENT_TYPE: return createDocumentType();
             case RepositoryPackage.CONTEXT: return createContext();
             case RepositoryPackage.DOCUMENT: return createDocument();
+            case RepositoryPackage.REPOSITORY_METADATA: return createRepositoryMetadata();
             default:
                 throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
         }
@@ -103,6 +104,16 @@ public class RepositoryFactoryImpl extends EFactoryImpl implements RepositoryFac
     public Document createDocument() {
         DocumentImpl document = new DocumentImpl();
         return document;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public RepositoryMetadata createRepositoryMetadata() {
+        RepositoryMetadataImpl repositoryMetadata = new RepositoryMetadataImpl();
+        return repositoryMetadata;
     }
 
     /**

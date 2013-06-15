@@ -84,6 +84,10 @@ public class RepositoryAdapterFactory extends AdapterFactoryImpl {
                 return createDocumentAdapter();
             }
             @Override
+            public Adapter caseRepositoryMetadata(RepositoryMetadata object) {
+                return createRepositoryMetadataAdapter();
+            }
+            @Override
             public Adapter defaultCase(EObject object) {
                 return createEObjectAdapter();
             }
@@ -156,6 +160,20 @@ public class RepositoryAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createDocumentAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata <em>Metadata</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata
+     * @generated
+     */
+    public Adapter createRepositoryMetadataAdapter() {
         return null;
     }
 

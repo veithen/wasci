@@ -7,6 +7,7 @@ import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.Document;
 import com.github.veithen.ramsay.ws.model.repository.DocumentType;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryFactory;
+import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -51,6 +52,13 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
      * @generated
      */
     private EClass documentEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass repositoryMetadataEClass = null;
 
     /**
      * Creates an instance of the model <b>Package</b>, registered with
@@ -274,6 +282,33 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getRepositoryMetadata() {
+        return repositoryMetadataEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getRepositoryMetadata_ContextTypes() {
+        return (EReference)repositoryMetadataEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getRepositoryMetadata_DocumentTypes() {
+        return (EReference)repositoryMetadataEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public RepositoryFactory getRepositoryFactory() {
         return (RepositoryFactory)getEFactoryInstance();
     }
@@ -317,6 +352,10 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
         documentEClass = createEClass(DOCUMENT);
         createEReference(documentEClass, DOCUMENT__TYPE);
         createEReference(documentEClass, DOCUMENT__CONTENTS);
+
+        repositoryMetadataEClass = createEClass(REPOSITORY_METADATA);
+        createEReference(repositoryMetadataEClass, REPOSITORY_METADATA__CONTEXT_TYPES);
+        createEReference(repositoryMetadataEClass, REPOSITORY_METADATA__DOCUMENT_TYPES);
     }
 
     /**
@@ -372,6 +411,10 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
         initEClass(documentEClass, Document.class, "Document", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEReference(getDocument_Type(), this.getDocumentType(), null, "type", null, 1, 1, Document.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getDocument_Contents(), theEcorePackage.getEObject(), null, "contents", null, 0, -1, Document.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(repositoryMetadataEClass, RepositoryMetadata.class, "RepositoryMetadata", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getRepositoryMetadata_ContextTypes(), this.getContextType(), null, "contextTypes", null, 0, -1, RepositoryMetadata.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getRepositoryMetadata_DocumentTypes(), this.getDocumentType(), null, "documentTypes", null, 0, -1, RepositoryMetadata.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         // Create resource
         createResource(eNS_URI);

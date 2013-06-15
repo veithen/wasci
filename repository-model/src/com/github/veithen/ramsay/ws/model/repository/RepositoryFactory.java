@@ -58,6 +58,15 @@ public interface RepositoryFactory extends EFactory {
     Document createDocument();
 
     /**
+     * Returns a new object of class '<em>Metadata</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Metadata</em>'.
+     * @generated
+     */
+    RepositoryMetadata createRepositoryMetadata();
+
+    /**
      * Returns the package supported by this factory.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

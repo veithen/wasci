@@ -29,4 +29,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RepositoryMetadata">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextTypes" upperBound="-1"
+        eType="#//ContextType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="documentTypes" upperBound="-1"
+        eType="#//DocumentType" containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

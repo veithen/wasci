@@ -16,10 +16,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -36,6 +34,7 @@ import com.github.veithen.ramsay.ws.metadata.extractor.RepositoryMetadataCallbac
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.DocumentType;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryFactory;
+import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
 
 public class ExtractRawRunnable implements IWorkspaceRunnable, ConfigMetadataCallback, RepositoryMetadataCallback {
     private final IFolder folder;
@@ -92,11 +91,12 @@ public class ExtractRawRunnable implements IWorkspaceRunnable, ConfigMetadataCal
             } catch (Exception ex) {
                 throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Repository metadata extraction failed", ex));
             }
-            Resource repositoryMetadata = resourceSet.createResource(EMFUtil.createURI(folder.getFile("repository-metadata.xmi")));
-            EList<EObject> contents = repositoryMetadata.getContents();
-            contents.addAll(documentTypeMap.values());
-            contents.addAll(contextTypeMap.values());
-            EMFUtil.save(repositoryMetadata);
+            Resource resource = resourceSet.createResource(EMFUtil.createURI(folder.getFile("repository-metadata.xmi")));
+            RepositoryMetadata repositoryMetadata = RepositoryFactory.eINSTANCE.createRepositoryMetadata();
+            repositoryMetadata.getDocumentTypes().addAll(documentTypeMap.values());
+            repositoryMetadata.getContextTypes().addAll(contextTypeMap.values());
+            resource.getContents().add(repositoryMetadata);
+            EMFUtil.save(resource);
        } finally {
             thread.setContextClassLoader(savedContextClassLoader);
         }
