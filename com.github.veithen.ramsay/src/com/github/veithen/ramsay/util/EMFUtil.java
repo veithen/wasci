@@ -1,7 +1,6 @@
 package com.github.veithen.ramsay.util;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -19,7 +18,7 @@ public final class EMFUtil {
     public static void registerPackage(EPackage.Registry registry, EPackage pkg) {
         System.out.println(pkg.getNsURI());
         registry.put(pkg.getNsURI(), pkg);
-        for (EPackage subpkg : (List<EPackage>)pkg.getESubpackages()) {
+        for (EPackage subpkg : pkg.getESubpackages()) {
             registerPackage(registry, subpkg);
         }
     }
