@@ -10,12 +10,15 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.statushandlers.StatusManager;
 
+import com.github.veithen.ramsay.ws.extract.Constants;
 import com.github.veithen.ramsay.ws.extract.ExtractionProject;
 
 public class ExtractHandler extends AbstractHandler {
@@ -37,7 +40,14 @@ public class ExtractHandler extends AbstractHandler {
                     }
                 });
             } catch (InvocationTargetException ex) {
-                StatusManager.getManager().handle(((CoreException)ex.getCause()).getStatus(), StatusManager.SHOW);
+                Throwable cause = ex.getCause();
+                IStatus status;
+                if (cause instanceof CoreException) {
+                    status = ((CoreException)cause).getStatus();
+                } else {
+                    status = new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Extraction failed", cause);
+                }
+                StatusManager.getManager().handle(status, StatusManager.SHOW);
             } catch (InterruptedException ex) {
                 return null;
             }
