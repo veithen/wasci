@@ -11,6 +11,7 @@ import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
 import com.github.veithen.ramsay.emf.cm.transform.TransformerFactory;
@@ -29,7 +31,6 @@ import com.github.veithen.ramsay.ws.model.repository.ChildDocument;
 import com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink;
 import com.github.veithen.ramsay.ws.model.repository.Context;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
-import com.github.veithen.ramsay.ws.model.repository.Document;
 import com.github.veithen.ramsay.ws.model.repository.DocumentType;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
 
@@ -108,7 +109,11 @@ public class Metadata {
                     clazz.setName("RootContext");
                 } else {
                     clazz.setName(contextType.getName());
-                    // TODO: add name attribute
+                    EAttribute nameAttr = EcoreFactory.eINSTANCE.createEAttribute();
+                    nameAttr.setName("name");
+                    nameAttr.setEType(EcorePackage.eINSTANCE.getEString());
+                    nameAttr.setLowerBound(1);
+                    clazz.getEStructuralFeatures().add(nameAttr);
                 }
                 contextPackage.getEClassifiers().add(clazz);
                 contextType.setGeneratedClass(clazz);
@@ -170,14 +175,17 @@ public class Metadata {
         }
     }
     
-    private void processContext(Context context) {
-        EObject object = context.getRootDocument().getContents().get(0);
+    private EObject processContext(Context context) {
+        EObject object;
+        EClass generatedClass = context.getType().getGeneratedClass();
+        if (generatedClass != null) {
+            object = EcoreUtil.create(generatedClass);
+            object.eSet(generatedClass.getEStructuralFeature("name"), context.getName());
+        } else {
+            object = context.getRootDocument().getContents().get(0);
+        }
         for (ChildContext childContext : context.getChildContexts()) {
-            Document rootDocument = childContext.getContext().getRootDocument();
-            if (rootDocument != null) {
-                ((EList<EObject>)object.eGet(childContext.getLink().getReference())).addAll(rootDocument.getContents());
-                processContext(childContext.getContext());
-            }
+            ((EList<EObject>)object.eGet(childContext.getLink().getReference())).add(processContext(childContext.getContext()));
         }
         for (ChildDocument childDocument : context.getChildDocuments()) {
             if (childDocument.getDocument().getType().getFilePattern().equals("ws-security.xml")) {
@@ -185,5 +193,6 @@ public class Metadata {
             }
             ((EList<EObject>)object.eGet(childDocument.getLink().getReference())).addAll(childDocument.getDocument().getContents());
         }
+        return object;
     }
 }
