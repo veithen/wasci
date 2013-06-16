@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
+import com.github.veithen.ramsay.emf.local.LocalPackageUtil;
 import com.github.veithen.ramsay.emf.xmi.XmiPackage;
 import com.github.veithen.ramsay.util.EMFUtil;
 import com.github.veithen.ramsay.util.FolderSubset;
@@ -34,6 +35,7 @@ public class MetadataProject {
             if (resource.getURI().lastSegment().endsWith(".ecore")) {
                 for (EObject content : resource.getContents()) {
                     EMFUtil.registerPackage(registry, (EPackage)content);
+                    LocalPackageUtil.makePackageLocal(resourceSet, (EPackage)content);
                 }
             }
         }

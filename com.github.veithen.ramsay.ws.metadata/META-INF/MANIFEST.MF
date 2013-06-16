@@ -10,6 +10,7 @@ Export-Package: com.github.veithen.ramsay.ws.metadata
 Import-Package: com.github.veithen.ramsay.emf.cm,
  com.github.veithen.ramsay.emf.cm.cmml,
  com.github.veithen.ramsay.emf.cm.transform,
+ com.github.veithen.ramsay.emf.local,
  com.github.veithen.ramsay.emf.xmi,
  com.github.veithen.ramsay.util,
  com.github.veithen.ramsay.ws.model.repository,

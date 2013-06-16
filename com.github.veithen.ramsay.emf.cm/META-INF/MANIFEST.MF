@@ -10,4 +10,5 @@ Import-Package: org.eclipse.emf.common.notify,
  org.eclipse.emf.ecore.impl,
  org.eclipse.emf.ecore.resource,
  org.eclipse.emf.ecore.util
-Export-Package: com.github.veithen.ramsay.emf.cm
+Export-Package: com.github.veithen.ramsay.emf.cm,
+ com.github.veithen.ramsay.emf.local
