@@ -75,22 +75,22 @@ public interface RepositoryPackage extends EPackage {
     int CONTEXT_TYPE__NAME = 0;
 
     /**
-     * The feature id for the '<em><b>Child Context Types</b></em>' reference list.
+     * The feature id for the '<em><b>Child Context Type Links</b></em>' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int CONTEXT_TYPE__CHILD_CONTEXT_TYPES = 1;
+    int CONTEXT_TYPE__CHILD_CONTEXT_TYPE_LINKS = 1;
 
     /**
-     * The feature id for the '<em><b>Child Document Types</b></em>' reference list.
+     * The feature id for the '<em><b>Child Document Type Links</b></em>' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int CONTEXT_TYPE__CHILD_DOCUMENT_TYPES = 2;
+    int CONTEXT_TYPE__CHILD_DOCUMENT_TYPE_LINKS = 2;
 
     /**
      * The feature id for the '<em><b>Root Document Type</b></em>' reference.
@@ -120,6 +120,80 @@ public interface RepositoryPackage extends EPackage {
     int CONTEXT_TYPE_FEATURE_COUNT = 5;
 
     /**
+     * The meta object id for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.ChildContextTypeLinkImpl <em>Child Context Type Link</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.ChildContextTypeLinkImpl
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getChildContextTypeLink()
+     * @generated
+     */
+    int CHILD_CONTEXT_TYPE_LINK = 1;
+
+    /**
+     * The feature id for the '<em><b>Context Type</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CHILD_CONTEXT_TYPE_LINK__CONTEXT_TYPE = 0;
+
+    /**
+     * The feature id for the '<em><b>Reference</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CHILD_CONTEXT_TYPE_LINK__REFERENCE = 1;
+
+    /**
+     * The number of structural features of the '<em>Child Context Type Link</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CHILD_CONTEXT_TYPE_LINK_FEATURE_COUNT = 2;
+
+    /**
+     * The meta object id for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.ChildDocumentTypeLinkImpl <em>Child Document Type Link</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.ChildDocumentTypeLinkImpl
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getChildDocumentTypeLink()
+     * @generated
+     */
+    int CHILD_DOCUMENT_TYPE_LINK = 2;
+
+    /**
+     * The feature id for the '<em><b>Document Type</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CHILD_DOCUMENT_TYPE_LINK__DOCUMENT_TYPE = 0;
+
+    /**
+     * The feature id for the '<em><b>Reference</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CHILD_DOCUMENT_TYPE_LINK__REFERENCE = 1;
+
+    /**
+     * The number of structural features of the '<em>Child Document Type Link</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CHILD_DOCUMENT_TYPE_LINK_FEATURE_COUNT = 2;
+
+    /**
      * The meta object id for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.DocumentTypeImpl <em>Document Type</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -127,7 +201,7 @@ public interface RepositoryPackage extends EPackage {
      * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getDocumentType()
      * @generated
      */
-    int DOCUMENT_TYPE = 1;
+    int DOCUMENT_TYPE = 3;
 
     /**
      * The feature id for the '<em><b>File Pattern</b></em>' attribute.
@@ -164,7 +238,7 @@ public interface RepositoryPackage extends EPackage {
      * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getContext()
      * @generated
      */
-    int CONTEXT = 2;
+    int CONTEXT = 4;
 
     /**
      * The feature id for the '<em><b>Type</b></em>' reference.
@@ -221,6 +295,80 @@ public interface RepositoryPackage extends EPackage {
     int CONTEXT_FEATURE_COUNT = 5;
 
     /**
+     * The meta object id for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.ChildDocumentImpl <em>Child Document</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.ChildDocumentImpl
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getChildDocument()
+     * @generated
+     */
+    int CHILD_DOCUMENT = 5;
+
+    /**
+     * The feature id for the '<em><b>Link</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CHILD_DOCUMENT__LINK = 0;
+
+    /**
+     * The feature id for the '<em><b>Document</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CHILD_DOCUMENT__DOCUMENT = 1;
+
+    /**
+     * The number of structural features of the '<em>Child Document</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CHILD_DOCUMENT_FEATURE_COUNT = 2;
+
+    /**
+     * The meta object id for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.ChildContextImpl <em>Child Context</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.ChildContextImpl
+     * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getChildContext()
+     * @generated
+     */
+    int CHILD_CONTEXT = 6;
+
+    /**
+     * The feature id for the '<em><b>Link</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CHILD_CONTEXT__LINK = 0;
+
+    /**
+     * The feature id for the '<em><b>Context</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CHILD_CONTEXT__CONTEXT = 1;
+
+    /**
+     * The number of structural features of the '<em>Child Context</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CHILD_CONTEXT_FEATURE_COUNT = 2;
+
+    /**
      * The meta object id for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.DocumentImpl <em>Document</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -228,7 +376,7 @@ public interface RepositoryPackage extends EPackage {
      * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getDocument()
      * @generated
      */
-    int DOCUMENT = 3;
+    int DOCUMENT = 7;
 
     /**
      * The feature id for the '<em><b>Type</b></em>' reference.
@@ -266,7 +414,7 @@ public interface RepositoryPackage extends EPackage {
      * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getRepositoryMetadata()
      * @generated
      */
-    int REPOSITORY_METADATA = 4;
+    int REPOSITORY_METADATA = 8;
 
     /**
      * The feature id for the '<em><b>Context Types</b></em>' containment reference list.
@@ -318,26 +466,26 @@ public interface RepositoryPackage extends EPackage {
     EAttribute getContextType_Name();
 
     /**
-     * Returns the meta object for the reference list '{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getChildContextTypes <em>Child Context Types</em>}'.
+     * Returns the meta object for the containment reference list '{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getChildContextTypeLinks <em>Child Context Type Links</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for the reference list '<em>Child Context Types</em>'.
-     * @see com.github.veithen.ramsay.ws.model.repository.ContextType#getChildContextTypes()
+     * @return the meta object for the containment reference list '<em>Child Context Type Links</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ContextType#getChildContextTypeLinks()
      * @see #getContextType()
      * @generated
      */
-    EReference getContextType_ChildContextTypes();
+    EReference getContextType_ChildContextTypeLinks();
 
     /**
-     * Returns the meta object for the reference list '{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getChildDocumentTypes <em>Child Document Types</em>}'.
+     * Returns the meta object for the containment reference list '{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getChildDocumentTypeLinks <em>Child Document Type Links</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for the reference list '<em>Child Document Types</em>'.
-     * @see com.github.veithen.ramsay.ws.model.repository.ContextType#getChildDocumentTypes()
+     * @return the meta object for the containment reference list '<em>Child Document Type Links</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ContextType#getChildDocumentTypeLinks()
      * @see #getContextType()
      * @generated
      */
-    EReference getContextType_ChildDocumentTypes();
+    EReference getContextType_ChildDocumentTypeLinks();
 
     /**
      * Returns the meta object for the reference '{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getRootDocumentType <em>Root Document Type</em>}'.
@@ -360,6 +508,70 @@ public interface RepositoryPackage extends EPackage {
      * @generated
      */
     EReference getContextType_GeneratedClass();
+
+    /**
+     * Returns the meta object for class '{@link com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink <em>Child Context Type Link</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Child Context Type Link</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink
+     * @generated
+     */
+    EClass getChildContextTypeLink();
+
+    /**
+     * Returns the meta object for the reference '{@link com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink#getContextType <em>Context Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Context Type</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink#getContextType()
+     * @see #getChildContextTypeLink()
+     * @generated
+     */
+    EReference getChildContextTypeLink_ContextType();
+
+    /**
+     * Returns the meta object for the reference '{@link com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink#getReference <em>Reference</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Reference</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink#getReference()
+     * @see #getChildContextTypeLink()
+     * @generated
+     */
+    EReference getChildContextTypeLink_Reference();
+
+    /**
+     * Returns the meta object for class '{@link com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink <em>Child Document Type Link</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Child Document Type Link</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink
+     * @generated
+     */
+    EClass getChildDocumentTypeLink();
+
+    /**
+     * Returns the meta object for the reference '{@link com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink#getDocumentType <em>Document Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Document Type</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink#getDocumentType()
+     * @see #getChildDocumentTypeLink()
+     * @generated
+     */
+    EReference getChildDocumentTypeLink_DocumentType();
+
+    /**
+     * Returns the meta object for the reference '{@link com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink#getReference <em>Reference</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Reference</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink#getReference()
+     * @see #getChildDocumentTypeLink()
+     * @generated
+     */
+    EReference getChildDocumentTypeLink_Reference();
 
     /**
      * Returns the meta object for class '{@link com.github.veithen.ramsay.ws.model.repository.DocumentType <em>Document Type</em>}'.
@@ -457,6 +669,70 @@ public interface RepositoryPackage extends EPackage {
      * @generated
      */
     EReference getContext_ChildContexts();
+
+    /**
+     * Returns the meta object for class '{@link com.github.veithen.ramsay.ws.model.repository.ChildDocument <em>Child Document</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Child Document</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildDocument
+     * @generated
+     */
+    EClass getChildDocument();
+
+    /**
+     * Returns the meta object for the reference '{@link com.github.veithen.ramsay.ws.model.repository.ChildDocument#getLink <em>Link</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Link</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildDocument#getLink()
+     * @see #getChildDocument()
+     * @generated
+     */
+    EReference getChildDocument_Link();
+
+    /**
+     * Returns the meta object for the containment reference '{@link com.github.veithen.ramsay.ws.model.repository.ChildDocument#getDocument <em>Document</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Document</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildDocument#getDocument()
+     * @see #getChildDocument()
+     * @generated
+     */
+    EReference getChildDocument_Document();
+
+    /**
+     * Returns the meta object for class '{@link com.github.veithen.ramsay.ws.model.repository.ChildContext <em>Child Context</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Child Context</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildContext
+     * @generated
+     */
+    EClass getChildContext();
+
+    /**
+     * Returns the meta object for the reference '{@link com.github.veithen.ramsay.ws.model.repository.ChildContext#getLink <em>Link</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Link</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildContext#getLink()
+     * @see #getChildContext()
+     * @generated
+     */
+    EReference getChildContext_Link();
+
+    /**
+     * Returns the meta object for the containment reference '{@link com.github.veithen.ramsay.ws.model.repository.ChildContext#getContext <em>Context</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Context</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildContext#getContext()
+     * @see #getChildContext()
+     * @generated
+     */
+    EReference getChildContext_Context();
 
     /**
      * Returns the meta object for class '{@link com.github.veithen.ramsay.ws.model.repository.Document <em>Document</em>}'.
@@ -563,20 +839,20 @@ public interface RepositoryPackage extends EPackage {
         EAttribute CONTEXT_TYPE__NAME = eINSTANCE.getContextType_Name();
 
         /**
-         * The meta object literal for the '<em><b>Child Context Types</b></em>' reference list feature.
+         * The meta object literal for the '<em><b>Child Context Type Links</b></em>' containment reference list feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference CONTEXT_TYPE__CHILD_CONTEXT_TYPES = eINSTANCE.getContextType_ChildContextTypes();
+        EReference CONTEXT_TYPE__CHILD_CONTEXT_TYPE_LINKS = eINSTANCE.getContextType_ChildContextTypeLinks();
 
         /**
-         * The meta object literal for the '<em><b>Child Document Types</b></em>' reference list feature.
+         * The meta object literal for the '<em><b>Child Document Type Links</b></em>' containment reference list feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference CONTEXT_TYPE__CHILD_DOCUMENT_TYPES = eINSTANCE.getContextType_ChildDocumentTypes();
+        EReference CONTEXT_TYPE__CHILD_DOCUMENT_TYPE_LINKS = eINSTANCE.getContextType_ChildDocumentTypeLinks();
 
         /**
          * The meta object literal for the '<em><b>Root Document Type</b></em>' reference feature.
@@ -593,6 +869,58 @@ public interface RepositoryPackage extends EPackage {
          * @generated
          */
         EReference CONTEXT_TYPE__GENERATED_CLASS = eINSTANCE.getContextType_GeneratedClass();
+
+        /**
+         * The meta object literal for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.ChildContextTypeLinkImpl <em>Child Context Type Link</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.ChildContextTypeLinkImpl
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getChildContextTypeLink()
+         * @generated
+         */
+        EClass CHILD_CONTEXT_TYPE_LINK = eINSTANCE.getChildContextTypeLink();
+
+        /**
+         * The meta object literal for the '<em><b>Context Type</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference CHILD_CONTEXT_TYPE_LINK__CONTEXT_TYPE = eINSTANCE.getChildContextTypeLink_ContextType();
+
+        /**
+         * The meta object literal for the '<em><b>Reference</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference CHILD_CONTEXT_TYPE_LINK__REFERENCE = eINSTANCE.getChildContextTypeLink_Reference();
+
+        /**
+         * The meta object literal for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.ChildDocumentTypeLinkImpl <em>Child Document Type Link</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.ChildDocumentTypeLinkImpl
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getChildDocumentTypeLink()
+         * @generated
+         */
+        EClass CHILD_DOCUMENT_TYPE_LINK = eINSTANCE.getChildDocumentTypeLink();
+
+        /**
+         * The meta object literal for the '<em><b>Document Type</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference CHILD_DOCUMENT_TYPE_LINK__DOCUMENT_TYPE = eINSTANCE.getChildDocumentTypeLink_DocumentType();
+
+        /**
+         * The meta object literal for the '<em><b>Reference</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference CHILD_DOCUMENT_TYPE_LINK__REFERENCE = eINSTANCE.getChildDocumentTypeLink_Reference();
 
         /**
          * The meta object literal for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.DocumentTypeImpl <em>Document Type</em>}' class.
@@ -669,6 +997,58 @@ public interface RepositoryPackage extends EPackage {
          * @generated
          */
         EReference CONTEXT__CHILD_CONTEXTS = eINSTANCE.getContext_ChildContexts();
+
+        /**
+         * The meta object literal for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.ChildDocumentImpl <em>Child Document</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.ChildDocumentImpl
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getChildDocument()
+         * @generated
+         */
+        EClass CHILD_DOCUMENT = eINSTANCE.getChildDocument();
+
+        /**
+         * The meta object literal for the '<em><b>Link</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference CHILD_DOCUMENT__LINK = eINSTANCE.getChildDocument_Link();
+
+        /**
+         * The meta object literal for the '<em><b>Document</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference CHILD_DOCUMENT__DOCUMENT = eINSTANCE.getChildDocument_Document();
+
+        /**
+         * The meta object literal for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.ChildContextImpl <em>Child Context</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.ChildContextImpl
+         * @see com.github.veithen.ramsay.ws.model.repository.impl.RepositoryPackageImpl#getChildContext()
+         * @generated
+         */
+        EClass CHILD_CONTEXT = eINSTANCE.getChildContext();
+
+        /**
+         * The meta object literal for the '<em><b>Link</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference CHILD_CONTEXT__LINK = eINSTANCE.getChildContext_Link();
+
+        /**
+         * The meta object literal for the '<em><b>Context</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference CHILD_CONTEXT__CONTEXT = eINSTANCE.getChildContext_Context();
 
         /**
          * The meta object literal for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.DocumentImpl <em>Document</em>}' class.

@@ -57,8 +57,12 @@ public class RepositoryFactoryImpl extends EFactoryImpl implements RepositoryFac
     public EObject create(EClass eClass) {
         switch (eClass.getClassifierID()) {
             case RepositoryPackage.CONTEXT_TYPE: return createContextType();
+            case RepositoryPackage.CHILD_CONTEXT_TYPE_LINK: return createChildContextTypeLink();
+            case RepositoryPackage.CHILD_DOCUMENT_TYPE_LINK: return createChildDocumentTypeLink();
             case RepositoryPackage.DOCUMENT_TYPE: return createDocumentType();
             case RepositoryPackage.CONTEXT: return createContext();
+            case RepositoryPackage.CHILD_DOCUMENT: return createChildDocument();
+            case RepositoryPackage.CHILD_CONTEXT: return createChildContext();
             case RepositoryPackage.DOCUMENT: return createDocument();
             case RepositoryPackage.REPOSITORY_METADATA: return createRepositoryMetadata();
             default:
@@ -81,6 +85,26 @@ public class RepositoryFactoryImpl extends EFactoryImpl implements RepositoryFac
      * <!-- end-user-doc -->
      * @generated
      */
+    public ChildContextTypeLink createChildContextTypeLink() {
+        ChildContextTypeLinkImpl childContextTypeLink = new ChildContextTypeLinkImpl();
+        return childContextTypeLink;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ChildDocumentTypeLink createChildDocumentTypeLink() {
+        ChildDocumentTypeLinkImpl childDocumentTypeLink = new ChildDocumentTypeLinkImpl();
+        return childDocumentTypeLink;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public DocumentType createDocumentType() {
         DocumentTypeImpl documentType = new DocumentTypeImpl();
         return documentType;
@@ -94,6 +118,26 @@ public class RepositoryFactoryImpl extends EFactoryImpl implements RepositoryFac
     public Context createContext() {
         ContextImpl context = new ContextImpl();
         return context;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ChildDocument createChildDocument() {
+        ChildDocumentImpl childDocument = new ChildDocumentImpl();
+        return childDocument;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ChildContext createChildContext() {
+        ChildContextImpl childContext = new ChildContextImpl();
+        return childContext;
     }
 
     /**

@@ -23,6 +23,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import com.github.veithen.ramsay.emf.cm.Realm;
 import com.github.veithen.ramsay.emf.cm.transform.TransformerFactory;
 import com.github.veithen.ramsay.util.FolderSubset;
+import com.github.veithen.ramsay.ws.model.repository.ChildContext;
+import com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink;
+import com.github.veithen.ramsay.ws.model.repository.ChildDocument;
+import com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink;
 import com.github.veithen.ramsay.ws.model.repository.Context;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.Document;
@@ -119,7 +123,8 @@ public class Metadata {
         for (Map.Entry<ContextType,EClass> entry : contextTypeMap.entrySet()) {
             ContextType contextType = entry.getKey();
             EClass clazz = entry.getValue();
-            for (ContextType childContextType : contextType.getChildContextTypes()) {
+            for (ChildContextTypeLink childContextTypeLink : contextType.getChildContextTypeLinks()) {
+                ContextType childContextType = childContextTypeLink.getContextType();
                 if (childContextType.getName().equals("repository")) {
                     continue;
                 }
@@ -129,17 +134,21 @@ public class Metadata {
                 ref.setUpperBound(-1);
                 ref.setContainment(true);
                 clazz.getEStructuralFeatures().add(ref);
+                childContextTypeLink.setReference(ref);
             }
-            for (DocumentType childDocumentType : contextType.getChildDocumentTypes()) {
-                if (childDocumentType == contextType.getRootDocumentType() || childDocumentType.getRootRefObjectTypes().isEmpty()) {
+            for (ChildDocumentTypeLink childDocumentTypeLink : contextType.getChildDocumentTypeLinks()) {
+                DocumentType childDocumentType = childDocumentTypeLink.getDocumentType();
+                if (childDocumentType.getRootRefObjectTypes().isEmpty()) {
                     continue;
                 }
                 EReference ref = EcoreFactory.eINSTANCE.createEReference();
-                ref.setName(getReferenceName(childDocumentType));
+                String filePattern = childDocumentType.getFilePattern();
+                ref.setName(filePattern.substring(0, filePattern.lastIndexOf('.')));
                 ref.setEType(documentTypeMap.get(childDocumentType));
                 ref.setUpperBound(-1); // This is actually just a guess...
                 ref.setContainment(true);
                 clazz.getEStructuralFeatures().add(ref);
+                childDocumentTypeLink.setReference(ref);
             }
         }
         
@@ -161,27 +170,20 @@ public class Metadata {
         }
     }
     
-    private String getReferenceName(DocumentType documentType) {
-        String filePattern = documentType.getFilePattern();
-        return filePattern.substring(0, filePattern.lastIndexOf('.'));
-    }
-    
     private void processContext(Context context) {
         EObject object = context.getRootDocument().getContents().get(0);
-        for (Context childContext : context.getChildContexts()) {
-            Document rootDocument = childContext.getRootDocument();
+        for (ChildContext childContext : context.getChildContexts()) {
+            Document rootDocument = childContext.getContext().getRootDocument();
             if (rootDocument != null) {
-                EReference ref = (EReference)object.eClass().getEStructuralFeature(childContext.getType().getName());
-                ((EList<EObject>)object.eGet(ref)).addAll(rootDocument.getContents());
-                processContext(childContext);
+                ((EList<EObject>)object.eGet(childContext.getLink().getReference())).addAll(rootDocument.getContents());
+                processContext(childContext.getContext());
             }
         }
-        for (Document childDocument : context.getChildDocuments()) {
-            if (childDocument.getType().getFilePattern().equals("ws-security.xml")) {
+        for (ChildDocument childDocument : context.getChildDocuments()) {
+            if (childDocument.getDocument().getType().getFilePattern().equals("ws-security.xml")) {
                 continue; // TODO: hack!
             }
-            EReference ref = (EReference)object.eClass().getEStructuralFeature(getReferenceName(childDocument.getType()));
-            ((EList<EObject>)object.eGet(ref)).addAll(childDocument.getContents());
+            ((EList<EObject>)object.eGet(childDocument.getLink().getReference())).addAll(childDocument.getDocument().getContents());
         }
     }
 }

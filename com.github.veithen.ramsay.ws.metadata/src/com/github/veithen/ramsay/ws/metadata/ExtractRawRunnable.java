@@ -31,6 +31,8 @@ import com.github.veithen.ramsay.ws.metadata.extractor.IsolatedClassLoader;
 import com.github.veithen.ramsay.ws.metadata.extractor.MetadataExtractor;
 import com.github.veithen.ramsay.ws.metadata.extractor.MetadataExtractorImpl;
 import com.github.veithen.ramsay.ws.metadata.extractor.RepositoryMetadataCallback;
+import com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink;
+import com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.DocumentType;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryFactory;
@@ -143,11 +145,19 @@ public class ExtractRawRunnable implements IWorkspaceRunnable, ConfigMetadataCal
 
     @Override
     public void linkDocumentTypeToContextType(String parent, String child) {
-        contextTypeMap.get(parent).getChildDocumentTypes().add(documentTypeMap.get(child));
+        ContextType contextType = contextTypeMap.get(parent);
+        DocumentType documentType = documentTypeMap.get(child);
+        if (documentType != contextType.getRootDocumentType()) {
+            ChildDocumentTypeLink link = RepositoryFactory.eINSTANCE.createChildDocumentTypeLink();
+            link.setDocumentType(documentType);
+            contextType.getChildDocumentTypeLinks().add(link);
+        }
     }
 
     @Override
     public void linkContextTypes(String parent, String child) {
-        contextTypeMap.get(parent).getChildContextTypes().add(contextTypeMap.get(child));
+        ChildContextTypeLink link = RepositoryFactory.eINSTANCE.createChildContextTypeLink();
+        link.setContextType(contextTypeMap.get(child));
+        contextTypeMap.get(parent).getChildContextTypeLinks().add(link);
     }
 }

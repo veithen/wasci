@@ -72,6 +72,18 @@ public class RepositorySwitch<T> extends Switch<T> {
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
+            case RepositoryPackage.CHILD_CONTEXT_TYPE_LINK: {
+                ChildContextTypeLink childContextTypeLink = (ChildContextTypeLink)theEObject;
+                T result = caseChildContextTypeLink(childContextTypeLink);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case RepositoryPackage.CHILD_DOCUMENT_TYPE_LINK: {
+                ChildDocumentTypeLink childDocumentTypeLink = (ChildDocumentTypeLink)theEObject;
+                T result = caseChildDocumentTypeLink(childDocumentTypeLink);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
             case RepositoryPackage.DOCUMENT_TYPE: {
                 DocumentType documentType = (DocumentType)theEObject;
                 T result = caseDocumentType(documentType);
@@ -81,6 +93,18 @@ public class RepositorySwitch<T> extends Switch<T> {
             case RepositoryPackage.CONTEXT: {
                 Context context = (Context)theEObject;
                 T result = caseContext(context);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case RepositoryPackage.CHILD_DOCUMENT: {
+                ChildDocument childDocument = (ChildDocument)theEObject;
+                T result = caseChildDocument(childDocument);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case RepositoryPackage.CHILD_CONTEXT: {
+                ChildContext childContext = (ChildContext)theEObject;
+                T result = caseChildContext(childContext);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
@@ -116,6 +140,36 @@ public class RepositorySwitch<T> extends Switch<T> {
     }
 
     /**
+     * Returns the result of interpreting the object as an instance of '<em>Child Context Type Link</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Child Context Type Link</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseChildContextTypeLink(ChildContextTypeLink object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Child Document Type Link</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Child Document Type Link</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseChildDocumentTypeLink(ChildDocumentTypeLink object) {
+        return null;
+    }
+
+    /**
      * Returns the result of interpreting the object as an instance of '<em>Document Type</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
@@ -142,6 +196,36 @@ public class RepositorySwitch<T> extends Switch<T> {
      * @generated
      */
     public T caseContext(Context object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Child Document</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Child Document</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseChildDocument(ChildDocument object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Child Context</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Child Context</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseChildContext(ChildContext object) {
         return null;
     }
 

@@ -107,7 +107,7 @@ public interface Context extends EObject {
 
     /**
      * Returns the value of the '<em><b>Child Documents</b></em>' containment reference list.
-     * The list contents are of type {@link com.github.veithen.ramsay.ws.model.repository.Document}.
+     * The list contents are of type {@link com.github.veithen.ramsay.ws.model.repository.ChildDocument}.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Child Documents</em>' containment reference list isn't clear,
@@ -119,11 +119,11 @@ public interface Context extends EObject {
      * @model containment="true"
      * @generated
      */
-    EList<Document> getChildDocuments();
+    EList<ChildDocument> getChildDocuments();
 
     /**
      * Returns the value of the '<em><b>Child Contexts</b></em>' containment reference list.
-     * The list contents are of type {@link com.github.veithen.ramsay.ws.model.repository.Context}.
+     * The list contents are of type {@link com.github.veithen.ramsay.ws.model.repository.ChildContext}.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Child Contexts</em>' containment reference list isn't clear,
@@ -135,6 +135,6 @@ public interface Context extends EObject {
      * @model containment="true"
      * @generated
      */
-    EList<Context> getChildContexts();
+    EList<ChildContext> getChildContexts();
 
 } // Context

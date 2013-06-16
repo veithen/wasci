@@ -33,7 +33,7 @@ public class Builder extends SimpleBuilder {
         ExtractionProject project = (ExtractionProject)getProject().getAdapter(ExtractionProject.class);
         ResourceSet resourceSet = new ResourceSetImpl();
         MetadataProject metadataProject = project.getMetadataProject();
-        Metadata metadata = metadataProject.loadMetadata(new ResourceSetImpl() /* resourceSet */); // TODO
+        Metadata metadata = metadataProject.loadMetadata(resourceSet);
         Registry registry = metadata.getRegistry();
         resourceSet.setPackageRegistry(registry);
         FolderSubset folderSubset = new FolderSubset(resourceSet, inputFolder);

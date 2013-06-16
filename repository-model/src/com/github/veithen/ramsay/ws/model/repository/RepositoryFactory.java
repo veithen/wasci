@@ -31,6 +31,24 @@ public interface RepositoryFactory extends EFactory {
     ContextType createContextType();
 
     /**
+     * Returns a new object of class '<em>Child Context Type Link</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Child Context Type Link</em>'.
+     * @generated
+     */
+    ChildContextTypeLink createChildContextTypeLink();
+
+    /**
+     * Returns a new object of class '<em>Child Document Type Link</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Child Document Type Link</em>'.
+     * @generated
+     */
+    ChildDocumentTypeLink createChildDocumentTypeLink();
+
+    /**
      * Returns a new object of class '<em>Document Type</em>'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -47,6 +65,24 @@ public interface RepositoryFactory extends EFactory {
      * @generated
      */
     Context createContext();
+
+    /**
+     * Returns a new object of class '<em>Child Document</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Child Document</em>'.
+     * @generated
+     */
+    ChildDocument createChildDocument();
+
+    /**
+     * Returns a new object of class '<em>Child Context</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Child Context</em>'.
+     * @generated
+     */
+    ChildContext createChildContext();
 
     /**
      * Returns a new object of class '<em>Document</em>'.

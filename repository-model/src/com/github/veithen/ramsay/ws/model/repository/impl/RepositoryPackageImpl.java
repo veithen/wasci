@@ -2,6 +2,10 @@
  */
 package com.github.veithen.ramsay.ws.model.repository.impl;
 
+import com.github.veithen.ramsay.ws.model.repository.ChildContext;
+import com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink;
+import com.github.veithen.ramsay.ws.model.repository.ChildDocument;
+import com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink;
 import com.github.veithen.ramsay.ws.model.repository.Context;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.Document;
@@ -37,6 +41,20 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
      * <!-- end-user-doc -->
      * @generated
      */
+    private EClass childContextTypeLinkEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass childDocumentTypeLinkEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     private EClass documentTypeEClass = null;
 
     /**
@@ -45,6 +63,20 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
      * @generated
      */
     private EClass contextEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass childDocumentEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass childContextEClass = null;
 
     /**
      * <!-- begin-user-doc -->
@@ -147,7 +179,7 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getContextType_ChildContextTypes() {
+    public EReference getContextType_ChildContextTypeLinks() {
         return (EReference)contextTypeEClass.getEStructuralFeatures().get(1);
     }
 
@@ -156,7 +188,7 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getContextType_ChildDocumentTypes() {
+    public EReference getContextType_ChildDocumentTypeLinks() {
         return (EReference)contextTypeEClass.getEStructuralFeatures().get(2);
     }
 
@@ -176,6 +208,60 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
      */
     public EReference getContextType_GeneratedClass() {
         return (EReference)contextTypeEClass.getEStructuralFeatures().get(4);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getChildContextTypeLink() {
+        return childContextTypeLinkEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getChildContextTypeLink_ContextType() {
+        return (EReference)childContextTypeLinkEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getChildContextTypeLink_Reference() {
+        return (EReference)childContextTypeLinkEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getChildDocumentTypeLink() {
+        return childDocumentTypeLinkEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getChildDocumentTypeLink_DocumentType() {
+        return (EReference)childDocumentTypeLinkEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getChildDocumentTypeLink_Reference() {
+        return (EReference)childDocumentTypeLinkEClass.getEStructuralFeatures().get(1);
     }
 
     /**
@@ -264,6 +350,60 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getChildDocument() {
+        return childDocumentEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getChildDocument_Link() {
+        return (EReference)childDocumentEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getChildDocument_Document() {
+        return (EReference)childDocumentEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getChildContext() {
+        return childContextEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getChildContext_Link() {
+        return (EReference)childContextEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getChildContext_Context() {
+        return (EReference)childContextEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EClass getDocument() {
         return documentEClass;
     }
@@ -343,10 +483,18 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
         // Create classes and their features
         contextTypeEClass = createEClass(CONTEXT_TYPE);
         createEAttribute(contextTypeEClass, CONTEXT_TYPE__NAME);
-        createEReference(contextTypeEClass, CONTEXT_TYPE__CHILD_CONTEXT_TYPES);
-        createEReference(contextTypeEClass, CONTEXT_TYPE__CHILD_DOCUMENT_TYPES);
+        createEReference(contextTypeEClass, CONTEXT_TYPE__CHILD_CONTEXT_TYPE_LINKS);
+        createEReference(contextTypeEClass, CONTEXT_TYPE__CHILD_DOCUMENT_TYPE_LINKS);
         createEReference(contextTypeEClass, CONTEXT_TYPE__ROOT_DOCUMENT_TYPE);
         createEReference(contextTypeEClass, CONTEXT_TYPE__GENERATED_CLASS);
+
+        childContextTypeLinkEClass = createEClass(CHILD_CONTEXT_TYPE_LINK);
+        createEReference(childContextTypeLinkEClass, CHILD_CONTEXT_TYPE_LINK__CONTEXT_TYPE);
+        createEReference(childContextTypeLinkEClass, CHILD_CONTEXT_TYPE_LINK__REFERENCE);
+
+        childDocumentTypeLinkEClass = createEClass(CHILD_DOCUMENT_TYPE_LINK);
+        createEReference(childDocumentTypeLinkEClass, CHILD_DOCUMENT_TYPE_LINK__DOCUMENT_TYPE);
+        createEReference(childDocumentTypeLinkEClass, CHILD_DOCUMENT_TYPE_LINK__REFERENCE);
 
         documentTypeEClass = createEClass(DOCUMENT_TYPE);
         createEAttribute(documentTypeEClass, DOCUMENT_TYPE__FILE_PATTERN);
@@ -358,6 +506,14 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
         createEReference(contextEClass, CONTEXT__ROOT_DOCUMENT);
         createEReference(contextEClass, CONTEXT__CHILD_DOCUMENTS);
         createEReference(contextEClass, CONTEXT__CHILD_CONTEXTS);
+
+        childDocumentEClass = createEClass(CHILD_DOCUMENT);
+        createEReference(childDocumentEClass, CHILD_DOCUMENT__LINK);
+        createEReference(childDocumentEClass, CHILD_DOCUMENT__DOCUMENT);
+
+        childContextEClass = createEClass(CHILD_CONTEXT);
+        createEReference(childContextEClass, CHILD_CONTEXT__LINK);
+        createEReference(childContextEClass, CHILD_CONTEXT__CONTEXT);
 
         documentEClass = createEClass(DOCUMENT);
         createEReference(documentEClass, DOCUMENT__TYPE);
@@ -403,10 +559,18 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
         // Initialize classes and features; add operations and parameters
         initEClass(contextTypeEClass, ContextType.class, "ContextType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getContextType_Name(), ecorePackage.getEString(), "name", null, 0, 1, ContextType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getContextType_ChildContextTypes(), this.getContextType(), null, "childContextTypes", null, 0, -1, ContextType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getContextType_ChildDocumentTypes(), this.getDocumentType(), null, "childDocumentTypes", null, 0, -1, ContextType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getContextType_ChildContextTypeLinks(), this.getChildContextTypeLink(), null, "childContextTypeLinks", null, 0, -1, ContextType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getContextType_ChildDocumentTypeLinks(), this.getChildDocumentTypeLink(), null, "childDocumentTypeLinks", null, 0, -1, ContextType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getContextType_RootDocumentType(), this.getDocumentType(), null, "rootDocumentType", null, 0, 1, ContextType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getContextType_GeneratedClass(), theEcorePackage.getEClass(), null, "generatedClass", null, 0, 1, ContextType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(childContextTypeLinkEClass, ChildContextTypeLink.class, "ChildContextTypeLink", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getChildContextTypeLink_ContextType(), this.getContextType(), null, "contextType", null, 1, 1, ChildContextTypeLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getChildContextTypeLink_Reference(), theEcorePackage.getEReference(), null, "reference", null, 0, 1, ChildContextTypeLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(childDocumentTypeLinkEClass, ChildDocumentTypeLink.class, "ChildDocumentTypeLink", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getChildDocumentTypeLink_DocumentType(), this.getDocumentType(), null, "documentType", null, 1, 1, ChildDocumentTypeLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getChildDocumentTypeLink_Reference(), theEcorePackage.getEReference(), null, "reference", null, 0, 1, ChildDocumentTypeLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(documentTypeEClass, DocumentType.class, "DocumentType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getDocumentType_FilePattern(), ecorePackage.getEString(), "filePattern", null, 0, 1, DocumentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -416,8 +580,16 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
         initEReference(getContext_Type(), this.getContextType(), null, "type", null, 1, 1, Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getContext_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getContext_RootDocument(), this.getDocument(), null, "rootDocument", null, 0, 1, Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getContext_ChildDocuments(), this.getDocument(), null, "childDocuments", null, 0, -1, Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getContext_ChildContexts(), this.getContext(), null, "childContexts", null, 0, -1, Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getContext_ChildDocuments(), this.getChildDocument(), null, "childDocuments", null, 0, -1, Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getContext_ChildContexts(), this.getChildContext(), null, "childContexts", null, 0, -1, Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(childDocumentEClass, ChildDocument.class, "ChildDocument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getChildDocument_Link(), this.getChildDocumentTypeLink(), null, "link", null, 1, 1, ChildDocument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getChildDocument_Document(), this.getDocument(), null, "document", null, 1, 1, ChildDocument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(childContextEClass, ChildContext.class, "ChildContext", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getChildContext_Link(), this.getChildContextTypeLink(), null, "link", null, 1, 1, ChildContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getChildContext_Context(), this.getContext(), null, "context", null, 1, 1, ChildContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(documentEClass, Document.class, "Document", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEReference(getDocument_Type(), this.getDocumentType(), null, "type", null, 1, 1, Document.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

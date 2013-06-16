@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getName <em>Name</em>}</li>
- *   <li>{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getChildContextTypes <em>Child Context Types</em>}</li>
- *   <li>{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getChildDocumentTypes <em>Child Document Types</em>}</li>
+ *   <li>{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getChildContextTypeLinks <em>Child Context Type Links</em>}</li>
+ *   <li>{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getChildDocumentTypeLinks <em>Child Document Type Links</em>}</li>
  *   <li>{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getRootDocumentType <em>Root Document Type</em>}</li>
  *   <li>{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getGeneratedClass <em>Generated Class</em>}</li>
  * </ul>
@@ -55,36 +55,36 @@ public interface ContextType extends EObject {
     void setName(String value);
 
     /**
-     * Returns the value of the '<em><b>Child Context Types</b></em>' reference list.
-     * The list contents are of type {@link com.github.veithen.ramsay.ws.model.repository.ContextType}.
+     * Returns the value of the '<em><b>Child Context Type Links</b></em>' containment reference list.
+     * The list contents are of type {@link com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Child Context Types</em>' reference list isn't clear,
+     * If the meaning of the '<em>Child Context Type Links</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Child Context Types</em>' reference list.
-     * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage#getContextType_ChildContextTypes()
-     * @model
+     * @return the value of the '<em>Child Context Type Links</em>' containment reference list.
+     * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage#getContextType_ChildContextTypeLinks()
+     * @model containment="true"
      * @generated
      */
-    EList<ContextType> getChildContextTypes();
+    EList<ChildContextTypeLink> getChildContextTypeLinks();
 
     /**
-     * Returns the value of the '<em><b>Child Document Types</b></em>' reference list.
-     * The list contents are of type {@link com.github.veithen.ramsay.ws.model.repository.DocumentType}.
+     * Returns the value of the '<em><b>Child Document Type Links</b></em>' containment reference list.
+     * The list contents are of type {@link com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Child Document Types</em>' reference list isn't clear,
+     * If the meaning of the '<em>Child Document Type Links</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Child Document Types</em>' reference list.
-     * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage#getContextType_ChildDocumentTypes()
-     * @model
+     * @return the value of the '<em>Child Document Type Links</em>' containment reference list.
+     * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage#getContextType_ChildDocumentTypeLinks()
+     * @model containment="true"
      * @generated
      */
-    EList<DocumentType> getChildDocumentTypes();
+    EList<ChildDocumentTypeLink> getChildDocumentTypeLinks();
 
     /**
      * Returns the value of the '<em><b>Root Document Type</b></em>' reference.

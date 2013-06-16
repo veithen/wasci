@@ -2,6 +2,8 @@
  */
 package com.github.veithen.ramsay.ws.model.repository.impl;
 
+import com.github.veithen.ramsay.ws.model.repository.ChildContext;
+import com.github.veithen.ramsay.ws.model.repository.ChildDocument;
 import com.github.veithen.ramsay.ws.model.repository.Context;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.Document;
@@ -89,7 +91,7 @@ public class ContextImpl extends EObjectImpl implements Context {
      * @generated
      * @ordered
      */
-    protected EList<Document> childDocuments;
+    protected EList<ChildDocument> childDocuments;
 
     /**
      * The cached value of the '{@link #getChildContexts() <em>Child Contexts</em>}' containment reference list.
@@ -99,7 +101,7 @@ public class ContextImpl extends EObjectImpl implements Context {
      * @generated
      * @ordered
      */
-    protected EList<Context> childContexts;
+    protected EList<ChildContext> childContexts;
 
     /**
      * <!-- begin-user-doc -->
@@ -227,9 +229,9 @@ public class ContextImpl extends EObjectImpl implements Context {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<Document> getChildDocuments() {
+    public EList<ChildDocument> getChildDocuments() {
         if (childDocuments == null) {
-            childDocuments = new EObjectContainmentEList<Document>(Document.class, this, RepositoryPackage.CONTEXT__CHILD_DOCUMENTS);
+            childDocuments = new EObjectContainmentEList<ChildDocument>(ChildDocument.class, this, RepositoryPackage.CONTEXT__CHILD_DOCUMENTS);
         }
         return childDocuments;
     }
@@ -239,9 +241,9 @@ public class ContextImpl extends EObjectImpl implements Context {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<Context> getChildContexts() {
+    public EList<ChildContext> getChildContexts() {
         if (childContexts == null) {
-            childContexts = new EObjectContainmentEList<Context>(Context.class, this, RepositoryPackage.CONTEXT__CHILD_CONTEXTS);
+            childContexts = new EObjectContainmentEList<ChildContext>(ChildContext.class, this, RepositoryPackage.CONTEXT__CHILD_CONTEXTS);
         }
         return childContexts;
     }
@@ -307,11 +309,11 @@ public class ContextImpl extends EObjectImpl implements Context {
                 return;
             case RepositoryPackage.CONTEXT__CHILD_DOCUMENTS:
                 getChildDocuments().clear();
-                getChildDocuments().addAll((Collection<? extends Document>)newValue);
+                getChildDocuments().addAll((Collection<? extends ChildDocument>)newValue);
                 return;
             case RepositoryPackage.CONTEXT__CHILD_CONTEXTS:
                 getChildContexts().clear();
-                getChildContexts().addAll((Collection<? extends Context>)newValue);
+                getChildContexts().addAll((Collection<? extends ChildContext>)newValue);
                 return;
         }
         super.eSet(featureID, newValue);

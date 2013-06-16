@@ -72,12 +72,28 @@ public class RepositoryAdapterFactory extends AdapterFactoryImpl {
                 return createContextTypeAdapter();
             }
             @Override
+            public Adapter caseChildContextTypeLink(ChildContextTypeLink object) {
+                return createChildContextTypeLinkAdapter();
+            }
+            @Override
+            public Adapter caseChildDocumentTypeLink(ChildDocumentTypeLink object) {
+                return createChildDocumentTypeLinkAdapter();
+            }
+            @Override
             public Adapter caseDocumentType(DocumentType object) {
                 return createDocumentTypeAdapter();
             }
             @Override
             public Adapter caseContext(Context object) {
                 return createContextAdapter();
+            }
+            @Override
+            public Adapter caseChildDocument(ChildDocument object) {
+                return createChildDocumentAdapter();
+            }
+            @Override
+            public Adapter caseChildContext(ChildContext object) {
+                return createChildContextAdapter();
             }
             @Override
             public Adapter caseDocument(Document object) {
@@ -122,6 +138,34 @@ public class RepositoryAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
+     * Creates a new adapter for an object of class '{@link com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink <em>Child Context Type Link</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink
+     * @generated
+     */
+    public Adapter createChildContextTypeLinkAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink <em>Child Document Type Link</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink
+     * @generated
+     */
+    public Adapter createChildDocumentTypeLinkAdapter() {
+        return null;
+    }
+
+    /**
      * Creates a new adapter for an object of class '{@link com.github.veithen.ramsay.ws.model.repository.DocumentType <em>Document Type</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
@@ -146,6 +190,34 @@ public class RepositoryAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createContextAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link com.github.veithen.ramsay.ws.model.repository.ChildDocument <em>Child Document</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildDocument
+     * @generated
+     */
+    public Adapter createChildDocumentAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link com.github.veithen.ramsay.ws.model.repository.ChildContext <em>Child Context</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see com.github.veithen.ramsay.ws.model.repository.ChildContext
+     * @generated
+     */
+    public Adapter createChildContextAdapter() {
         return null;
     }
 

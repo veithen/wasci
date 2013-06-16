@@ -23,6 +23,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import com.github.veithen.ramsay.util.EMFUtil;
 import com.github.veithen.ramsay.ws.metadata.Metadata;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
+import com.github.veithen.ramsay.ws.model.repository.ChildContext;
+import com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink;
+import com.github.veithen.ramsay.ws.model.repository.ChildDocument;
+import com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink;
 import com.github.veithen.ramsay.ws.model.repository.Context;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.Document;
@@ -102,22 +106,27 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
         if (rootDocumentType != null) {
             context.setRootDocument(searchDocument(uri, rootDocumentType));
         }
-        for (DocumentType childDocumentType : type.getChildDocumentTypes()) {
-            if (childDocumentType != rootDocumentType) {
-                Document document = searchDocument(uri, childDocumentType);
-                if (document != null) {
-                    context.getChildDocuments().add(document);
-                }
+        for (ChildDocumentTypeLink link : type.getChildDocumentTypeLinks()) {
+            Document document = searchDocument(uri, link.getDocumentType());
+            if (document != null) {
+                ChildDocument childDocument = RepositoryFactory.eINSTANCE.createChildDocument();
+                childDocument.setLink(link);
+                childDocument.setDocument(document);
+                context.getChildDocuments().add(childDocument);
             }
         }
-        for (ContextType childContextType : type.getChildContextTypes()) {
+        for (ChildContextTypeLink link : type.getChildContextTypeLinks()) {
+            ContextType childContextType = link.getContextType();
             if (childContextType.getName().equals("repository") || childContextType.getName().equals("bver") || childContextType.getName().equals("cver")) {
                 continue; // TODO: hack!
             }
             String prefix = uri + "/" + childContextType.getName() + "/";
             for (String resourceName : resourceNames) {
                 if (resourceName.startsWith(prefix) && resourceName.indexOf('/', prefix.length()) == -1) {
-                    context.getChildContexts().add(buildContext(resourceName, childContextType, resourceName.substring(prefix.length())));
+                    ChildContext childContext = RepositoryFactory.eINSTANCE.createChildContext();
+                    childContext.setLink(link);
+                    childContext.setContext(buildContext(resourceName, childContextType, resourceName.substring(prefix.length())));
+                    context.getChildContexts().add(childContext);
                 }
             }
         }
@@ -139,15 +148,17 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
         if (rootDocument != null) {
             extractDocument(uri, rootDocument, folder);
         }
-        for (Document childDocument : context.getChildDocuments()) {
-            extractDocument(uri, childDocument, folder);
+        for (ChildDocument childDocument : context.getChildDocuments()) {
+            extractDocument(uri, childDocument.getDocument(), folder);
         }
-        for (Context childContext : context.getChildContexts()) {
-            IFolder childFolder = folder.getFolder(childContext.getType().getName());
+        for (ChildContext childContext : context.getChildContexts()) {
+            String type = childContext.getContext().getType().getName();
+            String name = childContext.getContext().getName();
+            IFolder childFolder = folder.getFolder(type);
             create(childFolder);
-            childFolder = childFolder.getFolder(childContext.getName());
+            childFolder = childFolder.getFolder(name);
             create(childFolder);
-            extractDocuments(uri + "/" + childContext.getType().getName() + "/" + childContext.getName(), childContext, childFolder);
+            extractDocuments(uri + "/" + type + "/" + name, childContext.getContext(), childFolder);
         }
     }
     

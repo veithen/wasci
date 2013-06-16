@@ -2,6 +2,8 @@
  */
 package com.github.veithen.ramsay.ws.model.repository.impl;
 
+import com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink;
+import com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
 import com.github.veithen.ramsay.ws.model.repository.DocumentType;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
@@ -10,6 +12,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -18,6 +21,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
@@ -28,8 +33,8 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl#getChildContextTypes <em>Child Context Types</em>}</li>
- *   <li>{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl#getChildDocumentTypes <em>Child Document Types</em>}</li>
+ *   <li>{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl#getChildContextTypeLinks <em>Child Context Type Links</em>}</li>
+ *   <li>{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl#getChildDocumentTypeLinks <em>Child Document Type Links</em>}</li>
  *   <li>{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl#getRootDocumentType <em>Root Document Type</em>}</li>
  *   <li>{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl#getGeneratedClass <em>Generated Class</em>}</li>
  * </ul>
@@ -59,24 +64,24 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
     protected String name = NAME_EDEFAULT;
 
     /**
-     * The cached value of the '{@link #getChildContextTypes() <em>Child Context Types</em>}' reference list.
+     * The cached value of the '{@link #getChildContextTypeLinks() <em>Child Context Type Links</em>}' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getChildContextTypes()
+     * @see #getChildContextTypeLinks()
      * @generated
      * @ordered
      */
-    protected EList<ContextType> childContextTypes;
+    protected EList<ChildContextTypeLink> childContextTypeLinks;
 
     /**
-     * The cached value of the '{@link #getChildDocumentTypes() <em>Child Document Types</em>}' reference list.
+     * The cached value of the '{@link #getChildDocumentTypeLinks() <em>Child Document Type Links</em>}' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getChildDocumentTypes()
+     * @see #getChildDocumentTypeLinks()
      * @generated
      * @ordered
      */
-    protected EList<DocumentType> childDocumentTypes;
+    protected EList<ChildDocumentTypeLink> childDocumentTypeLinks;
 
     /**
      * The cached value of the '{@link #getRootDocumentType() <em>Root Document Type</em>}' reference.
@@ -143,11 +148,11 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<ContextType> getChildContextTypes() {
-        if (childContextTypes == null) {
-            childContextTypes = new EObjectResolvingEList<ContextType>(ContextType.class, this, RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPES);
+    public EList<ChildContextTypeLink> getChildContextTypeLinks() {
+        if (childContextTypeLinks == null) {
+            childContextTypeLinks = new EObjectContainmentEList<ChildContextTypeLink>(ChildContextTypeLink.class, this, RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPE_LINKS);
         }
-        return childContextTypes;
+        return childContextTypeLinks;
     }
 
     /**
@@ -155,11 +160,11 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<DocumentType> getChildDocumentTypes() {
-        if (childDocumentTypes == null) {
-            childDocumentTypes = new EObjectResolvingEList<DocumentType>(DocumentType.class, this, RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPES);
+    public EList<ChildDocumentTypeLink> getChildDocumentTypeLinks() {
+        if (childDocumentTypeLinks == null) {
+            childDocumentTypeLinks = new EObjectContainmentEList<ChildDocumentTypeLink>(ChildDocumentTypeLink.class, this, RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPE_LINKS);
         }
-        return childDocumentTypes;
+        return childDocumentTypeLinks;
     }
 
     /**
@@ -244,14 +249,30 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * @generated
      */
     @Override
+    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+        switch (featureID) {
+            case RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPE_LINKS:
+                return ((InternalEList<?>)getChildContextTypeLinks()).basicRemove(otherEnd, msgs);
+            case RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPE_LINKS:
+                return ((InternalEList<?>)getChildDocumentTypeLinks()).basicRemove(otherEnd, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
             case RepositoryPackage.CONTEXT_TYPE__NAME:
                 return getName();
-            case RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPES:
-                return getChildContextTypes();
-            case RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPES:
-                return getChildDocumentTypes();
+            case RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPE_LINKS:
+                return getChildContextTypeLinks();
+            case RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPE_LINKS:
+                return getChildDocumentTypeLinks();
             case RepositoryPackage.CONTEXT_TYPE__ROOT_DOCUMENT_TYPE:
                 if (resolve) return getRootDocumentType();
                 return basicGetRootDocumentType();
@@ -274,13 +295,13 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
             case RepositoryPackage.CONTEXT_TYPE__NAME:
                 setName((String)newValue);
                 return;
-            case RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPES:
-                getChildContextTypes().clear();
-                getChildContextTypes().addAll((Collection<? extends ContextType>)newValue);
+            case RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPE_LINKS:
+                getChildContextTypeLinks().clear();
+                getChildContextTypeLinks().addAll((Collection<? extends ChildContextTypeLink>)newValue);
                 return;
-            case RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPES:
-                getChildDocumentTypes().clear();
-                getChildDocumentTypes().addAll((Collection<? extends DocumentType>)newValue);
+            case RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPE_LINKS:
+                getChildDocumentTypeLinks().clear();
+                getChildDocumentTypeLinks().addAll((Collection<? extends ChildDocumentTypeLink>)newValue);
                 return;
             case RepositoryPackage.CONTEXT_TYPE__ROOT_DOCUMENT_TYPE:
                 setRootDocumentType((DocumentType)newValue);
@@ -303,11 +324,11 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
             case RepositoryPackage.CONTEXT_TYPE__NAME:
                 setName(NAME_EDEFAULT);
                 return;
-            case RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPES:
-                getChildContextTypes().clear();
+            case RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPE_LINKS:
+                getChildContextTypeLinks().clear();
                 return;
-            case RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPES:
-                getChildDocumentTypes().clear();
+            case RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPE_LINKS:
+                getChildDocumentTypeLinks().clear();
                 return;
             case RepositoryPackage.CONTEXT_TYPE__ROOT_DOCUMENT_TYPE:
                 setRootDocumentType((DocumentType)null);
@@ -329,10 +350,10 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
         switch (featureID) {
             case RepositoryPackage.CONTEXT_TYPE__NAME:
                 return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-            case RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPES:
-                return childContextTypes != null && !childContextTypes.isEmpty();
-            case RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPES:
-                return childDocumentTypes != null && !childDocumentTypes.isEmpty();
+            case RepositoryPackage.CONTEXT_TYPE__CHILD_CONTEXT_TYPE_LINKS:
+                return childContextTypeLinks != null && !childContextTypeLinks.isEmpty();
+            case RepositoryPackage.CONTEXT_TYPE__CHILD_DOCUMENT_TYPE_LINKS:
+                return childDocumentTypeLinks != null && !childDocumentTypeLinks.isEmpty();
             case RepositoryPackage.CONTEXT_TYPE__ROOT_DOCUMENT_TYPE:
                 return rootDocumentType != null;
             case RepositoryPackage.CONTEXT_TYPE__GENERATED_CLASS:
