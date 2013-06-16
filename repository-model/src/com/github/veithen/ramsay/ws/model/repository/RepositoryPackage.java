@@ -102,13 +102,22 @@ public interface RepositoryPackage extends EPackage {
     int CONTEXT_TYPE__ROOT_DOCUMENT_TYPE = 3;
 
     /**
+     * The feature id for the '<em><b>Generated Class</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONTEXT_TYPE__GENERATED_CLASS = 4;
+
+    /**
      * The number of structural features of the '<em>Context Type</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int CONTEXT_TYPE_FEATURE_COUNT = 4;
+    int CONTEXT_TYPE_FEATURE_COUNT = 5;
 
     /**
      * The meta object id for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.DocumentTypeImpl <em>Document Type</em>}' class.
@@ -342,6 +351,17 @@ public interface RepositoryPackage extends EPackage {
     EReference getContextType_RootDocumentType();
 
     /**
+     * Returns the meta object for the reference '{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getGeneratedClass <em>Generated Class</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Generated Class</em>'.
+     * @see com.github.veithen.ramsay.ws.model.repository.ContextType#getGeneratedClass()
+     * @see #getContextType()
+     * @generated
+     */
+    EReference getContextType_GeneratedClass();
+
+    /**
      * Returns the meta object for class '{@link com.github.veithen.ramsay.ws.model.repository.DocumentType <em>Document Type</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -565,6 +585,14 @@ public interface RepositoryPackage extends EPackage {
          * @generated
          */
         EReference CONTEXT_TYPE__ROOT_DOCUMENT_TYPE = eINSTANCE.getContextType_RootDocumentType();
+
+        /**
+         * The meta object literal for the '<em><b>Generated Class</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference CONTEXT_TYPE__GENERATED_CLASS = eINSTANCE.getContextType_GeneratedClass();
 
         /**
          * The meta object literal for the '{@link com.github.veithen.ramsay.ws.model.repository.impl.DocumentTypeImpl <em>Document Type</em>}' class.

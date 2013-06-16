@@ -4,6 +4,7 @@ package com.github.veithen.ramsay.ws.model.repository;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -18,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getChildContextTypes <em>Child Context Types</em>}</li>
  *   <li>{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getChildDocumentTypes <em>Child Document Types</em>}</li>
  *   <li>{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getRootDocumentType <em>Root Document Type</em>}</li>
+ *   <li>{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getGeneratedClass <em>Generated Class</em>}</li>
  * </ul>
  * </p>
  *
@@ -109,5 +111,30 @@ public interface ContextType extends EObject {
      * @generated
      */
     void setRootDocumentType(DocumentType value);
+
+    /**
+     * Returns the value of the '<em><b>Generated Class</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * <!-- begin-model-doc -->
+     * The generated class is only relevant if the context type has no root document type. It this case, it specifies the class that will be used to represent contexts of this type.
+     * <!-- end-model-doc -->
+     * @return the value of the '<em>Generated Class</em>' reference.
+     * @see #setGeneratedClass(EClass)
+     * @see com.github.veithen.ramsay.ws.model.repository.RepositoryPackage#getContextType_GeneratedClass()
+     * @model
+     * @generated
+     */
+    EClass getGeneratedClass();
+
+    /**
+     * Sets the value of the '{@link com.github.veithen.ramsay.ws.model.repository.ContextType#getGeneratedClass <em>Generated Class</em>}' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Generated Class</em>' reference.
+     * @see #getGeneratedClass()
+     * @generated
+     */
+    void setGeneratedClass(EClass value);
 
 } // ContextType

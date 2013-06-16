@@ -174,6 +174,15 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
      * <!-- end-user-doc -->
      * @generated
      */
+    public EReference getContextType_GeneratedClass() {
+        return (EReference)contextTypeEClass.getEStructuralFeatures().get(4);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EClass getDocumentType() {
         return documentTypeEClass;
     }
@@ -337,6 +346,7 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
         createEReference(contextTypeEClass, CONTEXT_TYPE__CHILD_CONTEXT_TYPES);
         createEReference(contextTypeEClass, CONTEXT_TYPE__CHILD_DOCUMENT_TYPES);
         createEReference(contextTypeEClass, CONTEXT_TYPE__ROOT_DOCUMENT_TYPE);
+        createEReference(contextTypeEClass, CONTEXT_TYPE__GENERATED_CLASS);
 
         documentTypeEClass = createEClass(DOCUMENT_TYPE);
         createEAttribute(documentTypeEClass, DOCUMENT_TYPE__FILE_PATTERN);
@@ -396,6 +406,7 @@ public class RepositoryPackageImpl extends EPackageImpl implements RepositoryPac
         initEReference(getContextType_ChildContextTypes(), this.getContextType(), null, "childContextTypes", null, 0, -1, ContextType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getContextType_ChildDocumentTypes(), this.getDocumentType(), null, "childDocumentTypes", null, 0, -1, ContextType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getContextType_RootDocumentType(), this.getDocumentType(), null, "rootDocumentType", null, 0, 1, ContextType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getContextType_GeneratedClass(), theEcorePackage.getEClass(), null, "generatedClass", null, 0, 1, ContextType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(documentTypeEClass, DocumentType.class, "DocumentType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getDocumentType_FilePattern(), ecorePackage.getEString(), "filePattern", null, 0, 1, DocumentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

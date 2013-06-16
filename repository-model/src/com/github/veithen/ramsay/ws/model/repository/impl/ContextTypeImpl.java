@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl#getChildContextTypes <em>Child Context Types</em>}</li>
  *   <li>{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl#getChildDocumentTypes <em>Child Document Types</em>}</li>
  *   <li>{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl#getRootDocumentType <em>Root Document Type</em>}</li>
+ *   <li>{@link com.github.veithen.ramsay.ws.model.repository.impl.ContextTypeImpl#getGeneratedClass <em>Generated Class</em>}</li>
  * </ul>
  * </p>
  *
@@ -86,6 +87,16 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * @ordered
      */
     protected DocumentType rootDocumentType;
+
+    /**
+     * The cached value of the '{@link #getGeneratedClass() <em>Generated Class</em>}' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getGeneratedClass()
+     * @generated
+     * @ordered
+     */
+    protected EClass generatedClass;
 
     /**
      * <!-- begin-user-doc -->
@@ -194,6 +205,44 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getGeneratedClass() {
+        if (generatedClass != null && generatedClass.eIsProxy()) {
+            InternalEObject oldGeneratedClass = (InternalEObject)generatedClass;
+            generatedClass = (EClass)eResolveProxy(oldGeneratedClass);
+            if (generatedClass != oldGeneratedClass) {
+                if (eNotificationRequired())
+                    eNotify(new ENotificationImpl(this, Notification.RESOLVE, RepositoryPackage.CONTEXT_TYPE__GENERATED_CLASS, oldGeneratedClass, generatedClass));
+            }
+        }
+        return generatedClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass basicGetGeneratedClass() {
+        return generatedClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setGeneratedClass(EClass newGeneratedClass) {
+        EClass oldGeneratedClass = generatedClass;
+        generatedClass = newGeneratedClass;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, RepositoryPackage.CONTEXT_TYPE__GENERATED_CLASS, oldGeneratedClass, generatedClass));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
@@ -206,6 +255,9 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
             case RepositoryPackage.CONTEXT_TYPE__ROOT_DOCUMENT_TYPE:
                 if (resolve) return getRootDocumentType();
                 return basicGetRootDocumentType();
+            case RepositoryPackage.CONTEXT_TYPE__GENERATED_CLASS:
+                if (resolve) return getGeneratedClass();
+                return basicGetGeneratedClass();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -233,6 +285,9 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
             case RepositoryPackage.CONTEXT_TYPE__ROOT_DOCUMENT_TYPE:
                 setRootDocumentType((DocumentType)newValue);
                 return;
+            case RepositoryPackage.CONTEXT_TYPE__GENERATED_CLASS:
+                setGeneratedClass((EClass)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
@@ -257,6 +312,9 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
             case RepositoryPackage.CONTEXT_TYPE__ROOT_DOCUMENT_TYPE:
                 setRootDocumentType((DocumentType)null);
                 return;
+            case RepositoryPackage.CONTEXT_TYPE__GENERATED_CLASS:
+                setGeneratedClass((EClass)null);
+                return;
         }
         super.eUnset(featureID);
     }
@@ -277,6 +335,8 @@ public class ContextTypeImpl extends EObjectImpl implements ContextType {
                 return childDocumentTypes != null && !childDocumentTypes.isEmpty();
             case RepositoryPackage.CONTEXT_TYPE__ROOT_DOCUMENT_TYPE:
                 return rootDocumentType != null;
+            case RepositoryPackage.CONTEXT_TYPE__GENERATED_CLASS:
+                return generatedClass != null;
         }
         return super.eIsSet(featureID);
     }

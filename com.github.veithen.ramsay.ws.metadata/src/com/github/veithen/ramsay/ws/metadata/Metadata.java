@@ -107,6 +107,7 @@ public class Metadata {
                     // TODO: add name attribute
                 }
                 contextPackage.getEClassifiers().add(clazz);
+                contextType.setGeneratedClass(clazz);
             }
             contextTypeMap.put(contextType, clazz);
         }
