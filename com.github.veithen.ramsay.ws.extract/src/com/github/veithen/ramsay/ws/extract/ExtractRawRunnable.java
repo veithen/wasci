@@ -1,24 +1,27 @@
 package com.github.veithen.ramsay.ws.extract;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.github.veithen.ramsay.util.EMFUtil;
 import com.github.veithen.ramsay.ws.metadata.Metadata;
@@ -39,10 +42,9 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
     private final MetadataProject metadataProject;
     private final IFolder folder;
     private final ConfigRepository repository;
-    private IProgressMonitor monitor;
     private Set<String> resourceNames;
     private ResourceSet resourceSet;
-    private Set<IResource> resourcesToDelete = new HashSet<IResource>();
+    private Map<IFile,Resource> resourceMap = new HashMap<IFile,Resource>();
     
     public ExtractRawRunnable(MetadataProject metadataProject, IFolder folder, ConfigRepository repository) {
         this.metadataProject = metadataProject;
@@ -52,18 +54,6 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
 
     @Override
     public void run(IProgressMonitor monitor) throws CoreException {
-        if (folder.exists()) {
-            folder.accept(new IResourceVisitor() {
-                @Override
-                public boolean visit(IResource resource) throws CoreException {
-                    resourcesToDelete.add(resource);
-                    return true;
-                }
-            });
-            resourcesToDelete.remove(folder);
-        } else {
-            folder.create(false, true, monitor);
-        }
         resourceNames = new HashSet<String>(Arrays.asList(repository.listResourceNames("", 3, Integer.MAX_VALUE)));
         resourceSet = new ResourceSetImpl();
         Metadata metadata = metadataProject.loadMetadata(resourceSet);
@@ -71,31 +61,17 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
         Context cellContext = buildContext("cells/test", metadata.getCellContextType(), "test");
         resourceSet.setPackageRegistry(registry);
         IFile indexFile = folder.getFile("index.xmi");
-        resourcesToDelete.remove(indexFile);
         Resource index = EMFUtil.createResource(resourceSet, indexFile);
         index.getContents().add(cellContext);
         extractDocuments("cells/test", cellContext, folder);
+        EcoreUtil.resolveAll(resourceSet);
+        folder.delete(false, monitor);
+        for (Map.Entry<IFile,Resource> entry : resourceMap.entrySet()) {
+            Resource resource = entry.getValue();
+            resource.setURI(EMFUtil.createURI(entry.getKey()));
+            EMFUtil.save(resource);
+        }
         EMFUtil.save(index);
-        for (IResource resource : resourcesToDelete) {
-            resource.delete(false, monitor);
-        }
-    }
-    
-    private void create(IFolder folder) throws CoreException {
-        if (folder.exists()) {
-            resourcesToDelete.remove(folder);
-        } else {
-            folder.create(false, true, monitor);
-        }
-    }
-    
-    private void create(IFile file, InputStream source) throws CoreException {
-        if (file.exists()) {
-            resourcesToDelete.remove(file);
-            file.setContents(source, false, true, monitor);
-        } else {
-            file.create(source, false, monitor);
-        }
     }
     
     private Context buildContext(String uri, ContextType type, String name) {
@@ -154,30 +130,40 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
         for (ChildContext childContext : context.getChildContexts()) {
             String type = childContext.getContext().getType().getName();
             String name = childContext.getContext().getName();
-            IFolder childFolder = folder.getFolder(type);
-            create(childFolder);
-            childFolder = childFolder.getFolder(name);
-            create(childFolder);
-            extractDocuments(uri + "/" + type + "/" + name, childContext.getContext(), childFolder);
+            extractDocuments(uri + "/" + type + "/" + name, childContext.getContext(), folder.getFolder(type).getFolder(name));
         }
     }
     
     private void extractDocument(String contextURI, Document document, IFolder folder) throws CoreException {
-        String fileName = document.getType().getFilePattern();
-        if (fileName.equals("ws-security.xml")) {
+        String inputFileName = document.getType().getFilePattern();
+        if (inputFileName.equals("ws-security.xml")) {
             return; // TODO: hack!
         }
-        String uri = contextURI + "/" + fileName;
-        IFile file = folder.getFile(fileName);
+        String uri = contextURI + "/" + inputFileName;
+        Resource resource;
+        InputStream in;
         try {
-            create(file, repository.extract(uri).getSource());
+            in = repository.extract(uri).getSource();
         } catch (RepositoryException ex) {
             throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Error extracting document " + uri, ex));
         }
-        for (EObject object : EMFUtil.load(resourceSet, file).getContents()) {
+        try {
+            try {
+                resource = resourceSet.createResource(URI.createURI("wsrepo:///" + uri));
+                resource.load(in, null);
+            } finally {
+                in.close();
+            }
+        } catch (IOException ex) {
+            throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Error loading document " + uri, ex));
+        }
+        for (EObject object : resource.getContents()) {
             if (!object.eClass().getEPackage().getNsPrefix().equals("xmi")) {
                 document.getContents().add(object);
             }
         }
+        int idx = inputFileName.lastIndexOf('.');
+        String outputFileName = (idx == -1 ? inputFileName : inputFileName.substring(0, idx)) + ".xmi";
+        resourceMap.put(folder.getFile(outputFileName), resource);
     }
 }
