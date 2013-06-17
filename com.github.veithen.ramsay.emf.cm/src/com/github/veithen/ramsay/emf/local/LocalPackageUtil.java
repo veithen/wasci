@@ -8,6 +8,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import com.github.veithen.ramsay.emf.cm.impl.EMFUtil;
 
 public final class LocalPackageUtil {
+    public static final String ANNOTATION_URI = "http://github.com/veithen/ramsay/emf/local";
+    public static final String ORIGINAL_NS_URI = "originalNsURI";
+    
     private LocalPackageUtil() {}
     
     public static void makePackageLocal(ResourceSet resourceSet, EPackage ePackage) {

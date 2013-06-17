@@ -19,13 +19,16 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import com.github.veithen.ramsay.emf.local.LocalPackageUtil;
 import com.ibm.websphere.management.exception.InvalidConfigDataTypeException;
 import com.ibm.ws.management.configservice.TypeRegistry;
 import com.ibm.ws.sm.workspace.metadata.RepositoryContextType;
@@ -103,7 +106,7 @@ public class MetadataExtractorImpl implements MetadataExtractor {
         
         // Change the package URIs
         
-        // Need to copy the packages because we are going to assign new resources.
+        // Need to copy the packages because we are going to assign new resources and change the namespace URIs.
         ePackages = EcoreUtil.copyAll(ePackages);
         ResourceSet resourceSet = new ResourceSetImpl();
         List<Resource> resources = new ArrayList<Resource>();
@@ -111,6 +114,7 @@ public class MetadataExtractorImpl implements MetadataExtractor {
             Resource resource = resourceSet.createResource(URI.createURI(callback.getEcoreFileURI(ePackage.getName(), ePackage.getNsURI(), ePackage.getNsPrefix(), javaPackageNames.get(ePackage.getNsURI()))));
             resource.getContents().add(ePackage);
             resources.add(resource);
+            changeNsURI(ePackage);
         }
         
         // Save the Ecore files
@@ -125,6 +129,27 @@ public class MetadataExtractorImpl implements MetadataExtractor {
         }
     }
 
+    /**
+     * Change the namespace URI of the package to a local one (i.e. make it equal to the location
+     * URI of the EPackage object). Note that this is basically what we do with
+     * {@link LocalPackageUtil}, but unfortunately we can't use that code in the isolated class
+     * loader.
+     * 
+     * @param ePackage
+     */
+    private void changeNsURI(EPackage ePackage) {
+        EAnnotation ann = EcoreFactory.eINSTANCE.createEAnnotation();
+        // Note: it is safe to use the constants from the LocalPackageUtil here because
+        //       the compiler will inline them
+        ann.setSource(LocalPackageUtil.ANNOTATION_URI);
+        ann.getDetails().put(LocalPackageUtil.ORIGINAL_NS_URI, ePackage.getNsURI());
+        ePackage.getEAnnotations().add(ann);
+        ePackage.setNsURI(EcoreUtil.getURI(ePackage).toString());
+        for (EPackage eSubpackage : ePackage.getESubpackages()) {
+            changeNsURI(eSubpackage);
+        }
+    }
+    
     @Override
     public void extractRepositoryMetadata(String dir, RepositoryMetadataCallback callback) throws Exception {
         RepositoryMetaData repositoryMetaData = RepositoryMetaDataFactory.getFactory().getMetaData(dir);
