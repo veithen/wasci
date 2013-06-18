@@ -11,11 +11,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
 import com.github.veithen.ramsay.emf.local.LocalPackageUtil;
-import com.github.veithen.ramsay.emf.xmi.XmiPackage;
-import com.github.veithen.ramsay.util.EMFUtil;
 import com.github.veithen.ramsay.util.FolderSubset;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
-import com.github.veithen.ramsay.ws.model.repository.RepositoryPackage;
 
 public class MetadataProject {
     private final IProject project;
@@ -26,7 +23,7 @@ public class MetadataProject {
     
     public Metadata loadMetadata(final ResourceSet resourceSet) throws CoreException {
         IFolder modelsFolder = project.getFolder(Constants.RAW_PATH);
-        final EPackage.Registry registry = new EPackageRegistryImpl();
+        final EPackage.Registry registry = new EPackageRegistryImpl(EPackage.Registry.INSTANCE);
         FolderSubset folderSubset = new FolderSubset(resourceSet, modelsFolder);
         folderSubset.load();
         registry.putAll(LocalPackageUtil.configureLocalPackageSupport(resourceSet).getLocalPackageMap());
@@ -35,8 +32,6 @@ public class MetadataProject {
         for (Object object : registry.values()) {
             realm.addPackage((EPackage)object);
         }
-        EMFUtil.registerPackage(registry, XmiPackage.eINSTANCE);
-        EMFUtil.registerPackage(registry, RepositoryPackage.eINSTANCE);
         return new Metadata(folderSubset, project.getFolder(Constants.TRANSFORMATIONS_PATH), project.getFolder(Constants.TRANSFORMED_PATH), realm, registry, (RepositoryMetadata)folderSubset.getResource(modelsFolder.getFile("repository-metadata.xmi")).getContents().get(0));
     }
 
