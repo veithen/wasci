@@ -1,5 +1,7 @@
 package com.github.veithen.ramsay.emf.local;
 
+import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -9,7 +11,6 @@ import com.github.veithen.ramsay.emf.cm.impl.EMFUtil;
 
 final class EPackageAdapter extends AdapterBase<EPackage> {
     private final ResourceSetAdapter resourceSetAdapter;
-    private String originalNsURI;
     
     EPackageAdapter(ResourceSetAdapter resourceSetAdapter, EPackage target) {
         super(target);
@@ -17,13 +18,9 @@ final class EPackageAdapter extends AdapterBase<EPackage> {
     }
 
     boolean isLocal() {
-        return resourceSetAdapter.isLocal(target);
+        return target.getEAnnotation(LocalPackageSupport.ANNOTATION_URI) != null;
     }
     
-    String getOriginalNsURI() {
-        return originalNsURI;
-    }
-
     @Override
     protected void added() {
         for (EPackage ePackage : target.getESubpackages()) {
@@ -35,8 +32,13 @@ final class EPackageAdapter extends AdapterBase<EPackage> {
     }
     
     void makeLocal() {
-        originalNsURI = target.getNsURI();
+        EAnnotation ann = target.getEAnnotation(LocalPackageSupport.ANNOTATION_URI);
+        EMap<String,String> details = ann.getDetails();
+        if (!details.containsKey(LocalPackageSupport.ORIGINAL_NS_URI)) {
+            details.put(LocalPackageSupport.ORIGINAL_NS_URI, target.getNsURI());
+        }
         setLocalNsURI();
+        resourceSetAdapter.addLocalPackage(target);
     }
     
     private void setLocalNsURI() {
@@ -46,7 +48,7 @@ final class EPackageAdapter extends AdapterBase<EPackage> {
     @Override
     protected void removed() {
         if (isLocal()) {
-            target.setNsURI(originalNsURI);
+            resourceSetAdapter.removeLocalPackage(target);
         }
         for (EPackage ePackage : target.getESubpackages()) {
             resourceSetAdapter.removeAdapter(ePackage);

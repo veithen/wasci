@@ -1,7 +1,9 @@
 package com.github.veithen.ramsay.emf.local;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -12,18 +14,32 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import com.github.veithen.ramsay.emf.cm.impl.AdapterBase;
 
 final class ResourceSetAdapter extends AdapterBase<ResourceSet> {
+    private final LocalPackageSupport localPackageSupport;
     private final Set<EPackage> localPackages = new HashSet<EPackage>();
     
-    ResourceSetAdapter(ResourceSet target) {
+    ResourceSetAdapter(LocalPackageSupport localPackageSupport, ResourceSet target) {
         super(target);
+        this.localPackageSupport = localPackageSupport;
+    }
+
+    LocalPackageSupport getLocalPackageSupport() {
+        return localPackageSupport;
     }
 
     void addLocalPackage(EPackage ePackage) {
         localPackages.add(ePackage);
     }
     
-    boolean isLocal(EPackage ePackage) {
-        return localPackages.contains(ePackage);
+    void removeLocalPackage(EPackage ePackage) {
+        localPackages.remove(ePackage);
+    }
+    
+    Map<String,EPackage> getLocalPackageMap() {
+        Map<String,EPackage> map = new HashMap<String,EPackage>();
+        for (EPackage localPackage : localPackages) {
+            map.put(localPackage.getEAnnotation(LocalPackageSupport.ANNOTATION_URI).getDetails().get(LocalPackageSupport.ORIGINAL_NS_URI), localPackage);
+        }
+        return map;
     }
     
     @Override

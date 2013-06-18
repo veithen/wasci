@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import com.github.veithen.ramsay.emf.local.LocalPackageSupport;
 import com.github.veithen.ramsay.emf.local.LocalPackageUtil;
 import com.ibm.websphere.management.exception.InvalidConfigDataTypeException;
 import com.ibm.ws.management.configservice.TypeRegistry;
@@ -139,10 +140,10 @@ public class MetadataExtractorImpl implements MetadataExtractor {
      */
     private void changeNsURI(EPackage ePackage) {
         EAnnotation ann = EcoreFactory.eINSTANCE.createEAnnotation();
-        // Note: it is safe to use the constants from the LocalPackageUtil here because
+        // Note: it is safe to use the constants from the LocalPackageSupport here because
         //       the compiler will inline them
-        ann.setSource(LocalPackageUtil.ANNOTATION_URI);
-        ann.getDetails().put(LocalPackageUtil.ORIGINAL_NS_URI, ePackage.getNsURI());
+        ann.setSource(LocalPackageSupport.ANNOTATION_URI);
+        ann.getDetails().put(LocalPackageSupport.ORIGINAL_NS_URI, ePackage.getNsURI());
         ePackage.getEAnnotations().add(ann);
         ePackage.setNsURI(EcoreUtil.getURI(ePackage).toString());
         for (EPackage eSubpackage : ePackage.getESubpackages()) {

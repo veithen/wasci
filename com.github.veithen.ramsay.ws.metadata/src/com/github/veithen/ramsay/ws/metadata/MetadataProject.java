@@ -5,10 +5,8 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
@@ -31,14 +29,7 @@ public class MetadataProject {
         final EPackage.Registry registry = new EPackageRegistryImpl();
         FolderSubset folderSubset = new FolderSubset(resourceSet, modelsFolder);
         folderSubset.load();
-        for (Resource resource : resourceSet.getResources()) {
-            if (resource.getURI().lastSegment().endsWith(".ecore")) {
-                for (EObject content : resource.getContents()) {
-                    EMFUtil.registerPackage(registry, (EPackage)content);
-                    LocalPackageUtil.makePackageLocal(resourceSet, (EPackage)content);
-                }
-            }
-        }
+        registry.putAll(LocalPackageUtil.configureLocalPackageSupport(resourceSet).getLocalPackageMap());
         registry.put("http://www.ibm.com/websphere/appserver/schemas/6.0/pmiservice.xmi", registry.get("http://www.ibm.com/websphere/appserver/schemas/5.0/pmiservice.xmi"));
         Realm realm = new Realm();
         for (Object object : registry.values()) {
