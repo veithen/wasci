@@ -46,6 +46,11 @@ public class MetadataExtractorImpl implements MetadataExtractor {
             "http://www.ibm.com/websphere/appserver/schemas/5.0/datatype.xmi",
             "application.xmi"));
     
+    /**
+     * Maps package namespace URIs from their original value to the local namespace URI.
+     */
+    private final Map<String,String> nsURIMap = new HashMap<String,String>();
+    
     @Override
     public void extractConfigMetadata(ConfigMetadataCallback callback) throws Exception {
         Collection<EPackage> ePackages = new HashSet<EPackage>();
@@ -145,7 +150,9 @@ public class MetadataExtractorImpl implements MetadataExtractor {
         ann.setSource(LocalPackageSupport.ANNOTATION_URI);
         ann.getDetails().put(LocalPackageSupport.ORIGINAL_NS_URI, ePackage.getNsURI());
         ePackage.getEAnnotations().add(ann);
-        ePackage.setNsURI(EcoreUtil.getURI(ePackage).toString());
+        String newNsURI = EcoreUtil.getURI(ePackage).toString();
+        nsURIMap.put(ePackage.getNsURI(), newNsURI);
+        ePackage.setNsURI(newNsURI);
         for (EPackage eSubpackage : ePackage.getESubpackages()) {
             changeNsURI(eSubpackage);
         }
@@ -160,7 +167,7 @@ public class MetadataExtractorImpl implements MetadataExtractor {
             for (String rootRefObjectType : documentType.getRootRefObjectTypes()) {
                 try {
                     EClass eClass = TypeRegistry.getMetaObject(rootRefObjectType);
-                    callback.addRootRefObjectType(documentType.getDisplayName(), eClass.getEPackage().getNsURI(), eClass.getName());
+                    callback.addRootRefObjectType(documentType.getDisplayName(), nsURIMap.get(eClass.getEPackage().getNsURI()), eClass.getName());
                 } catch (InvalidConfigDataTypeException e) {
                     System.out.println("Config object type " + rootRefObjectType + " not found");
                 }
