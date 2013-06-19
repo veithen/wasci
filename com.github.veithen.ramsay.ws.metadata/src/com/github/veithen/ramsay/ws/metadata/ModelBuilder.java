@@ -30,6 +30,7 @@ public class ModelBuilder extends SimpleBuilder {
         ResourceSet resourceSet = new ResourceSetImpl();
         Metadata metadata = metadataProject.loadMetadata(resourceSet);
         metadata.transform();
+        outputFolder.delete(false, monitor);
         metadata.getFolderSubset().save();
     }
 }
