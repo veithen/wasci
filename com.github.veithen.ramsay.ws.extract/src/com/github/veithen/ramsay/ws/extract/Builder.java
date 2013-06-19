@@ -37,6 +37,7 @@ public class Builder extends SimpleBuilder {
         folderSubset.load();
         metadata.setRootContext((Context)folderSubset.getResource(inputFolder.getFile("index.xmi")).getContents().get(0));
         metadata.transform();
+        outputFolder.delete(false, monitor);
         folderSubset.mapTo(outputFolder);
         folderSubset.save();
     }
