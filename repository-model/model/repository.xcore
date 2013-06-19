@@ -1,0 +1,59 @@
+package com.github.veithen.ramsay.ws.model.repository
+
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.emf.ecore.EObject
+
+annotation "http://www.eclipse.org/emf/2002/GenModel" as GenModel
+
+class ContextType {
+	String name
+	contains ChildContextTypeLink[] childContextTypeLinks
+	contains ChildDocumentTypeLink[] childDocumentTypeLinks
+	refers DocumentType rootDocumentType
+	@GenModel(documentation="The generated class is only relevant if the context type has no root document type. It this case, it specifies the class that will be used to represent contexts of this type.")
+	refers EClass generatedClass
+}
+
+class ChildContextTypeLink {
+	refers ContextType[1] contextType
+	refers EReference reference
+}
+
+class ChildDocumentTypeLink {
+	refers DocumentType[1] documentType
+	refers EReference reference
+}
+
+class DocumentType {
+	String filePattern
+	refers EClass[] rootRefObjectTypes
+}
+
+class Context {
+	refers ContextType[1] ^type
+	String name
+	contains Document rootDocument
+	contains ChildDocument[] childDocuments
+	contains ChildContext[] childContexts
+}
+
+class ChildDocument {
+	refers ChildDocumentTypeLink[1] link
+	contains Document[1] document
+}
+
+class ChildContext {
+	refers ChildContextTypeLink[1] link
+	contains Context[1] context
+}
+
+class Document {
+	refers DocumentType[1] ^type
+	refers EObject[] contents
+}
+
+class RepositoryMetadata {
+	contains ContextType[] contextTypes
+	contains DocumentType[] documentTypes
+}
