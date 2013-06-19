@@ -52,6 +52,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable, ConfigMetadataCal
 
     @Override
     public void run(IProgressMonitor monitor) throws CoreException {
+        folder.delete(false, monitor);
         File installDir = new File("c:\\opt\\IBM\\WebSphere\\AppServer-8.5");
         List<File> jars = new ArrayList<File>();
         for (File file : new File(installDir, "plugins").listFiles()) {
