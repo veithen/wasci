@@ -70,4 +70,12 @@ class Document {
 class RepositoryMetadata {
 	contains ContextType[] contextTypes
 	contains DocumentType[] documentTypes
+	op ContextType getContextType(String name) {
+		for (ContextType t : contextTypes) {
+			if (t.name == name) {
+				return t
+			}
+		}
+		return null
+	}
 }
