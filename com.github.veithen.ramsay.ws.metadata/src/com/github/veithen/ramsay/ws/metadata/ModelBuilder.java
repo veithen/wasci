@@ -32,21 +32,4 @@ public class ModelBuilder extends SimpleBuilder {
         metadata.transform();
         metadata.getFolderSubset().save();
     }
-    
-    /*
-    @Override
-    protected void doBuild(IFolder inputFolder, IFolder outputFolder, IProgressMonitor monitor) throws CoreException {
-        IProject project = getProject();
-        MetadataProject metadataProject = (MetadataProject)project.getAdapter(MetadataProject.class);
-        Metadata metadata = metadataProject.loadMetadata();
-        ModelMapper modelMapper = metadata.getModelMapper();
-        modelMapper.map(metadata.getCellContextType());
-        ResourceSet outResourceSet = new ResourceSetImpl();
-        IFile outFile = project.getFile(Constants.METADATA_FILE);
-        Resource outResource = EMFUtil.createResource(outResourceSet, outFile);
-        outResource.getContents().add(modelMapper.getEPackage());
-        EMFUtil.save(outResource);
-        outFile.refreshLocal(IResource.DEPTH_ONE, monitor);
-    }
-    */
 }
