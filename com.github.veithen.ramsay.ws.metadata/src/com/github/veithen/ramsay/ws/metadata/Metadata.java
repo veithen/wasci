@@ -1,7 +1,6 @@
 package com.github.veithen.ramsay.ws.metadata;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -88,20 +87,11 @@ public class Metadata {
         generatedPackages.getContents().add(contextPackage);
         
         Map<ContextType,EClass> contextTypeMap = new HashMap<ContextType,EClass>();
-        Map<DocumentType,EClass> documentTypeMap = new HashMap<DocumentType,EClass>();
         for (ContextType contextType : repositoryMetadata.getContextTypes()) {
             DocumentType rootDocumentType = contextType.getRootDocumentType();
             EClass clazz = null;
             if (rootDocumentType != null) {
-                List<EClass> rootRefObjectTypes = rootDocumentType.getRootRefObjectTypes();
-                if (rootRefObjectTypes.size() == 1) {
-                    clazz = rootRefObjectTypes.get(0);
-                } else if (rootRefObjectTypes.size() > 1) {
-                    System.out.println(rootDocumentType.getFilePattern());
-                    System.out.println(rootDocumentType.getRootRefObjectTypes());
-                    // TODO
-                    continue;
-                }
+                clazz = rootDocumentType.getObjectType();
             }
             if (clazz == null) {
                 clazz = EcoreFactory.eINSTANCE.createEClass();
@@ -119,11 +109,6 @@ public class Metadata {
                 contextType.setGeneratedClass(clazz);
             }
             contextTypeMap.put(contextType, clazz);
-        }
-        for (DocumentType documentType : repositoryMetadata.getDocumentTypes()) {
-            List<EClass> classes = documentType.getRootRefObjectTypes();
-            // TODO: if there are multiple classes, we should get the common superclass
-            documentTypeMap.put(documentType, classes.size() == 1 ? classes.get(0) : EcorePackage.eINSTANCE.getEObject());
         }
         for (Map.Entry<ContextType,EClass> entry : contextTypeMap.entrySet()) {
             ContextType contextType = entry.getKey();
@@ -151,13 +136,14 @@ public class Metadata {
             }
             for (ChildDocumentTypeLink childDocumentTypeLink : contextType.getChildDocumentTypeLinks()) {
                 DocumentType childDocumentType = childDocumentTypeLink.getDocumentType();
-                if (childDocumentType.getRootRefObjectTypes().isEmpty()) {
+                EClass type = childDocumentType.getObjectType();
+                if (type == null) {
                     continue;
                 }
                 EReference ref = EcoreFactory.eINSTANCE.createEReference();
                 String filePattern = childDocumentType.getFilePattern();
                 ref.setName(filePattern.substring(0, filePattern.lastIndexOf('.')));
-                ref.setEType(documentTypeMap.get(childDocumentType));
+                ref.setEType(type);
                 ref.setUpperBound(-1); // This is actually just a guess...
                 clazz.getEStructuralFeatures().add(ref);
                 childDocumentTypeLink.setReference(ref);

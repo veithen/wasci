@@ -34,7 +34,7 @@ import com.github.veithen.ramsay.ws.metadata.extractor.RepositoryMetadataCallbac
 import com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink;
 import com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
-import com.github.veithen.ramsay.ws.model.repository.DocumentType;
+import com.github.veithen.ramsay.ws.model.repository.DefaultDocumentType;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryFactory;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
 
@@ -43,7 +43,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable, ConfigMetadataCal
     private final URIConverter uriConverter = new ExtensibleURIConverterImpl();
     private final ResourceSet resourceSet = new ResourceSetImpl();
     private final Map<String,EPackage> packageMap = new HashMap<String,EPackage>();
-    private final Map<String,DocumentType> documentTypeMap = new HashMap<String,DocumentType>();
+    private final Map<String,DefaultDocumentType> documentTypeMap = new HashMap<String,DefaultDocumentType>();
     private final Map<String,ContextType> contextTypeMap = new HashMap<String,ContextType>();
     
     public ExtractRawRunnable(IFolder folder) {
@@ -126,7 +126,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable, ConfigMetadataCal
 
     @Override
     public void createDocumentType(String name, String filePattern) {
-        DocumentType documentType = RepositoryFactory.eINSTANCE.createDocumentType();
+        DefaultDocumentType documentType = RepositoryFactory.eINSTANCE.createDefaultDocumentType();
         documentType.setFilePattern(filePattern);
         documentTypeMap.put(name, documentType);
     }
