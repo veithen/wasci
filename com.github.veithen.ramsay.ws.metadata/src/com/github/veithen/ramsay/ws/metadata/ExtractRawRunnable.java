@@ -114,7 +114,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable, ConfigMetadataCal
     
     @Override
     public String getEcoreFileURI(String ePackageName, String ePackageNsURI, String ePackageNsPrefix, String javaPackageName) {
-        return EMFUtil.createURI(folder.getFile(/*javaPackageName*/ ePackageNsPrefix + ".ecore")).toString();
+        return EMFUtil.createURI(folder.getFile(javaPackageName + ".ecore")).toString();
     }
 
     @Override
