@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import com.github.veithen.ramsay.util.EMFUtil;
 import com.github.veithen.ramsay.ws.metadata.Metadata;
@@ -44,7 +46,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
     private final ConfigRepository repository;
     private Set<String> resourceNames;
     private ResourceSet resourceSet;
-    private Map<IFile,Resource> resourceMap = new HashMap<IFile,Resource>();
+    private Map<IFile,XMIResource> resourceMap = new HashMap<IFile,XMIResource>();
     
     public ExtractRawRunnable(MetadataProject metadataProject, IFolder folder, ConfigRepository repository) {
         this.metadataProject = metadataProject;
@@ -66,7 +68,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
         extractDocuments("cells/test", cellContext, folder);
         EcoreUtil.resolveAll(resourceSet);
         folder.delete(false, monitor);
-        for (Map.Entry<IFile,Resource> entry : resourceMap.entrySet()) {
+        for (Map.Entry<IFile,XMIResource> entry : resourceMap.entrySet()) {
             Resource resource = entry.getValue();
             resource.setURI(EMFUtil.createURI(entry.getKey()));
             EMFUtil.save(resource);
@@ -140,7 +142,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
             return; // TODO: hack!
         }
         String uri = contextURI + "/" + inputFileName;
-        Resource resource;
+        XMIResource resource;
         InputStream in;
         try {
             in = repository.extract(uri).getSource();
@@ -149,8 +151,10 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
         }
         try {
             try {
-                resource = resourceSet.createResource(URI.createURI("wsrepo:///" + uri));
-                resource.load(in, null);
+                // All documents are saved as XMI irrespective of the original format
+                resource = new XMIResourceImpl(URI.createURI("wsrepo:///" + uri));
+                resourceSet.getResources().add(resource);
+                document.getType().getDocumentProcessor().processDocument(resource, in);
             } finally {
                 in.close();
             }
