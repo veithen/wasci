@@ -15,10 +15,10 @@ import com.ibm.websphere.management.AdminClient;
 import com.ibm.websphere.management.repository.ConfigRepository;
 import com.ibm.ws.management.repository.client.JMXRemoteConfigRepositoryClient;
 
-public class ExtractionProject {
+public class DataProject {
     private final IProject project;
 
-    public ExtractionProject(IProject project) {
+    public DataProject(IProject project) {
         this.project = project;
     }
     
@@ -66,7 +66,7 @@ public class ExtractionProject {
         MetadataProject metadataProject = getMetadataProject();
         IFolder folder = project.getFolder(Constants.RAW_PATH);
         ConfigRepository repository = connect();
-        project.getWorkspace().run(new ExtractRawRunnable(metadataProject, folder, repository),
+        project.getWorkspace().run(new ExtractRawDataRunnable(metadataProject, folder, repository),
                 null, IWorkspace.AVOID_UPDATE, monitor);
     }
 }

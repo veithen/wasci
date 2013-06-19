@@ -6,7 +6,7 @@
                point="org.eclipse.core.resources.builders"
                name="Metadata Builder">
         <builder hasNature="true">
-            <run class="com.github.veithen.ramsay.ws.metadata.ModelBuilder"/>
+            <run class="com.github.veithen.ramsay.ws.metadata.TransformedMetadataBuilder"/>
         </builder>
     </extension>
     <extension id="nature"

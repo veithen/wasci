@@ -40,7 +40,7 @@ import com.github.veithen.ramsay.ws.model.repository.RepositoryFactory;
 import com.ibm.websphere.management.exception.RepositoryException;
 import com.ibm.websphere.management.repository.ConfigRepository;
 
-public class ExtractRawRunnable implements IWorkspaceRunnable {
+public class ExtractRawDataRunnable implements IWorkspaceRunnable {
     private final MetadataProject metadataProject;
     private final IFolder folder;
     private final ConfigRepository repository;
@@ -48,7 +48,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
     private ResourceSet resourceSet;
     private Map<IFile,XMIResource> resourceMap = new HashMap<IFile,XMIResource>();
     
-    public ExtractRawRunnable(MetadataProject metadataProject, IFolder folder, ConfigRepository repository) {
+    public ExtractRawDataRunnable(MetadataProject metadataProject, IFolder folder, ConfigRepository repository) {
         this.metadataProject = metadataProject;
         this.folder = folder;
         this.repository = repository;

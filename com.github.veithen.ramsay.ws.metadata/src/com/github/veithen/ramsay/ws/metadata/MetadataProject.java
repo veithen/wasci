@@ -48,7 +48,7 @@ public class MetadataProject {
     }
 
     public void extractRaw(IProgressMonitor monitor) throws CoreException {
-        project.getWorkspace().run(new ExtractRawRunnable(project.getFolder(Constants.RAW_PATH)),
+        project.getWorkspace().run(new ExtractRawMetadataRunnable(project.getFolder(Constants.RAW_PATH)),
                 null, IWorkspace.AVOID_UPDATE, monitor);
     }
 }

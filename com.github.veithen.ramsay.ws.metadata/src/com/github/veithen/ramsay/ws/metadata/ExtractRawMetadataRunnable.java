@@ -38,7 +38,7 @@ import com.github.veithen.ramsay.ws.model.repository.DefaultDocumentType;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryFactory;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
 
-public class ExtractRawRunnable implements IWorkspaceRunnable, ConfigMetadataCallback, RepositoryMetadataCallback {
+public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMetadataCallback, RepositoryMetadataCallback {
     private final IFolder folder;
     private final URIConverter uriConverter = new ExtensibleURIConverterImpl();
     private final ResourceSet resourceSet = new ResourceSetImpl();
@@ -46,7 +46,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable, ConfigMetadataCal
     private final Map<String,DefaultDocumentType> documentTypeMap = new HashMap<String,DefaultDocumentType>();
     private final Map<String,ContextType> contextTypeMap = new HashMap<String,ContextType>();
     
-    public ExtractRawRunnable(IFolder folder) {
+    public ExtractRawMetadataRunnable(IFolder folder) {
         this.folder = folder;
     }
 
@@ -69,7 +69,7 @@ public class ExtractRawRunnable implements IWorkspaceRunnable, ConfigMetadataCal
                 throw new Error("Unexpected exception", ex);
             }
         }
-        ClassLoader cl = new IsolatedClassLoader(urls.toArray(new URL[urls.size()]), ExtractRawRunnable.class.getClassLoader());
+        ClassLoader cl = new IsolatedClassLoader(urls.toArray(new URL[urls.size()]), ExtractRawMetadataRunnable.class.getClassLoader());
         Thread thread = Thread.currentThread();
         ClassLoader savedContextClassLoader = thread.getContextClassLoader();
         thread.setContextClassLoader(cl);

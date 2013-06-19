@@ -13,7 +13,7 @@ import com.github.veithen.ramsay.ws.metadata.Metadata;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
 import com.github.veithen.ramsay.ws.model.repository.Context;
 
-public class Builder extends SimpleBuilder {
+public class TransformedDataBuilder extends SimpleBuilder {
     public static final String ID = Constants.PLUGIN_ID + ".builder";
     
     @Override
@@ -29,7 +29,7 @@ public class Builder extends SimpleBuilder {
     @Override
     protected void doBuild(IFolder[] inputFolders, final IFolder outputFolder, IProgressMonitor monitor) throws CoreException {
         IFolder inputFolder = inputFolders[0];
-        ExtractionProject project = (ExtractionProject)getProject().getAdapter(ExtractionProject.class);
+        DataProject project = (DataProject)getProject().getAdapter(DataProject.class);
         ResourceSet resourceSet = new ResourceSetImpl();
         MetadataProject metadataProject = project.getMetadataProject();
         Metadata metadata = metadataProject.loadMetadata(resourceSet);

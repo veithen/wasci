@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.github.veithen.ramsay.util.SimpleBuilder;
 
-public class ModelBuilder extends SimpleBuilder {
+public class TransformedMetadataBuilder extends SimpleBuilder {
     public static final String ID = Constants.PLUGIN_ID + ".builder";
     
     @Override

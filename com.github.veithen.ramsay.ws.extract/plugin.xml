@@ -5,7 +5,7 @@
                point="org.eclipse.core.resources.builders"
                name="Transformed Model Builder">
         <builder hasNature="true">
-            <run class="com.github.veithen.ramsay.ws.extract.Builder"/>
+            <run class="com.github.veithen.ramsay.ws.extract.TransformedDataBuilder"/>
         </builder>
     </extension>
     <extension id="nature"
@@ -19,7 +19,7 @@
     <extension point="org.eclipse.core.runtime.adapters">
         <factory adaptableType="org.eclipse.core.resources.IProject"
                  class="com.github.veithen.ramsay.ws.extract.ProjectAdapterFactory">
-            <adapter type="com.github.veithen.ramsay.ws.extract.ExtractionProject"/>
+            <adapter type="com.github.veithen.ramsay.ws.extract.DataProject"/>
         </factory>
     </extension>
 </plugin>

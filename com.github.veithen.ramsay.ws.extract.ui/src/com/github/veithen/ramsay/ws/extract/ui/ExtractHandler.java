@@ -19,7 +19,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import com.github.veithen.ramsay.ws.extract.Constants;
-import com.github.veithen.ramsay.ws.extract.ExtractionProject;
+import com.github.veithen.ramsay.ws.extract.DataProject;
 
 public class ExtractHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -27,7 +27,7 @@ public class ExtractHandler extends AbstractHandler {
 	    for (Iterator it = selection.iterator(); it.hasNext(); ) {
             IProject project = (IProject)it.next();
             IFile outFile = project.getFile("wsconfig.xmi");
-            final ExtractionProject extractionProject = (ExtractionProject)project.getAdapter(ExtractionProject.class);
+            final DataProject extractionProject = (DataProject)project.getAdapter(DataProject.class);
             try {
                 PlatformUI.getWorkbench().getProgressService().busyCursorWhile(new IRunnableWithProgress() {
                     @Override
