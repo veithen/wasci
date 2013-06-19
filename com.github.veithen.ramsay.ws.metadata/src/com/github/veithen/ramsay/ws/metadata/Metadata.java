@@ -133,11 +133,19 @@ public class Metadata {
                 if (childContextType.getName().equals("repository")) {
                     continue;
                 }
+                EClass type = contextTypeMap.get(childContextType);
+                if (type == null) {
+                    // TODO: only necessary because we skipped some context types earlier
+                    continue;
+                }
                 EReference ref = EcoreFactory.eINSTANCE.createEReference();
                 ref.setName(childContextType.getName());
-                ref.setEType(contextTypeMap.get(childContextType));
+                ref.setEType(type);
                 ref.setUpperBound(-1);
-                ref.setContainment(true);
+                // Normally, the object representing the context is stored in a different resource. The only
+                // exception is for generated classes (that are used for context types that don't have a
+                // root document type).
+                ref.setContainment(type.getEPackage() == contextPackage);
                 clazz.getEStructuralFeatures().add(ref);
                 childContextTypeLink.setReference(ref);
             }
@@ -151,7 +159,6 @@ public class Metadata {
                 ref.setName(filePattern.substring(0, filePattern.lastIndexOf('.')));
                 ref.setEType(documentTypeMap.get(childDocumentType));
                 ref.setUpperBound(-1); // This is actually just a guess...
-                ref.setContainment(true);
                 clazz.getEStructuralFeatures().add(ref);
                 childDocumentTypeLink.setReference(ref);
             }
