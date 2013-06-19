@@ -4,7 +4,6 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
@@ -34,8 +33,6 @@ public class Builder extends SimpleBuilder {
         ResourceSet resourceSet = new ResourceSetImpl();
         MetadataProject metadataProject = project.getMetadataProject();
         Metadata metadata = metadataProject.loadMetadata(resourceSet);
-        Registry registry = metadata.getRegistry();
-        resourceSet.setPackageRegistry(registry);
         FolderSubset folderSubset = new FolderSubset(resourceSet, inputFolder);
         folderSubset.load();
         metadata.setRootContext((Context)folderSubset.getResource(inputFolder.getFile("index.xmi")).getContents().get(0));
