@@ -164,6 +164,8 @@ public class ExtractRawRunnable implements IWorkspaceRunnable {
         }
         int idx = inputFileName.lastIndexOf('.');
         String outputFileName = (idx == -1 ? inputFileName : inputFileName.substring(0, idx)) + ".xmi";
-        resourceMap.put(folder.getFile(outputFileName), resource);
+        if (resourceMap.put(folder.getFile(outputFileName), resource) != null) {
+            throw new IllegalStateException("Document " + uri + " encountered twice!");
+        }
     }
 }
