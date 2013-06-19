@@ -141,8 +141,16 @@ public class Metadata {
                     continue;
                 }
                 EReference ref = EcoreFactory.eINSTANCE.createEReference();
-                String filePattern = childDocumentType.getFilePattern();
-                ref.setName(filePattern.substring(0, filePattern.lastIndexOf('.')));
+                String referenceName = childDocumentType.getReferenceName();
+                if (referenceName == null) {
+                    referenceName = childDocumentType.getFilePattern();
+                    int idx = referenceName.lastIndexOf('/');
+                    if (idx != -1) {
+                        referenceName = referenceName.substring(idx+1);
+                    }
+                    referenceName = referenceName.substring(0, referenceName.lastIndexOf('.'));
+                }
+                ref.setName(referenceName);
                 ref.setEType(type);
                 ref.setUpperBound(-1); // This is actually just a guess...
                 clazz.getEStructuralFeatures().add(ref);

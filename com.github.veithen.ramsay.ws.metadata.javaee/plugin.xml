@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+   <extension
+         id="metadataExtension"
+         name="JavaEE Metadata Extension"
+         point="com.github.veithen.ramsay.ws.metadata.metadataExtensions">
+      <metadataExtension
+            class="com.github.veithen.ramsay.ws.metadata.javaee.extension.JavaEEMetadataExtension">
+      </metadataExtension>
+   </extension>
+
+</plugin>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+    <extension-point id="metadataExtensions" name="Metadata Extension" schema="schema/metadataExtensions.exsd"/>
     <extension id="builder"
                point="org.eclipse.core.resources.builders"
                name="Metadata Builder">
