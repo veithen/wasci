@@ -191,8 +191,12 @@ public class MetadataExtractorImpl implements MetadataExtractor {
         }
         for (Iterator<RepositoryContextType> it = repositoryMetaData.getContextTypeAccess(); it.hasNext(); ) {
             RepositoryContextType contextType = it.next();
+            // Sometimes a child context type is declared twice; filter out duplicate instances
+            Set<String> seenChildContextTypes = new HashSet<String>();
             for (RepositoryContextType childContextType : contextType.getChildContextTypes()) {
-                callback.linkContextTypes(contextType.getName(), childContextType.getName());
+                if (seenChildContextTypes.add(childContextType.getName())) {
+                    callback.linkContextTypes(contextType.getName(), childContextType.getName());
+                }
             }
         }
     }
