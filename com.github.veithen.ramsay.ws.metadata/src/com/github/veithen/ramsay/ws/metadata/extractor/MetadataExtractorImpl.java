@@ -177,8 +177,16 @@ public class MetadataExtractorImpl implements MetadataExtractor {
             RepositoryContextType contextType = it.next();
             RepositoryDocumentType rootDocumentType = contextType.getRootDocumentType();
             callback.createContextType(contextType.getName(), rootDocumentType == null ? null : rootDocumentType.getDisplayName());
+            // Sometimes the repository metadata contains a given child document type twice; filter out these instances
+            Set<String> seenDocumentTypes = new HashSet<String>();
+            // There are cases where the root document type is also declared as a child document type; take care of this as well
+            if (rootDocumentType != null) {
+                seenDocumentTypes.add(rootDocumentType.getDisplayName());
+            }
             for (RepositoryDocumentType childDocumentType : contextType.getChildDocumentTypes()) {
-                callback.linkDocumentTypeToContextType(contextType.getName(), childDocumentType.getDisplayName());
+                if (seenDocumentTypes.add(childDocumentType.getDisplayName())) {
+                    callback.linkDocumentTypeToContextType(contextType.getName(), childDocumentType.getDisplayName());
+                }
             }
         }
         for (Iterator<RepositoryContextType> it = repositoryMetaData.getContextTypeAccess(); it.hasNext(); ) {

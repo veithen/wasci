@@ -145,13 +145,9 @@ public class ExtractRawRunnable implements IWorkspaceRunnable, ConfigMetadataCal
 
     @Override
     public void linkDocumentTypeToContextType(String parent, String child) {
-        ContextType contextType = contextTypeMap.get(parent);
-        DocumentType documentType = documentTypeMap.get(child);
-        if (documentType != contextType.getRootDocumentType()) {
-            ChildDocumentTypeLink link = RepositoryFactory.eINSTANCE.createChildDocumentTypeLink();
-            link.setDocumentType(documentType);
-            contextType.getChildDocumentTypeLinks().add(link);
-        }
+        ChildDocumentTypeLink link = RepositoryFactory.eINSTANCE.createChildDocumentTypeLink();
+        link.setDocumentType(documentTypeMap.get(child));
+        contextTypeMap.get(parent).getChildDocumentTypeLinks().add(link);
     }
 
     @Override
