@@ -23,4 +23,5 @@ Import-Package: com.github.veithen.ramsay.emf.cm,
  org.eclipse.emf.ecore.resource,
  org.eclipse.emf.ecore.resource.impl,
  org.eclipse.emf.ecore.util,
+ org.eclipse.emf.ecore.xmi,
  org.eclipse.emf.ecore.xmi.impl
