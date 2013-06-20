@@ -8,7 +8,7 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="com.github.veithen.ramsay.report"
+            uri="http://github.com/veithen/ramsay/report"
             class="com.github.veithen.ramsay.report.ReportPackage"
             genModel="model/report.xcore"/>
    </extension>
