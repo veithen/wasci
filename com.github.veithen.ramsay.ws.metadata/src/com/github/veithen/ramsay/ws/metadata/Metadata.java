@@ -98,7 +98,7 @@ public class Metadata {
                 if (contextType.getName().length() == 0) {
                     clazz.setName("RootContext");
                 } else {
-                    clazz.setName(contextType.getName());
+                    clazz.setName(toIdentifier(contextType.getName(), true));
                     EAttribute nameAttr = EcoreFactory.eINSTANCE.createEAttribute();
                     nameAttr.setName("name");
                     nameAttr.setEType(EcorePackage.eINSTANCE.getEString());
@@ -124,7 +124,7 @@ public class Metadata {
                     continue;
                 }
                 EReference ref = EcoreFactory.eINSTANCE.createEReference();
-                ref.setName(childContextType.getName());
+                ref.setName(toIdentifier(childContextType.getName(), false));
                 ref.setEType(type);
                 ref.setUpperBound(-1);
                 // Normally, the object representing the context is stored in a different resource. The only
@@ -143,12 +143,8 @@ public class Metadata {
                 EReference ref = EcoreFactory.eINSTANCE.createEReference();
                 String referenceName = childDocumentType.getReferenceName();
                 if (referenceName == null) {
-                    referenceName = childDocumentType.getFilePattern();
-                    int idx = referenceName.lastIndexOf('/');
-                    if (idx != -1) {
-                        referenceName = referenceName.substring(idx+1);
-                    }
-                    referenceName = referenceName.substring(0, referenceName.lastIndexOf('.'));
+                    String filePattern = childDocumentType.getFilePattern();
+                    referenceName = toIdentifier(filePattern.substring(filePattern.lastIndexOf('/') + 1, filePattern.lastIndexOf('.')), false);
                 }
                 ref.setName(referenceName);
                 ref.setEType(type);
@@ -174,6 +170,25 @@ public class Metadata {
                 }
             });
         }
+    }
+    
+    private static String toIdentifier(String name, boolean startWithUpper) {
+        int len = name.length();
+        StringBuilder buffer = new StringBuilder(len);
+        boolean upperNext = startWithUpper;
+        for (int i=0; i<len; i++) {
+            char c = name.charAt(i);
+            if (c == '-') {
+                upperNext = true;
+            } else {
+                if (upperNext) {
+                    c = Character.toUpperCase(c);
+                    upperNext = false;
+                }
+                buffer.append(c);
+            }
+        }
+        return buffer.toString();
     }
     
     private EObject processContext(Context context) {
