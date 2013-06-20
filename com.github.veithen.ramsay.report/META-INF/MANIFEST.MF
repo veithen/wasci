@@ -20,4 +20,6 @@ Import-Package: com.github.veithen.ramsay.util,
  org.eclipse.ocl.ecore,
  org.eclipse.ocl.expressions,
  org.eclipse.ocl.helper,
+ org.eclipse.ocl.types,
+ org.eclipse.ocl.utilities,
  org.junit;version="4.10.0"

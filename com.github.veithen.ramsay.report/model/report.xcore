@@ -8,11 +8,22 @@ import org.eclipse.emf.ecore.EClass
 
 class Table {
 	refers EClass ^type
+	contains RowSource[] rowSources
+}
+
+abstract class RowSource {
+	String[1] ^var
 	String[1] expression
+}
+
+class RowGroup extends RowSource {
+	contains RowSource[] rowSources
+}
+
+class Rows extends RowSource {
 	contains Column[] columns
 }
 
 class Column {
-	String header
 	String[1] expression
 }
