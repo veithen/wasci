@@ -57,6 +57,7 @@ public class ApplicationDeploymentDescriptorProcessor extends ApplicationSwitch 
     @Override
     public Object caseApplication(org.eclipse.jst.j2ee.application.Application in) {
         Application out = ApplicationFactory.eINSTANCE.createApplication();
+        out.setApplicationName(in.getDisplayName());
         for (Object module : in.getModules()) {
             out.getModules().add((Module)doSwitch((EObject)module));
         }
