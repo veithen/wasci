@@ -10,7 +10,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.xtext.xbase.lib;visibility:=reexport,
- org.eclipse.jst.j2ee.core
+ org.eclipse.jst.j2ee.core,
+ org.eclipse.wst.common.emf
 Bundle-ActivationPolicy: lazy
 Import-Package: com.github.veithen.ramsay.ws.metadata.extension,
  com.github.veithen.ramsay.ws.model.repository,

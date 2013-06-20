@@ -40,6 +40,7 @@ public class ExtractHandler extends AbstractHandler {
                     }
                 });
             } catch (InvocationTargetException ex) {
+                ex.printStackTrace();
                 Throwable cause = ex.getCause();
                 IStatus status;
                 if (cause instanceof CoreException) {

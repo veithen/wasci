@@ -7,6 +7,6 @@ import com.github.veithen.ramsay.ws.metadata.javaee.processor.ApplicationDeploym
 import com.github.veithen.ramsay.ws.model.repository.DocumentProcessor
 
 class ApplicationDeploymentDescriptor extends DocumentType {
-	op EClass getObjectType() { ApplicationPackage::eINSTANCE.application }
+	op EClass getObjectType() { ApplicationPackage::eINSTANCE.applicationDeploymentDescriptor }
 	op DocumentProcessor getDocumentProcessor() { ApplicationDeploymentDescriptorProcessor::INSTANCE }
 }
