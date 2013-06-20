@@ -1,0 +1,18 @@
+@Ecore(nsURI="http://github.com/veithen/ramsay/report", nsPrefix="report")
+@GenModel(editDirectory="/com.github.veithen.ramsay.report.edit/src-gen")
+@GenModel(editorDirectory="/com.github.veithen.ramsay.report.editor/src-gen")
+@GenModel(fileExtensions="rrp")
+package com.github.veithen.ramsay.report
+
+import org.eclipse.emf.ecore.EClass
+
+class Table {
+	refers EClass ^type
+	String[1] expression
+	contains Column[] columns
+}
+
+class Column {
+	String header
+	String[1] expression
+}

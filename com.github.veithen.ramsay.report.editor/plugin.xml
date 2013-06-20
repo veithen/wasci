@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="com.github.veithen.ramsay.report.presentation.ReportModelWizardID"
+            name="%_UI_ReportModelWizard_label"
+            class="com.github.veithen.ramsay.report.presentation.ReportModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ReportModelFile.gif">
+         <description>%_UI_ReportModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="com.github.veithen.ramsay.report.presentation.ReportEditorID"
+            name="%_UI_ReportEditor_label"
+            icon="icons/full/obj16/ReportModelFile.gif"
+            extensions="rrp"
+            class="com.github.veithen.ramsay.report.presentation.ReportEditor"
+            contributorClass="com.github.veithen.ramsay.report.presentation.ReportActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
