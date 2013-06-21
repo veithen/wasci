@@ -45,7 +45,7 @@ public class TableHandler extends ContainerHandler {
         evalEnvironment.add("self", object);
     }
 
-    public void execute(TableSink sink) {
+    public void execute(TableSink sink) throws ReportExecutionException, TableSinkException {
         rowContainerHandlerSupport.executeChildren(sink);
     }
 }

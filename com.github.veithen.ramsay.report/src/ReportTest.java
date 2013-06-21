@@ -1,3 +1,6 @@
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
@@ -67,7 +70,9 @@ public class ReportTest {
         EObject cell = dataResource.getContents().get(1);
         
         tableHandler.setObject(cell);
-        tableHandler.execute(null);
+        Writer out = new OutputStreamWriter(System.out);
+        tableHandler.execute(new CSVTableSink(out));
+        out.flush();
         
         /*
         System.out.println(cell);

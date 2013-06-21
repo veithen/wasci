@@ -11,7 +11,7 @@ public class RowGroupHandler extends RowSourceHandler {
     }
 
     @Override
-    protected void executeChildren(TableSink sink) {
+    protected void executeChildren(TableSink sink) throws ReportExecutionException, TableSinkException {
         rowContainerHandlerSupport.executeChildren(sink);
     }
 }

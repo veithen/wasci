@@ -20,9 +20,11 @@ public class RowsHandler extends RowSourceHandler {
     }
 
     @Override
-    protected void executeChildren(TableSink sink) {
+    protected void executeChildren(TableSink sink) throws ReportExecutionException, TableSinkException {
+        sink.startRow();
         for (ColumnHandler columnHandler : columnHandlers) {
             columnHandler.execute(sink);
         }
+        sink.endRow();
     }
 }

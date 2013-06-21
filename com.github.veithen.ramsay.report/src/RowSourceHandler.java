@@ -57,7 +57,7 @@ public abstract class RowSourceHandler extends ContainerHandler {
         evalEnvironment.add(varName, current);
     }
 
-    public void execute(TableSink sink) {
+    public void execute(TableSink sink) throws ReportExecutionException, TableSinkException {
         EvaluationEnvironment<EClassifier,?,?,EClass,EObject> evalEnvironment = query.getEvaluationEnvironment();
         evalEnvironment.clear();
         parent.populate(evalEnvironment);
@@ -67,5 +67,5 @@ public abstract class RowSourceHandler extends ContainerHandler {
         }
     }
     
-    protected abstract void executeChildren(TableSink sink);
+    protected abstract void executeChildren(TableSink sink) throws ReportExecutionException, TableSinkException;
 }

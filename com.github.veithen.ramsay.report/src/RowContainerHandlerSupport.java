@@ -22,7 +22,7 @@ public class RowContainerHandlerSupport {
         }
     }
     
-    public void executeChildren(TableSink sink) {
+    public void executeChildren(TableSink sink) throws ReportExecutionException, TableSinkException {
         for (RowSourceHandler rowSourceHandler : rowSourceHandlers) {
             rowSourceHandler.execute(sink);
         }

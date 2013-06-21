@@ -1,3 +1,5 @@
+import java.util.Collection;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -22,10 +24,27 @@ public class ColumnHandler {
         query = ocl.createQuery(expression);
     }
     
-    public void execute(TableSink sink) {
+    public void execute(TableSink sink) throws ReportExecutionException, TableSinkException {
         EvaluationEnvironment<EClassifier,?,?,EClass,EObject> evalEnvironment = query.getEvaluationEnvironment();
         evalEnvironment.clear();
         parent.populate(evalEnvironment);
-        System.out.println(query.evaluate());
+        Object result = query.evaluate();
+        if (result instanceof Collection<?>) {
+            Collection<?> collection = (Collection<?>)result;
+            switch (collection.size()) {
+                case 0:
+                    sink.writeColumn(null);
+                    break;
+                case 1:
+                    sink.writeColumn(collection.iterator().next());
+                    break;
+                default:
+                    throw new ReportExecutionException("Column expression returned multiple values");
+            }
+        } else if (result == parent.getEnvironment().getOCLStandardLibrary().getInvalid()) {
+            sink.writeColumn(null);
+        } else {
+            sink.writeColumn(result);
+        }
     }
 }

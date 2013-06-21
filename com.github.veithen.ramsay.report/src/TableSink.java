@@ -1,6 +1,6 @@
 
 public interface TableSink {
-    void startRow();
-    void writeColumn(Object value);
-    void endRow();
+    void startRow() throws TableSinkException;
+    void writeColumn(Object value) throws TableSinkException;
+    void endRow() throws TableSinkException;
 }
