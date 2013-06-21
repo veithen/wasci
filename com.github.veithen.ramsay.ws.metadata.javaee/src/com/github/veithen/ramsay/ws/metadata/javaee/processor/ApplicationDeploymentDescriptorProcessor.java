@@ -59,17 +59,35 @@ public class ApplicationDeploymentDescriptorProcessor extends ApplicationSwitch 
         in = new ByteArrayInputStream(baos.toByteArray());
         
         JavaEEQuickPeek quickPeek = new JavaEEQuickPeek(in);
+        ApplicationDeploymentDescriptor dd;
         if (quickPeek.getJavaEEVersion() < JavaEEQuickPeek.VERSION_5_0) {
             Resource appResource = new ApplicationResourceFactory(EMF2SAXRendererFactory.INSTANCE).createResource(resource.getURI());
             appResource.load(in, null);
-            ApplicationDeploymentDescriptor dd = ApplicationFactory.eINSTANCE.createApplicationDeploymentDescriptor();
+            dd = ApplicationFactory.eINSTANCE.createApplicationDeploymentDescriptor();
             dd.setApplication((Application)doSwitch(appResource.getContents().get(0)));
-            resource.getContents().add((EObject)dd);
         } else {
             Resource appResource = new ApplicationResourceFactoryImpl().createResource(resource.getURI());
             appResource.load(in, null);
-            resource.getContents().addAll(appResource.getContents());
+            dd = (ApplicationDeploymentDescriptor)appResource.getContents().get(0);
         }
+        
+        // Normalize context roots
+        // TODO: should probably be handled elsewhere
+        for (Module module : dd.getApplication().getModules()) {
+            Web web = module.getWeb();
+            if (web != null) {
+                String contextRoot = web.getContextRoot();
+                if (contextRoot.endsWith("/")) {
+                    contextRoot = contextRoot.substring(0, contextRoot.length()-1);
+                }
+                if (!contextRoot.startsWith("/")) {
+                    contextRoot = "/" + contextRoot;
+                }
+                web.setContextRoot(contextRoot);
+            }
+        }
+        
+        resource.getContents().add((EObject)dd);
     }
     
     @Override
