@@ -53,6 +53,10 @@ public class Realm {
         return EMFUtil.getAdapter(CovariantClassAdapter.class, eClass).getInstances().getInstances();
     }
     
+    public boolean isCovariant(EClass eClass) {
+        return EMFUtil.getAdapter(CovariantClassAdapter.class, eClass) != null;
+    }
+    
     // TODO: internal method
     /**
      * Get a list of all subclasses of the given type that are part of this realm.

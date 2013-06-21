@@ -3,7 +3,7 @@
   <type href="../test/transformed/com.ibm.websphere.models.config.topology.cell.ecore#//Cell"/>
   <rowSources xsi:type="report:RowGroup" var="deployment" expression="self.applications.deployments">
     <rowSources xsi:type="report:Rows" var="module" expression="deployment.deployedObject.oclAsType(appdeployment::ApplicationDeployment).modules->select(m|m.oclIsKindOf(appdeployment::WebModuleDeployment))">
-      <columns expression="deployment.deploymentDescriptor.application.applicationName"/>
+      <columns expression="deployment.name"/>
       <columns expression="module.uri"/>
       <columns expression="deployment.deploymentDescriptor.application.modules.web->select(w|w.webUri=module.uri).contextRoot"/>
     </rowSources>

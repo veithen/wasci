@@ -90,8 +90,12 @@ public class Metadata {
         for (ContextType contextType : repositoryMetadata.getContextTypes()) {
             DocumentType rootDocumentType = contextType.getRootDocumentType();
             EClass clazz = null;
+            boolean addNameAttribute = false;
             if (rootDocumentType != null) {
                 clazz = rootDocumentType.getObjectType();
+                if (clazz != null && realm.isCovariant(clazz) && clazz.getEStructuralFeature("name") == null) {
+                    addNameAttribute = true;
+                }
             }
             if (clazz == null) {
                 clazz = EcoreFactory.eINSTANCE.createEClass();
@@ -99,14 +103,17 @@ public class Metadata {
                     clazz.setName("RootContext");
                 } else {
                     clazz.setName(toIdentifier(contextType.getName(), true));
-                    EAttribute nameAttr = EcoreFactory.eINSTANCE.createEAttribute();
-                    nameAttr.setName("name");
-                    nameAttr.setEType(EcorePackage.eINSTANCE.getEString());
-                    nameAttr.setLowerBound(1);
-                    clazz.getEStructuralFeatures().add(nameAttr);
+                    addNameAttribute = true;
                 }
                 contextPackage.getEClassifiers().add(clazz);
                 contextType.setGeneratedClass(clazz);
+            }
+            if (addNameAttribute) {
+                EAttribute nameAttr = EcoreFactory.eINSTANCE.createEAttribute();
+                nameAttr.setName("name");
+                nameAttr.setEType(EcorePackage.eINSTANCE.getEString());
+                nameAttr.setLowerBound(1);
+                clazz.getEStructuralFeatures().add(nameAttr);
             }
             contextTypeMap.put(contextType, clazz);
         }
@@ -193,12 +200,20 @@ public class Metadata {
     
     private EObject processContext(Context context) {
         EObject object;
-        EClass generatedClass = context.getType().getGeneratedClass();
-        if (generatedClass != null) {
-            object = EcoreUtil.create(generatedClass);
-            object.eSet(generatedClass.getEStructuralFeature("name"), context.getName());
+        EClass clazz = context.getType().getGeneratedClass();
+        if (clazz != null) {
+            object = EcoreUtil.create(clazz);
         } else {
             object = context.getRootDocument().getContents().get(0);
+            clazz = object.eClass();
+        }
+        EAttribute nameAttr = (EAttribute)clazz.getEStructuralFeature("name");
+        String name = (String)object.eGet(nameAttr);
+        String contextName = context.getName();
+        if (name == null) {
+            object.eSet(nameAttr, contextName);
+        } else if (!name.equals(contextName)) {
+            System.out.println("Name mismatch: " + object);
         }
         for (ChildContext childContext : context.getChildContexts()) {
             ((EList<EObject>)object.eGet(childContext.getLink().getReference())).add(processContext(childContext.getContext()));
