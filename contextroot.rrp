@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report:Table xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:report="http://github.com/veithen/ramsay/report">
+  <type href="../test/transformed/com.ibm.websphere.models.config.topology.cell.ecore#//Cell"/>
+  <rowSources xsi:type="report:RowGroup" var="deployment" expression="self.applications.deployments">
+    <rowSources xsi:type="report:Rows" var="module" expression="deployment.deployedObject.oclAsType(appdeployment::ApplicationDeployment).modules->select(m|m.oclIsKindOf(appdeployment::WebModuleDeployment))">
+      <columns expression="deployment.deploymentDescriptor.application.applicationName"/>
+      <columns expression="module.uri"/>
+      <columns expression="deployment.deploymentDescriptor.application.modules.web->select(w|w.webUri=module.uri).contextRoot"/>
+    </rowSources>
+  </rowSources>
+</report:Table>
