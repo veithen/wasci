@@ -19,14 +19,16 @@ import org.eclipse.ocl.ecore.Variable;
 import com.github.veithen.ramsay.report.Table;
 
 public class TableHandler extends ContainerHandler {
+    private final EClass type;
     private final Environment<EPackage,EClassifier,EOperation,EStructuralFeature,EEnumLiteral,EParameter,EObject,CallOperationAction,SendSignalAction,Constraint,EClass,EObject> environment;
     private final RowContainerHandlerSupport rowContainerHandlerSupport;
     private EObject object;
     
     public TableHandler(EcoreEnvironmentFactory environmentFactory, Table table) throws ParserException {
+        type = table.getType();
         environment = environmentFactory.createEnvironment();
         Variable selfVariable = EcoreFactory.eINSTANCE.createVariable();
-        selfVariable.setType(table.getType());
+        selfVariable.setType(type);
         environment.setSelfVariable(selfVariable);
         rowContainerHandlerSupport = new RowContainerHandlerSupport(this, table.getRowSources());
     }
@@ -37,6 +39,9 @@ public class TableHandler extends ContainerHandler {
     }
     
     public void setObject(EObject object) {
+        if (!type.isInstance(object)) {
+            throw new IllegalArgumentException("The object is not of type " + type.getName());
+        }
         this.object = object;
     }
 

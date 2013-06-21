@@ -67,7 +67,13 @@ public class ReportTest {
         
         Resource dataResource = resourceSet.createResource(URI.createURI("platform:/resource/devl/transformed/cell.xmi"));
         dataResource.load(null);
-        EObject cell = dataResource.getContents().get(0);
+        EObject cell = null;
+        for (EObject object : dataResource.getContents()) {
+            if (table.getType().isInstance(object)) {
+                cell = object;
+                break;
+            }
+        }
         
         tableHandler.setObject(cell);
         Writer out = new OutputStreamWriter(System.out);

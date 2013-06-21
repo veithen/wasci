@@ -3,12 +3,13 @@
   <type href="../was85/transformed/com.ibm.websphere.models.config.topology.cell.ecore#//Cell"/>
   <rowSources xsi:type="report:RowGroup" var="deployment" expression="self.applications.deployments">
     <rowSources xsi:type="report:RowGroup" var="module" expression="deployment.deployedObject.oclAsType(appdeployment::ApplicationDeployment).modules->select(m|m.oclIsKindOf(appdeployment::WebModuleDeployment))">
-      <rowSources xsi:type="report:Rows" var="mapping" expression="module.targetMappings">
+      <rowSources xsi:type="report:Rows" var="mapping" expression="module.targetMappings->select(m|m.target.oclIsKindOf(appdeployment::ClusteredTarget))">
         <columns expression="self.name"/>
         <columns expression="deployment.name"/>
         <columns expression="module.uri"/>
         <columns expression="deployment.deploymentDescriptor.application.modules->select(m|not m.web.oclIsUndefined()).web->select(w|w.webUri=module.uri).contextRoot"/>
         <columns expression="mapping.target.name"/>
+        <columns expression="module.targetMappings->select(m|m.target.oclIsKindOf(appdeployment::ServerTarget))->size()"/>
       </rowSources>
     </rowSources>
   </rowSources>

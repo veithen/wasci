@@ -61,9 +61,14 @@ public abstract class RowSourceHandler extends ContainerHandler {
         EvaluationEnvironment<EClassifier,?,?,EClass,EObject> evalEnvironment = query.getEvaluationEnvironment();
         evalEnvironment.clear();
         parent.populate(evalEnvironment);
-        for (Iterator<?> it = ((Collection<?>)query.evaluate()).iterator(); it.hasNext(); ) {
-            current = (EObject)it.next();
-            executeChildren(sink);
+        Object result = query.evaluate();
+        if (result instanceof Collection<?>) {
+            for (Iterator<?> it = ((Collection<?>)result).iterator(); it.hasNext(); ) {
+                current = (EObject)it.next();
+                executeChildren(sink);
+            }
+        } else {
+            throw new ReportExecutionException("Failed to execute " + query.getExpression());
         }
     }
     
