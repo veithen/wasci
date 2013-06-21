@@ -60,12 +60,18 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
         resourceSet = new ResourceSetImpl();
         Metadata metadata = metadataProject.loadMetadata(resourceSet);
         Registry registry = metadata.getRegistry();
-        Context cellContext = buildContext("cells/test", metadata.getCellContextType(), "test");
+        String cellName = null;
+        for (String resourceName : resourceNames) {
+            if (resourceName.startsWith("cells/") && resourceName.indexOf('/', 6) == -1) {
+                cellName = resourceName.substring(6);
+            }
+        }
+        Context cellContext = buildContext("cells/" + cellName, metadata.getCellContextType(), cellName);
         resourceSet.setPackageRegistry(registry);
         IFile indexFile = folder.getFile("index.xmi");
         Resource index = EMFUtil.createResource(resourceSet, indexFile);
         index.getContents().add(cellContext);
-        extractDocuments("cells/test", cellContext, folder);
+        extractDocuments("cells/" + cellName, cellContext, folder);
         EcoreUtil.resolveAll(resourceSet);
         folder.delete(false, monitor);
         for (Map.Entry<IFile,XMIResource> entry : resourceMap.entrySet()) {

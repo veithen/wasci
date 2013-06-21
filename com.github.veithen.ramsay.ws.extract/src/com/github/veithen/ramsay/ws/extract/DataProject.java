@@ -1,5 +1,7 @@
 package com.github.veithen.ramsay.ws.extract;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 import org.eclipse.core.resources.IFolder;
@@ -10,8 +12,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
+import com.github.veithen.ramsay.ws.metadata.Constants;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
-import com.ibm.websphere.management.AdminClient;
 import com.ibm.websphere.management.repository.ConfigRepository;
 import com.ibm.ws.management.repository.client.JMXRemoteConfigRepositoryClient;
 
@@ -23,11 +25,18 @@ public class DataProject {
     }
     
     private ConfigRepository connect() throws CoreException {
-        JMXRemoteConfigRepositoryClient repository = new JMXRemoteConfigRepositoryClient();
         Properties props = new Properties();
-        props.setProperty(AdminClient.CONNECTOR_HOST, "localhost");
-        props.setProperty(AdminClient.CONNECTOR_PORT, "8879");
-        props.setProperty(AdminClient.CONNECTOR_TYPE, AdminClient.CONNECTOR_TYPE_SOAP);
+        try {
+            InputStream in = project.getFile("adminclient.properties").getContents();
+            try {
+                props.load(in);
+            } finally {
+                in.close();
+            }
+        } catch (IOException ex) {
+            throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Failed to load properties", ex));
+        }
+        JMXRemoteConfigRepositoryClient repository = new JMXRemoteConfigRepositoryClient();
         try {
             repository.connect(props);
         } catch (Exception ex) {

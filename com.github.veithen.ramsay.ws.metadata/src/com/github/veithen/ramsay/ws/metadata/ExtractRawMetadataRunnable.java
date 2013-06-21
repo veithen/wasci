@@ -39,6 +39,8 @@ import com.github.veithen.ramsay.ws.model.repository.RepositoryFactory;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
 
 public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMetadataCallback, RepositoryMetadataCallback {
+    private final File installDir;
+    private final File profileDir;
     private final IFolder folder;
     private final URIConverter uriConverter = new ExtensibleURIConverterImpl();
     private final ResourceSet resourceSet = new ResourceSetImpl();
@@ -46,14 +48,15 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
     private final Map<String,DefaultDocumentType> documentTypeMap = new HashMap<String,DefaultDocumentType>();
     private final Map<String,ContextType> contextTypeMap = new HashMap<String,ContextType>();
     
-    public ExtractRawMetadataRunnable(IFolder folder) {
+    public ExtractRawMetadataRunnable(File installDir, File profileDir, IFolder folder) {
+        this.installDir = installDir;
+        this.profileDir = profileDir;
         this.folder = folder;
     }
 
     @Override
     public void run(IProgressMonitor monitor) throws CoreException {
         folder.delete(false, monitor);
-        File installDir = new File("c:\\opt\\IBM\\WebSphere\\AppServer-8.5");
         List<File> jars = new ArrayList<File>();
         for (File file : new File(installDir, "plugins").listFiles()) {
             if (file.isFile() && file.getName().endsWith(".jar")) {
@@ -90,7 +93,7 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
                 collectPackages((EPackage)resource.getContents().get(0));
             }
             try {
-                extractor.extractRepositoryMetadata("c:\\opt\\IBM\\WebSphere\\AppServer-8.5\\profiles\\dmgr\\config\\.repository", this);
+                extractor.extractRepositoryMetadata(new File(profileDir, "config/.repository").getAbsolutePath(), this);
             } catch (Exception ex) {
                 throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Repository metadata extraction failed", ex));
             }
