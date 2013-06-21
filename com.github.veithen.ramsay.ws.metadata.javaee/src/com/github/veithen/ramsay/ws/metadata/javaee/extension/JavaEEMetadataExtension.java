@@ -14,8 +14,6 @@ public class JavaEEMetadataExtension implements MetadataExtension {
         ContextType contextType = repositoryMetadata.getContextType("deployments");
         if (contextType != null) {
             ApplicationDeploymentDescriptor dd = JavaeeFactory.eINSTANCE.createApplicationDeploymentDescriptor();
-            dd.setFilePattern("META-INF/application.xml");
-            dd.setReferenceName("deploymentDescriptor");
             repositoryMetadata.getDocumentTypes().add(dd);
             ChildDocumentTypeLink link = RepositoryFactory.eINSTANCE.createChildDocumentTypeLink();
             link.setDocumentType(dd);

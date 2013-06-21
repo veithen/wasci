@@ -30,8 +30,10 @@ import com.github.veithen.ramsay.ws.model.repository.ChildDocument;
 import com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink;
 import com.github.veithen.ramsay.ws.model.repository.Context;
 import com.github.veithen.ramsay.ws.model.repository.ContextType;
+import com.github.veithen.ramsay.ws.model.repository.DefaultDocumentType;
 import com.github.veithen.ramsay.ws.model.repository.DocumentType;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
+import com.github.veithen.ramsay.ws.model.repository.util.RepositoryMetadataUtil;
 
 public class Metadata {
     private final FolderSubset folderSubset;
@@ -102,7 +104,7 @@ public class Metadata {
                 if (contextType.getName().length() == 0) {
                     clazz.setName("RootContext");
                 } else {
-                    clazz.setName(toIdentifier(contextType.getName(), true));
+                    clazz.setName(RepositoryMetadataUtil.toIdentifier(contextType.getName(), true));
                     addNameAttribute = true;
                 }
                 contextPackage.getEClassifiers().add(clazz);
@@ -131,7 +133,7 @@ public class Metadata {
                     continue;
                 }
                 EReference ref = EcoreFactory.eINSTANCE.createEReference();
-                ref.setName(toIdentifier(childContextType.getName(), false));
+                ref.setName(RepositoryMetadataUtil.toIdentifier(childContextType.getName(), false));
                 ref.setEType(type);
                 ref.setUpperBound(-1);
                 // Normally, the object representing the context is stored in a different resource. The only
@@ -148,12 +150,7 @@ public class Metadata {
                     continue;
                 }
                 EReference ref = EcoreFactory.eINSTANCE.createEReference();
-                String referenceName = childDocumentType.getReferenceName();
-                if (referenceName == null) {
-                    String filePattern = childDocumentType.getFilePattern();
-                    referenceName = toIdentifier(filePattern.substring(filePattern.lastIndexOf('/') + 1, filePattern.lastIndexOf('.')), false);
-                }
-                ref.setName(referenceName);
+                ref.setName(childDocumentType.getDocumentProcessor().getReferenceName());
                 ref.setEType(type);
                 ref.setUpperBound(-1); // This is actually just a guess...
                 clazz.getEStructuralFeatures().add(ref);
@@ -179,25 +176,6 @@ public class Metadata {
         }
     }
     
-    private static String toIdentifier(String name, boolean startWithUpper) {
-        int len = name.length();
-        StringBuilder buffer = new StringBuilder(len);
-        boolean upperNext = startWithUpper;
-        for (int i=0; i<len; i++) {
-            char c = name.charAt(i);
-            if (c == '-') {
-                upperNext = true;
-            } else {
-                if (upperNext) {
-                    c = Character.toUpperCase(c);
-                    upperNext = false;
-                }
-                buffer.append(c);
-            }
-        }
-        return buffer.toString();
-    }
-    
     private EObject processContext(Context context) {
         EObject object;
         EClass clazz = context.getType().getGeneratedClass();
@@ -219,7 +197,8 @@ public class Metadata {
             ((EList<EObject>)object.eGet(childContext.getLink().getReference())).add(processContext(childContext.getContext()));
         }
         for (ChildDocument childDocument : context.getChildDocuments()) {
-            if (childDocument.getDocument().getType().getFilePattern().equals("ws-security.xml")) {
+            DocumentType documentType = childDocument.getDocument().getType();
+            if (documentType instanceof DefaultDocumentType && ((DefaultDocumentType)documentType).getFilePattern().equals("ws-security.xml")) {
                 continue; // TODO: hack!
             }
             ((EList<EObject>)object.eGet(childDocument.getLink().getReference())).addAll(childDocument.getDocument().getContents());

@@ -30,13 +30,12 @@ class ChildDocumentTypeLink {
 }
 
 abstract class DocumentType {
-	String filePattern
-	String referenceName
 	op EClass getObjectType()
 	op DocumentProcessor getDocumentProcessor()
 }
 
 class DefaultDocumentType extends DocumentType {
+	String filePattern
 	refers EClass[] rootRefObjectTypes
 	op EClass getObjectType() {
 		if (rootRefObjectTypes.isEmpty())
@@ -47,7 +46,7 @@ class DefaultDocumentType extends DocumentType {
 			// TODO: if there are multiple classes, we should get the common superclass
 			EcorePackage::eINSTANCE.getEObject()
 	}
-	op DocumentProcessor getDocumentProcessor() { DefaultDocumentProcessor::INSTANCE }
+	op DocumentProcessor getDocumentProcessor() { new DefaultDocumentProcessor(this) }
 }
 
 class Context {
@@ -70,6 +69,7 @@ class ChildContext {
 
 class Document {
 	refers DocumentType[1] ^type
+	String path
 	refers EObject[] contents
 }
 

@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -27,8 +28,25 @@ import com.github.veithen.ramsay.ws.model.repository.DocumentProcessor;
 public class ApplicationDeploymentDescriptorProcessor extends ApplicationSwitch implements DocumentProcessor {
     public static final DocumentProcessor INSTANCE = new ApplicationDeploymentDescriptorProcessor();
     
-    private ApplicationDeploymentDescriptorProcessor() {}
+    private static final String[] names = { "META-INF/application_merged.xml", "META-INF/application.xml" };
     
+    private ApplicationDeploymentDescriptorProcessor() {}
+
+    @Override
+    public String getReferenceName() {
+        return "deploymentDescriptor";
+    }
+    
+    @Override
+    public String scan(Set<String> relativeURIs) {
+        for (String name : names) {
+            if (relativeURIs.contains(name)) {
+                return name;
+            }
+        }
+        return null;
+    }
+
     @Override
     public void processDocument(XMIResource resource, InputStream in) throws IOException {
         // Replace the InputStream with a ByteArrayInputStream to enable JavaEEQuickPeek

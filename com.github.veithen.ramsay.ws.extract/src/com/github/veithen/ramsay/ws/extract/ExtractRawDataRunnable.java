@@ -82,16 +82,26 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
         EMFUtil.save(index);
     }
     
-    private Context buildContext(String uri, ContextType type, String name) {
+    private Context buildContext(String contextURI, ContextType type, String name) {
+        // TODO: there is probably a better way to do this with TreeSets
+        Set<String> relativeURIs = new HashSet<String>();
+        {
+            String prefix = contextURI + "/";
+            for (String uri : resourceNames) {
+                if (uri.startsWith(prefix)) {
+                    relativeURIs.add(uri.substring(prefix.length()));
+                }
+            }
+        }
         Context context = RepositoryFactory.eINSTANCE.createContext();
         context.setType(type);
         context.setName(name);
         DocumentType rootDocumentType = type.getRootDocumentType();
         if (rootDocumentType != null) {
-            context.setRootDocument(searchDocument(uri, rootDocumentType));
+            context.setRootDocument(searchDocument(relativeURIs, rootDocumentType));
         }
         for (ChildDocumentTypeLink link : type.getChildDocumentTypeLinks()) {
-            Document document = searchDocument(uri, link.getDocumentType());
+            Document document = searchDocument(relativeURIs, link.getDocumentType());
             if (document != null) {
                 ChildDocument childDocument = RepositoryFactory.eINSTANCE.createChildDocument();
                 childDocument.setLink(link);
@@ -104,7 +114,7 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
             if (childContextType.getName().equals("repository") || childContextType.getName().equals("aver") || childContextType.getName().equals("bver") || childContextType.getName().equals("cver")) {
                 continue; // TODO: hack!
             }
-            String prefix = uri + "/" + childContextType.getName() + "/";
+            String prefix = contextURI + "/" + childContextType.getName() + "/";
             for (String resourceName : resourceNames) {
                 if (resourceName.startsWith(prefix) && resourceName.indexOf('/', prefix.length()) == -1) {
                     ChildContext childContext = RepositoryFactory.eINSTANCE.createChildContext();
@@ -117,10 +127,12 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
         return context;
     }
     
-    private Document searchDocument(String contextURI, DocumentType type) {
-        if (resourceNames.contains(contextURI + "/" + type.getFilePattern())) {
+    private Document searchDocument(Set<String> relativeURIs, DocumentType type) {
+        String path = type.getDocumentProcessor().scan(relativeURIs);
+        if (path != null) {
             Document document = RepositoryFactory.eINSTANCE.createDocument();
             document.setType(type);
+            document.setPath(path);
             return document;
         } else {
             return null;
@@ -143,7 +155,7 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
     }
     
     private void extractDocument(String contextURI, Document document, IFolder folder) throws CoreException {
-        String inputFileName = document.getType().getFilePattern();
+        String inputFileName = document.getPath();
         if (inputFileName.equals("ws-security.xml")) {
             return; // TODO: hack!
         }
