@@ -39,6 +39,15 @@ public class Realm {
         packageAdapters.add(adapter);
     }
 
+    public EPackage[] getPackages() {
+        EPackage[] result = new EPackage[packageAdapters.size()];
+        int i = 0;
+        for (CovariantPackageAdapter adapter : packageAdapters) {
+            result[i++] = adapter.getTarget();
+        }
+        return result;
+    }
+    
     public EPackage getPackage(String uri) {
         for (CovariantPackageAdapter adapter : packageAdapters) {
             EPackage ePackage = adapter.getTarget();

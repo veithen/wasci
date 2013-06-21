@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
 import com.github.veithen.ramsay.emf.cm.cmml.Type;
+import com.github.veithen.ramsay.emf.local.LocalPackageUtil;
 
 public final class Util {
     private Util() {}
@@ -21,7 +22,13 @@ public final class Util {
      * @return
      */
     public static EClass resolve(Realm realm, Type type) throws CoreException {
-        EPackage ePackage = realm.getPackage(type.getNsURI());
+        EPackage ePackage = null;
+        for (EPackage candidate : realm.getPackages()) {
+            if (LocalPackageUtil.getOriginalNsURI(candidate).equals(type.getNsURI())) {
+                ePackage = candidate;
+                break;
+            }
+        }
         if (ePackage == null) {
             throw new CoreException(new TransformationStatus(IStatus.ERROR, "No EPackage with URI " + type.getNsURI() + " found", type));
         }
