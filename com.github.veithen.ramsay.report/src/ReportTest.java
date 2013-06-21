@@ -33,7 +33,7 @@ public class ReportTest {
     @Test
     public void test() throws Exception {
         final ResourceSet resourceSet = new ResourceSetImpl();
-        ResourcesPlugin.getWorkspace().getRoot().getProject("test").getFolder("transformed").accept(new IResourceVisitor() {
+        ResourcesPlugin.getWorkspace().getRoot().getProject("was85").getFolder("transformed").accept(new IResourceVisitor() {
             @Override
             public boolean visit(IResource resource) throws CoreException {
                 if (resource.getType() == IResource.FILE && resource.getName().endsWith(".ecore")) {
@@ -65,9 +65,9 @@ public class ReportTest {
         Query<EClassifier,?,?> query = ocl.createQuery(expression);
         */
         
-        Resource dataResource = resourceSet.createResource(URI.createURI("platform:/resource/localhost/transformed/cell.xmi"));
+        Resource dataResource = resourceSet.createResource(URI.createURI("platform:/resource/devl/transformed/cell.xmi"));
         dataResource.load(null);
-        EObject cell = dataResource.getContents().get(1);
+        EObject cell = dataResource.getContents().get(0);
         
         tableHandler.setObject(cell);
         Writer out = new OutputStreamWriter(System.out);
