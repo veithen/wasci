@@ -6,6 +6,7 @@ Bundle-Version: 0.1.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: runtimes/com.ibm.ws.admin.client_8.5.0.jar,
  runtimes/com.ibm.ws.orb_8.5.0.jar,
+ plugins/com.ibm.ws.security.crypto.jar,
  .
 Export-Package: com.ibm.websphere.management,
  com.ibm.websphere.management.exception,

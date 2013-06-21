@@ -27,6 +27,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>plugins</name>
+			<type>2</type>
+			<locationURI>WAS_HOME/plugins</locationURI>
+		</link>
+		<link>
 			<name>runtimes</name>
 			<type>2</type>
 			<locationURI>WAS_HOME/runtimes</locationURI>
