@@ -101,7 +101,7 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
         }
         for (ChildContextTypeLink link : type.getChildContextTypeLinks()) {
             ContextType childContextType = link.getContextType();
-            if (childContextType.getName().equals("repository") || childContextType.getName().equals("bver") || childContextType.getName().equals("cver")) {
+            if (childContextType.getName().equals("repository") || childContextType.getName().equals("aver") || childContextType.getName().equals("bver") || childContextType.getName().equals("cver")) {
                 continue; // TODO: hack!
             }
             String prefix = uri + "/" + childContextType.getName() + "/";
