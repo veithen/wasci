@@ -36,8 +36,8 @@ import com.github.veithen.ramsay.ws.metadata.repository.ChildContextTypeLink;
 import com.github.veithen.ramsay.ws.metadata.repository.ChildDocumentTypeLink;
 import com.github.veithen.ramsay.ws.metadata.repository.ContextType;
 import com.github.veithen.ramsay.ws.metadata.repository.DefaultDocumentType;
-import com.github.veithen.ramsay.ws.metadata.repository.RepositoryFactory;
 import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadata;
+import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadataFactory;
 
 public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMetadataCallback, RepositoryMetadataCallback {
     private final File installDir;
@@ -99,7 +99,7 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
                 throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Repository metadata extraction failed", ex));
             }
             Resource resource = resourceSet.createResource(EMFUtil.createURI(folder.getFile("repository-metadata.xmi")));
-            RepositoryMetadata repositoryMetadata = RepositoryFactory.eINSTANCE.createRepositoryMetadata();
+            RepositoryMetadata repositoryMetadata = RepositoryMetadataFactory.eINSTANCE.createRepositoryMetadata();
             repositoryMetadata.getDocumentTypes().addAll(documentTypeMap.values());
             repositoryMetadata.getContextTypes().addAll(contextTypeMap.values());
             resource.getContents().add(repositoryMetadata);
@@ -130,7 +130,7 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
 
     @Override
     public void createDocumentType(String name, String filePattern) {
-        DefaultDocumentType documentType = RepositoryFactory.eINSTANCE.createDefaultDocumentType();
+        DefaultDocumentType documentType = RepositoryMetadataFactory.eINSTANCE.createDefaultDocumentType();
         documentType.setName(name);
         documentType.setFilePattern(filePattern);
         documentTypeMap.put(name, documentType);
@@ -143,7 +143,7 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
 
     @Override
     public void createContextType(String name, String rootDocumentTypeName) {
-        ContextType contextType = RepositoryFactory.eINSTANCE.createContextType();
+        ContextType contextType = RepositoryMetadataFactory.eINSTANCE.createContextType();
         contextType.setName(name);
         contextType.setRootDocumentType(rootDocumentTypeName == null ? null : documentTypeMap.get(rootDocumentTypeName));
         contextTypeMap.put(name, contextType);
@@ -151,14 +151,14 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
 
     @Override
     public void linkDocumentTypeToContextType(String parent, String child) {
-        ChildDocumentTypeLink link = RepositoryFactory.eINSTANCE.createChildDocumentTypeLink();
+        ChildDocumentTypeLink link = RepositoryMetadataFactory.eINSTANCE.createChildDocumentTypeLink();
         link.setDocumentType(documentTypeMap.get(child));
         contextTypeMap.get(parent).getChildDocumentTypeLinks().add(link);
     }
 
     @Override
     public void linkContextTypes(String parent, String child) {
-        ChildContextTypeLink link = RepositoryFactory.eINSTANCE.createChildContextTypeLink();
+        ChildContextTypeLink link = RepositoryMetadataFactory.eINSTANCE.createChildContextTypeLink();
         link.setContextType(contextTypeMap.get(child));
         contextTypeMap.get(parent).getChildContextTypeLinks().add(link);
     }

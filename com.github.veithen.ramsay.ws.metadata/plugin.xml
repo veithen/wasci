@@ -27,7 +27,7 @@
     <extension point="org.eclipse.emf.ecore.generated_package">
         <package
             uri="com.github.veithen.ramsay.ws.metadata.repository"
-            class="com.github.veithen.ramsay.ws.metadata.repository.RepositoryPackage"
+            class="com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadataPackage"
             genModel="repository.genmodel"/>
     </extension>
     <extension

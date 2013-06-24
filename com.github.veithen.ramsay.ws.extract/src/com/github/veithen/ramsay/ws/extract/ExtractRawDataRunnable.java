@@ -36,7 +36,7 @@ import com.github.veithen.ramsay.ws.metadata.repository.Context;
 import com.github.veithen.ramsay.ws.metadata.repository.ContextType;
 import com.github.veithen.ramsay.ws.metadata.repository.Document;
 import com.github.veithen.ramsay.ws.metadata.repository.DocumentType;
-import com.github.veithen.ramsay.ws.metadata.repository.RepositoryFactory;
+import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadataFactory;
 import com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler;
 import com.ibm.websphere.management.exception.RepositoryException;
 import com.ibm.websphere.management.repository.ConfigRepository;
@@ -94,7 +94,7 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
                 }
             }
         }
-        Context context = RepositoryFactory.eINSTANCE.createContext();
+        Context context = RepositoryMetadataFactory.eINSTANCE.createContext();
         context.setType(type);
         context.setName(name);
         DocumentType rootDocumentType = type.getRootDocumentType();
@@ -104,7 +104,7 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
         for (ChildDocumentTypeLink link : type.getChildDocumentTypeLinks()) {
             Document document = searchDocument(relativeURIs, link.getDocumentType());
             if (document != null) {
-                ChildDocument childDocument = RepositoryFactory.eINSTANCE.createChildDocument();
+                ChildDocument childDocument = RepositoryMetadataFactory.eINSTANCE.createChildDocument();
                 childDocument.setLink(link);
                 childDocument.setDocument(document);
                 context.getChildDocuments().add(childDocument);
@@ -118,7 +118,7 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
             String prefix = contextURI + "/" + childContextType.getName() + "/";
             for (String resourceName : resourceNames) {
                 if (resourceName.startsWith(prefix) && resourceName.indexOf('/', prefix.length()) == -1) {
-                    ChildContext childContext = RepositoryFactory.eINSTANCE.createChildContext();
+                    ChildContext childContext = RepositoryMetadataFactory.eINSTANCE.createChildContext();
                     childContext.setLink(link);
                     childContext.setContext(buildContext(resourceName, childContextType, resourceName.substring(prefix.length())));
                     context.getChildContexts().add(childContext);
@@ -131,7 +131,7 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
     private Document searchDocument(Set<String> relativeURIs, DocumentType type) {
         String path = ((DocumentTypeHandler)EcoreUtil.getRegisteredAdapter(type, DocumentTypeHandler.class)).scan(relativeURIs);
         if (path != null) {
-            Document document = RepositoryFactory.eINSTANCE.createDocument();
+            Document document = RepositoryMetadataFactory.eINSTANCE.createDocument();
             document.setType(type);
             document.setPath(path);
             return document;

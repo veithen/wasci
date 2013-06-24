@@ -1,3 +1,4 @@
+@GenModel(prefix="RepositoryMetadata")
 package com.github.veithen.ramsay.ws.metadata.repository
 
 import org.eclipse.emf.ecore.EClass

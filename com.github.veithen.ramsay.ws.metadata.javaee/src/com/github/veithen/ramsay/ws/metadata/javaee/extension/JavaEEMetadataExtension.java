@@ -5,8 +5,8 @@ import com.github.veithen.ramsay.ws.metadata.javaee.ApplicationDeploymentDescrip
 import com.github.veithen.ramsay.ws.metadata.javaee.JavaeeFactory;
 import com.github.veithen.ramsay.ws.metadata.repository.ChildDocumentTypeLink;
 import com.github.veithen.ramsay.ws.metadata.repository.ContextType;
-import com.github.veithen.ramsay.ws.metadata.repository.RepositoryFactory;
 import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadata;
+import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadataFactory;
 
 public class JavaEEMetadataExtension implements MetadataExtension {
     @Override
@@ -15,7 +15,7 @@ public class JavaEEMetadataExtension implements MetadataExtension {
         if (contextType != null) {
             ApplicationDeploymentDescriptor dd = JavaeeFactory.eINSTANCE.createApplicationDeploymentDescriptor();
             repositoryMetadata.getDocumentTypes().add(dd);
-            ChildDocumentTypeLink link = RepositoryFactory.eINSTANCE.createChildDocumentTypeLink();
+            ChildDocumentTypeLink link = RepositoryMetadataFactory.eINSTANCE.createChildDocumentTypeLink();
             link.setDocumentType(dd);
             contextType.getChildDocumentTypeLinks().add(link);
         }
