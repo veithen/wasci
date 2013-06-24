@@ -9,7 +9,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.omg.org/XMI"
-            class="com.github.veithen.ramsay.emf.xmi.XmiPackage"
+            class="com.github.veithen.ramsay.emf.xmi.XMIPackage"
             genModel="xmi.genmodel"/>
    </extension>
 

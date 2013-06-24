@@ -1,4 +1,5 @@
 @Ecore(nsURI="http://www.omg.org/XMI", nsPrefix="xmi")
+@GenModel(prefix="XMI")
 package com.github.veithen.ramsay.emf.xmi
 
 class Documentation {
