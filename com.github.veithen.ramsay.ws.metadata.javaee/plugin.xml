@@ -5,6 +5,12 @@
 -->
 
 <plugin>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="com.github.veithen.ramsay.ws.metadata.javaee"
+            class="com.github.veithen.ramsay.ws.metadata.javaee.JavaeePackage"
+            genModel="repository.genmodel"/>
+   </extension>
    <extension
          id="metadataExtension"
          name="JavaEE Metadata Extension"
