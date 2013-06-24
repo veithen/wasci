@@ -1,4 +1,4 @@
-package com.github.veithen.ramsay.ws.model.repository.util;
+package com.github.veithen.ramsay.ws.metadata.repository.util;
 
 public final class RepositoryMetadataUtil {
     private RepositoryMetadataUtil() {}

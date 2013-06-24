@@ -1,4 +1,4 @@
-package com.github.veithen.ramsay.ws.metadata.javaee.processor;
+package com.github.veithen.ramsay.ws.metadata.javaee.handler;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -9,10 +9,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.jst.j2ee.application.EjbModule;
-import org.eclipse.jst.j2ee.application.WebModule;
 import org.eclipse.jst.j2ee.application.internal.impl.ApplicationResourceFactory;
-import org.eclipse.jst.j2ee.application.internal.util.ApplicationSwitch;
 import org.eclipse.jst.javaee.application.Application;
 import org.eclipse.jst.javaee.application.ApplicationDeploymentDescriptor;
 import org.eclipse.jst.javaee.application.ApplicationFactory;
@@ -22,15 +19,15 @@ import org.eclipse.jst.javaee.application.internal.util.ApplicationResourceFacto
 import org.eclipse.jst.jee.util.internal.JavaEEQuickPeek;
 import org.eclipse.wst.common.internal.emf.resource.EMF2SAXRendererFactory;
 
-import com.github.veithen.ramsay.ws.model.repository.DocumentProcessor;
+import com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandlerAdapter;
 
 @SuppressWarnings("restriction")
-public class ApplicationDeploymentDescriptorProcessor extends ApplicationSwitch implements DocumentProcessor {
-    public static final DocumentProcessor INSTANCE = new ApplicationDeploymentDescriptorProcessor();
+public class ApplicationDeploymentDescriptorHandler extends DocumentTypeHandlerAdapter {
+    public static final ApplicationDeploymentDescriptorHandler INSTANCE = new ApplicationDeploymentDescriptorHandler();
     
     private static final String[] names = { "META-INF/application_merged.xml", "META-INF/application.xml" };
     
-    private ApplicationDeploymentDescriptorProcessor() {}
+    private ApplicationDeploymentDescriptorHandler() {}
 
     @Override
     public String getReferenceName() {
@@ -64,7 +61,7 @@ public class ApplicationDeploymentDescriptorProcessor extends ApplicationSwitch 
             Resource appResource = new ApplicationResourceFactory(EMF2SAXRendererFactory.INSTANCE).createResource(resource.getURI());
             appResource.load(in, null);
             dd = ApplicationFactory.eINSTANCE.createApplicationDeploymentDescriptor();
-            dd.setApplication((Application)doSwitch(appResource.getContents().get(0)));
+            dd.setApplication((Application)Converter.INSTANCE.doSwitch(appResource.getContents().get(0)));
         } else {
             Resource appResource = new ApplicationResourceFactoryImpl().createResource(resource.getURI());
             appResource.load(in, null);
@@ -88,32 +85,5 @@ public class ApplicationDeploymentDescriptorProcessor extends ApplicationSwitch 
         }
         
         resource.getContents().add((EObject)dd);
-    }
-    
-    @Override
-    public Object caseApplication(org.eclipse.jst.j2ee.application.Application in) {
-        Application out = ApplicationFactory.eINSTANCE.createApplication();
-        out.setApplicationName(in.getDisplayName());
-        for (Object module : in.getModules()) {
-            out.getModules().add((Module)doSwitch((EObject)module));
-        }
-        return out;
-    }
-
-    @Override
-    public Object caseEjbModule(EjbModule in) {
-        Module out = ApplicationFactory.eINSTANCE.createModule();
-        out.setEjb(in.getUri());
-        return out;
-    }
-
-    @Override
-    public Object caseWebModule(WebModule in) {
-        Module out = ApplicationFactory.eINSTANCE.createModule();
-        Web web = ApplicationFactory.eINSTANCE.createWeb();
-        web.setWebUri(in.getUri());
-        web.setContextRoot(in.getContextRoot());
-        out.setWeb(web);
-        return out;
     }
 }

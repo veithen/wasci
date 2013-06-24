@@ -2,6 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
     <extension-point id="metadataExtensions" name="Metadata Extension" schema="schema/metadataExtensions.exsd"/>
+    <extension-point id="adapters" name="Metadata Adapters" schema="schema/adapters.exsd"/>
     <extension id="builder"
                point="org.eclipse.core.resources.builders"
                name="Metadata Builder">
@@ -22,5 +23,11 @@
                  class="com.github.veithen.ramsay.ws.metadata.ProjectAdapterFactory">
             <adapter type="com.github.veithen.ramsay.ws.metadata.MetadataProject"/>
         </factory>
+    </extension>
+    <extension
+          point="com.github.veithen.ramsay.ws.metadata.adapters">
+       <adapterFactory
+             class="com.github.veithen.ramsay.ws.metadata.repository.handler.impl.DefaultDocumentTypeHandlerAdapterFactory">
+       </adapterFactory>
     </extension>
 </plugin>

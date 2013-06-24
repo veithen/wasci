@@ -22,6 +22,7 @@ import com.github.veithen.ramsay.emf.cm.Realm;
 import com.github.veithen.ramsay.emf.local.LocalPackageUtil;
 import com.github.veithen.ramsay.util.FolderSubset;
 import com.github.veithen.ramsay.ws.metadata.extension.MetadataExtension;
+import com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler;
 import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
 
 public class MetadataProject {
@@ -43,6 +44,9 @@ public class MetadataProject {
             realm.addPackage((EPackage)object);
         }
         RepositoryMetadata repositoryMetadata = (RepositoryMetadata)folderSubset.getResource(modelsFolder.getFile("repository-metadata.xmi")).getContents().get(0);
+        
+        resourceSet.getAdapterFactories().add(new DelegatingAdapterFactory(DocumentTypeHandler.class));
+        
         IConfigurationElement[] extensionConfig = Platform.getExtensionRegistry().getConfigurationElementsFor(Constants.METADATA_EXTENSIONS_ID);
         MetadataExtension[] metadataExtensions = new MetadataExtension[extensionConfig.length];
         for (int i=0; i<extensionConfig.length; i++) {
@@ -51,6 +55,7 @@ public class MetadataProject {
         for (MetadataExtension metadataExtension : metadataExtensions) {
             metadataExtension.enhanceMetadata(repositoryMetadata);
         }
+        
         return new Metadata(folderSubset, project.getFolder(Constants.TRANSFORMATIONS_PATH), project.getFolder(Constants.TRANSFORMED_PATH), realm, registry, repositoryMetadata);
     }
 

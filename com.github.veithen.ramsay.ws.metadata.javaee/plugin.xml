@@ -19,5 +19,11 @@
             class="com.github.veithen.ramsay.ws.metadata.javaee.extension.JavaEEMetadataExtension">
       </metadataExtension>
    </extension>
+   <extension
+         point="com.github.veithen.ramsay.ws.metadata.adapters">
+      <adapterFactory
+            class="com.github.veithen.ramsay.ws.metadata.javaee.handler.ApplicationDeploymentDescriptorHandlerAdapterFactory">
+      </adapterFactory>
+   </extension>
 
 </plugin>

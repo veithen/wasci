@@ -14,6 +14,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.wst.common.emf
 Bundle-ActivationPolicy: lazy
 Import-Package: com.github.veithen.ramsay.ws.metadata.extension,
+ com.github.veithen.ramsay.ws.metadata.repository.handler,
  com.github.veithen.ramsay.ws.model.repository,
  com.github.veithen.ramsay.ws.model.repository.impl,
+ com.github.veithen.ramsay.ws.model.repository.util,
  org.eclipse.emf.ecore.xmi

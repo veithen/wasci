@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import com.github.veithen.ramsay.util.EMFUtil;
 import com.github.veithen.ramsay.ws.metadata.Metadata;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
+import com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler;
 import com.github.veithen.ramsay.ws.model.repository.ChildContext;
 import com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink;
 import com.github.veithen.ramsay.ws.model.repository.ChildDocument;
@@ -128,7 +129,7 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
     }
     
     private Document searchDocument(Set<String> relativeURIs, DocumentType type) {
-        String path = type.getDocumentProcessor().scan(relativeURIs);
+        String path = ((DocumentTypeHandler)EcoreUtil.getRegisteredAdapter(type, DocumentTypeHandler.class)).scan(relativeURIs);
         if (path != null) {
             Document document = RepositoryFactory.eINSTANCE.createDocument();
             document.setType(type);
@@ -172,7 +173,7 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
                 // All documents are saved as XMI irrespective of the original format
                 resource = new XMIResourceImpl(URI.createURI("wsrepo:///" + uri));
                 resourceSet.getResources().add(resource);
-                document.getType().getDocumentProcessor().processDocument(resource, in);
+                ((DocumentTypeHandler)EcoreUtil.getRegisteredAdapter(document.getType(), DocumentTypeHandler.class)).processDocument(resource, in);
             } finally {
                 in.close();
             }
