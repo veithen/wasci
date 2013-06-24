@@ -1,9 +1,6 @@
 package com.github.veithen.ramsay.ws.metadata.javaee
 
 import com.github.veithen.ramsay.ws.model.repository.DocumentType
-import org.eclipse.emf.ecore.EClass
-import org.eclipse.jst.javaee.application.internal.metadata.ApplicationPackage
 
 class ApplicationDeploymentDescriptor extends DocumentType {
-	op EClass getObjectType() { ApplicationPackage::eINSTANCE.applicationDeploymentDescriptor }
 }

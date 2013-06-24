@@ -95,7 +95,8 @@ public class Metadata {
             EClass clazz = null;
             boolean addNameAttribute = false;
             if (rootDocumentType != null) {
-                clazz = rootDocumentType.getObjectType();
+                DocumentTypeHandler handler = (DocumentTypeHandler)EcoreUtil.getRegisteredAdapter(rootDocumentType, DocumentTypeHandler.class);
+                clazz = handler.getObjectType();
                 if (clazz != null && realm.isCovariant(clazz) && clazz.getEStructuralFeature("name") == null) {
                     addNameAttribute = true;
                 }
@@ -146,12 +147,12 @@ public class Metadata {
             }
             for (ChildDocumentTypeLink childDocumentTypeLink : contextType.getChildDocumentTypeLinks()) {
                 DocumentType childDocumentType = childDocumentTypeLink.getDocumentType();
-                EClass type = childDocumentType.getObjectType();
+                DocumentTypeHandler handler = (DocumentTypeHandler)EcoreUtil.getRegisteredAdapter(childDocumentType, DocumentTypeHandler.class);
+                EClass type = handler.getObjectType();
                 if (type == null) {
                     continue;
                 }
                 EReference ref = EcoreFactory.eINSTANCE.createEReference();
-                DocumentTypeHandler handler = (DocumentTypeHandler)EcoreUtil.getRegisteredAdapter(childDocumentType, DocumentTypeHandler.class);
                 ref.setName(handler.getReferenceName());
                 ref.setEType(type);
                 ref.setUpperBound(-1); // This is actually just a guess...

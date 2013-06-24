@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
@@ -15,6 +16,7 @@ import org.eclipse.jst.javaee.application.ApplicationDeploymentDescriptor;
 import org.eclipse.jst.javaee.application.ApplicationFactory;
 import org.eclipse.jst.javaee.application.Module;
 import org.eclipse.jst.javaee.application.Web;
+import org.eclipse.jst.javaee.application.internal.metadata.ApplicationPackage;
 import org.eclipse.jst.javaee.application.internal.util.ApplicationResourceFactoryImpl;
 import org.eclipse.jst.jee.util.internal.JavaEEQuickPeek;
 import org.eclipse.wst.common.internal.emf.resource.EMF2SAXRendererFactory;
@@ -28,6 +30,11 @@ public class ApplicationDeploymentDescriptorHandler extends DocumentTypeHandlerA
     private static final String[] names = { "META-INF/application_merged.xml", "META-INF/application.xml" };
     
     private ApplicationDeploymentDescriptorHandler() {}
+
+    @Override
+    public EClass getObjectType() {
+        return ApplicationPackage.eINSTANCE.getApplicationDeploymentDescriptor();
+    }
 
     @Override
     public String getReferenceName() {
