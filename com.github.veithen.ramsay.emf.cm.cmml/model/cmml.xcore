@@ -28,7 +28,7 @@ class Join extends Transformation {
 	contains Type[1] to
 	String[1] referenceName
 	String oppositeReferenceName
-	contains KeyMapping[] keyMappings // TODO: lowerBound = 1
+	contains KeyMapping[1..*] keyMappings
 }
 
 abstract class FeatureTransformation extends Transformation {
