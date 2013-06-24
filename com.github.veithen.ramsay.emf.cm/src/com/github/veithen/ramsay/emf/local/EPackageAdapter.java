@@ -6,8 +6,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com.github.veithen.ramsay.emf.cm.impl.AdapterBase;
 import com.github.veithen.ramsay.emf.cm.impl.EMFUtil;
+import com.github.veithen.ramsay.emf.notify.AdapterBase;
 
 final class EPackageAdapter extends AdapterBase<EPackage> {
     private final ResourceSetAdapter resourceSetAdapter;

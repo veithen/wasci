@@ -23,8 +23,7 @@ import com.github.veithen.ramsay.emf.cm.cmml.TransformationChain;
 import com.github.veithen.ramsay.emf.cm.cmml.util.CMMLSwitch;
 import com.github.veithen.ramsay.emf.cm.transform.Transformer;
 import com.github.veithen.ramsay.emf.cm.transform.TransformerFactory;
-import com.github.veithen.ramsay.util.Constants;
-import com.github.veithen.ramsay.util.EMFUtil;
+import com.github.veithen.ramsay.emf.util.EMFUtil;
 
 public class TransformerFactoryImpl extends CMMLSwitch<Transformer> implements TransformerFactory {
     @Override

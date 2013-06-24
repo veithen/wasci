@@ -4,6 +4,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.EStructuralFeature.Internal.SettingDelegate;
 
+import com.github.veithen.ramsay.emf.notify.AdapterBase;
+
 public class CovariantFeatureAdapter extends AdapterBase<EStructuralFeature.Internal> {
     private SettingDelegate currentSettingDelegate;
     

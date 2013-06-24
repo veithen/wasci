@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
 import com.github.veithen.ramsay.emf.cm.transform.TransformerFactory;
-import com.github.veithen.ramsay.util.FolderSubset;
+import com.github.veithen.ramsay.emf.util.FolderSubset;
 import com.github.veithen.ramsay.ws.metadata.repository.ChildContext;
 import com.github.veithen.ramsay.ws.metadata.repository.ChildContextTypeLink;
 import com.github.veithen.ramsay.ws.metadata.repository.ChildDocument;

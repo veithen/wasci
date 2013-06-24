@@ -1,4 +1,4 @@
-package com.github.veithen.ramsay.util;
+package com.github.veithen.ramsay.emf.util;
 
 import java.io.IOException;
 
@@ -11,6 +11,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+
+import com.github.veithen.ramsay.emf.internal.Constants;
 
 public final class EMFUtil {
     private EMFUtil() {}

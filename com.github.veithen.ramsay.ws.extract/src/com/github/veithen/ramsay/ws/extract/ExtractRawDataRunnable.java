@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
-import com.github.veithen.ramsay.util.EMFUtil;
+import com.github.veithen.ramsay.emf.util.EMFUtil;
 import com.github.veithen.ramsay.ws.metadata.Metadata;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
 import com.github.veithen.ramsay.ws.metadata.repository.ChildContext;

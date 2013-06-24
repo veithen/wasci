@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import com.github.veithen.ramsay.util.EMFUtil;
+import com.github.veithen.ramsay.emf.util.EMFUtil;
 import com.github.veithen.ramsay.ws.metadata.extractor.ConfigMetadataCallback;
 import com.github.veithen.ramsay.ws.metadata.extractor.IsolatedClassLoader;
 import com.github.veithen.ramsay.ws.metadata.extractor.MetadataExtractor;

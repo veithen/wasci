@@ -11,6 +11,7 @@ Bundle-ActivationPolicy: lazy
 Import-Package: com.github.veithen.ramsay.emf.cm,
  com.github.veithen.ramsay.emf.cm.cmml,
  com.github.veithen.ramsay.emf.cm.transform,
+ com.github.veithen.ramsay.emf.util,
  com.github.veithen.ramsay.util,
  com.github.veithen.ramsay.ws.metadata,
  com.github.veithen.ramsay.ws.metadata.repository,

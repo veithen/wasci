@@ -7,7 +7,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import com.github.veithen.ramsay.util.FolderSubset;
+import com.github.veithen.ramsay.emf.util.FolderSubset;
 import com.github.veithen.ramsay.util.SimpleBuilder;
 import com.github.veithen.ramsay.ws.metadata.Metadata;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;

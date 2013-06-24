@@ -1,4 +1,4 @@
-package com.github.veithen.ramsay.emf.cm.impl;
+package com.github.veithen.ramsay.emf.notify;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;

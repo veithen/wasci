@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
 import com.github.veithen.ramsay.emf.local.LocalPackageUtil;
-import com.github.veithen.ramsay.util.FolderSubset;
+import com.github.veithen.ramsay.emf.util.FolderSubset;
 import com.github.veithen.ramsay.ws.metadata.extension.MetadataExtension;
 import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadata;
 import com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler;

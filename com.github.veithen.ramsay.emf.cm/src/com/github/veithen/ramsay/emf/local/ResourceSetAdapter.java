@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
-import com.github.veithen.ramsay.emf.cm.impl.AdapterBase;
+import com.github.veithen.ramsay.emf.notify.AdapterBase;
 
 final class ResourceSetAdapter extends AdapterBase<ResourceSet> {
     private final LocalPackageSupport localPackageSupport;

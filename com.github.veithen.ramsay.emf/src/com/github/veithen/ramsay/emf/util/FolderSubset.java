@@ -1,4 +1,4 @@
-package com.github.veithen.ramsay.util;
+package com.github.veithen.ramsay.emf.util;
 
 import java.util.HashMap;
 import java.util.Map;

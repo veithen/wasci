@@ -26,8 +26,8 @@ import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.helper.OCLHelper;
 import org.junit.Test;
 
+import com.github.veithen.ramsay.emf.util.EMFUtil;
 import com.github.veithen.ramsay.report.Table;
-import com.github.veithen.ramsay.util.EMFUtil;
 
 public class ReportTest {
     @Test

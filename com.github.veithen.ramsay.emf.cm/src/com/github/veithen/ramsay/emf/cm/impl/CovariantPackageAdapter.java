@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 
 import com.github.veithen.ramsay.emf.cm.Realm;
+import com.github.veithen.ramsay.emf.notify.AdapterBase;
 
 public class CovariantPackageAdapter extends AdapterBase<EPackage> {
     private final Realm realm;
