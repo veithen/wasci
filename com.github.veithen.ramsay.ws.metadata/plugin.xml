@@ -26,8 +26,8 @@
     </extension>
     <extension point="org.eclipse.emf.ecore.generated_package">
         <package
-            uri="com.github.veithen.ramsay.ws.model.repository"
-            class="com.github.veithen.ramsay.ws.model.repository.RepositoryPackage"
+            uri="com.github.veithen.ramsay.ws.metadata.repository"
+            class="com.github.veithen.ramsay.ws.metadata.repository.RepositoryPackage"
             genModel="repository.genmodel"/>
     </extension>
     <extension
