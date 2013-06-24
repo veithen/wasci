@@ -35,6 +35,7 @@ abstract class DocumentType {
 }
 
 class DefaultDocumentType extends DocumentType {
+	String name
 	String filePattern
 	refers EClass[] rootRefObjectTypes
 	op EClass getObjectType() {

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IWorkspaceRunnable;
@@ -45,8 +46,8 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
     private final URIConverter uriConverter = new ExtensibleURIConverterImpl();
     private final ResourceSet resourceSet = new ResourceSetImpl();
     private final Map<String,EPackage> packageMap = new HashMap<String,EPackage>();
-    private final Map<String,DefaultDocumentType> documentTypeMap = new HashMap<String,DefaultDocumentType>();
-    private final Map<String,ContextType> contextTypeMap = new HashMap<String,ContextType>();
+    private final Map<String,DefaultDocumentType> documentTypeMap = new TreeMap<String,DefaultDocumentType>();
+    private final Map<String,ContextType> contextTypeMap = new TreeMap<String,ContextType>();
     
     public ExtractRawMetadataRunnable(File installDir, File profileDir, IFolder folder) {
         this.installDir = installDir;
@@ -130,6 +131,7 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
     @Override
     public void createDocumentType(String name, String filePattern) {
         DefaultDocumentType documentType = RepositoryFactory.eINSTANCE.createDefaultDocumentType();
+        documentType.setName(name);
         documentType.setFilePattern(filePattern);
         documentTypeMap.put(name, documentType);
     }
@@ -143,7 +145,7 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
     public void createContextType(String name, String rootDocumentTypeName) {
         ContextType contextType = RepositoryFactory.eINSTANCE.createContextType();
         contextType.setName(name);
-        contextType.setRootDocumentType(documentTypeMap.get(rootDocumentTypeName));
+        contextType.setRootDocumentType(rootDocumentTypeName == null ? null : documentTypeMap.get(rootDocumentTypeName));
         contextTypeMap.put(name, contextType);
     }
 
