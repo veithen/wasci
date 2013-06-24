@@ -1,0 +1,54 @@
+@Ecore(nsURI="http://github.com/veithen/ramsay/cm/cmml", nsPrefix="cmml")
+@GenModel(modelName="CMML")
+@GenModel(prefix="CMML")
+@GenModel(editDirectory="/com.github.veithen.ramsay.emf.cm.cmml.edit/src-gen")
+@GenModel(editorDirectory="/com.github.veithen.ramsay.emf.cm.cmml.editor/src-gen")
+@GenModel(fileExtensions="cmml")
+package com.github.veithen.ramsay.emf.cm.cmml
+
+abstract class Transformation {
+}
+
+class TransformationChain {
+	contains Transformation[] transformations
+}
+
+class Type {
+	String[1] nsURI
+	String[1] name
+}
+
+class KeyMapping {
+	String[1] from
+	String[1] to
+}
+
+class Join extends Transformation {
+	contains Type[1] from
+	contains Type[1] to
+	String[1] referenceName
+	String oppositeReferenceName
+	contains KeyMapping[] keyMappings // TODO: lowerBound = 1
+}
+
+abstract class FeatureTransformation extends Transformation {
+	contains Type[1] ^type
+	String[1] feature
+}
+
+class ChangeMultiplicity extends FeatureTransformation {
+	Integer lowerBound
+	Integer upperBound
+}
+
+class RemoveFeature extends FeatureTransformation {
+	String consistencyCheck
+}
+
+class CreateOppositeReference extends Transformation {
+	contains Type[1] ^type
+	String[1] referenceName
+	String[1] oppositeReferenceName
+	int lowerBound
+	int upperBound
+}
