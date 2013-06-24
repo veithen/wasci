@@ -2,6 +2,7 @@ package com.github.veithen.ramsay.ws.metadata.repository.handler.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -23,8 +24,21 @@ public class DefaultDocumentTypeHandler extends AdapterImpl implements DocumentT
         } else if (rootRefObjectTypes.size() == 1) {
             return rootRefObjectTypes.get(0);
         } else {
-            // TODO: if there are multiple classes, we should get the common superclass
-            return EcorePackage.eINSTANCE.getEObject();
+            // Try to determine the common supertype
+            Set<EClass> commonSuperTypes = null;
+            for (EClass rootRefObjectType : rootRefObjectTypes) {
+                EList<EClass> superTypes = rootRefObjectType.getEAllSuperTypes();
+                if (commonSuperTypes == null) {
+                    commonSuperTypes = new HashSet<EClass>(superTypes);
+                } else {
+                    commonSuperTypes.retainAll(superTypes);
+                }
+            }
+            if (commonSuperTypes.size() == 1) {
+                return commonSuperTypes.iterator().next();
+            } else {
+                return EcorePackage.eINSTANCE.getEObject();
+            }
         }
     }
 
