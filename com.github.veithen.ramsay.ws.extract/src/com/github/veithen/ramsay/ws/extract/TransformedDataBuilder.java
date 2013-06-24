@@ -11,7 +11,7 @@ import com.github.veithen.ramsay.util.FolderSubset;
 import com.github.veithen.ramsay.util.SimpleBuilder;
 import com.github.veithen.ramsay.ws.metadata.Metadata;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
-import com.github.veithen.ramsay.ws.model.repository.Context;
+import com.github.veithen.ramsay.ws.metadata.repository.Context;
 
 public class TransformedDataBuilder extends SimpleBuilder {
     public static final String ID = Constants.PLUGIN_ID + ".builder";

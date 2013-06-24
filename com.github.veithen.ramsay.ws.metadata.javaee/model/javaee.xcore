@@ -1,6 +1,6 @@
 package com.github.veithen.ramsay.ws.metadata.javaee
 
-import com.github.veithen.ramsay.ws.model.repository.DocumentType
+import com.github.veithen.ramsay.ws.metadata.repository.DocumentType
 
 class ApplicationDeploymentDescriptor extends DocumentType {
 }

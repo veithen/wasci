@@ -3,10 +3,10 @@ package com.github.veithen.ramsay.ws.metadata.javaee.extension;
 import com.github.veithen.ramsay.ws.metadata.extension.MetadataExtension;
 import com.github.veithen.ramsay.ws.metadata.javaee.ApplicationDeploymentDescriptor;
 import com.github.veithen.ramsay.ws.metadata.javaee.JavaeeFactory;
-import com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink;
-import com.github.veithen.ramsay.ws.model.repository.ContextType;
-import com.github.veithen.ramsay.ws.model.repository.RepositoryFactory;
-import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
+import com.github.veithen.ramsay.ws.metadata.repository.ChildDocumentTypeLink;
+import com.github.veithen.ramsay.ws.metadata.repository.ContextType;
+import com.github.veithen.ramsay.ws.metadata.repository.RepositoryFactory;
+import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadata;
 
 public class JavaEEMetadataExtension implements MetadataExtension {
     @Override

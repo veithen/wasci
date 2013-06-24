@@ -22,8 +22,8 @@ import com.github.veithen.ramsay.emf.cm.Realm;
 import com.github.veithen.ramsay.emf.local.LocalPackageUtil;
 import com.github.veithen.ramsay.util.FolderSubset;
 import com.github.veithen.ramsay.ws.metadata.extension.MetadataExtension;
+import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadata;
 import com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler;
-import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
 
 public class MetadataProject {
     private final IProject project;

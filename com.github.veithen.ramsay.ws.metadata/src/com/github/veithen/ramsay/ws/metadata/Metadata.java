@@ -24,17 +24,17 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import com.github.veithen.ramsay.emf.cm.Realm;
 import com.github.veithen.ramsay.emf.cm.transform.TransformerFactory;
 import com.github.veithen.ramsay.util.FolderSubset;
+import com.github.veithen.ramsay.ws.metadata.repository.ChildContext;
+import com.github.veithen.ramsay.ws.metadata.repository.ChildContextTypeLink;
+import com.github.veithen.ramsay.ws.metadata.repository.ChildDocument;
+import com.github.veithen.ramsay.ws.metadata.repository.ChildDocumentTypeLink;
+import com.github.veithen.ramsay.ws.metadata.repository.Context;
+import com.github.veithen.ramsay.ws.metadata.repository.ContextType;
+import com.github.veithen.ramsay.ws.metadata.repository.DefaultDocumentType;
+import com.github.veithen.ramsay.ws.metadata.repository.DocumentType;
+import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadata;
 import com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler;
 import com.github.veithen.ramsay.ws.metadata.repository.util.RepositoryMetadataUtil;
-import com.github.veithen.ramsay.ws.model.repository.ChildContext;
-import com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink;
-import com.github.veithen.ramsay.ws.model.repository.ChildDocument;
-import com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink;
-import com.github.veithen.ramsay.ws.model.repository.Context;
-import com.github.veithen.ramsay.ws.model.repository.ContextType;
-import com.github.veithen.ramsay.ws.model.repository.DefaultDocumentType;
-import com.github.veithen.ramsay.ws.model.repository.DocumentType;
-import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
 
 public class Metadata {
     private final FolderSubset folderSubset;

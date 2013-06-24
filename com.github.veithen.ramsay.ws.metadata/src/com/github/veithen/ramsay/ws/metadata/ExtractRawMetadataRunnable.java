@@ -32,12 +32,12 @@ import com.github.veithen.ramsay.ws.metadata.extractor.IsolatedClassLoader;
 import com.github.veithen.ramsay.ws.metadata.extractor.MetadataExtractor;
 import com.github.veithen.ramsay.ws.metadata.extractor.MetadataExtractorImpl;
 import com.github.veithen.ramsay.ws.metadata.extractor.RepositoryMetadataCallback;
-import com.github.veithen.ramsay.ws.model.repository.ChildContextTypeLink;
-import com.github.veithen.ramsay.ws.model.repository.ChildDocumentTypeLink;
-import com.github.veithen.ramsay.ws.model.repository.ContextType;
-import com.github.veithen.ramsay.ws.model.repository.DefaultDocumentType;
-import com.github.veithen.ramsay.ws.model.repository.RepositoryFactory;
-import com.github.veithen.ramsay.ws.model.repository.RepositoryMetadata;
+import com.github.veithen.ramsay.ws.metadata.repository.ChildContextTypeLink;
+import com.github.veithen.ramsay.ws.metadata.repository.ChildDocumentTypeLink;
+import com.github.veithen.ramsay.ws.metadata.repository.ContextType;
+import com.github.veithen.ramsay.ws.metadata.repository.DefaultDocumentType;
+import com.github.veithen.ramsay.ws.metadata.repository.RepositoryFactory;
+import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadata;
 
 public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMetadataCallback, RepositoryMetadataCallback {
     private final File installDir;

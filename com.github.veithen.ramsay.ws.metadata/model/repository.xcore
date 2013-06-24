@@ -1,4 +1,4 @@
-package com.github.veithen.ramsay.ws.model.repository
+package com.github.veithen.ramsay.ws.metadata.repository
 
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EReference

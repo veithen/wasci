@@ -10,9 +10,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 
+import com.github.veithen.ramsay.ws.metadata.repository.DefaultDocumentType;
 import com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler;
 import com.github.veithen.ramsay.ws.metadata.repository.util.RepositoryMetadataUtil;
-import com.github.veithen.ramsay.ws.model.repository.DefaultDocumentType;
 
 public class DefaultDocumentTypeHandler extends AdapterImpl implements DocumentTypeHandler {
     @Override
