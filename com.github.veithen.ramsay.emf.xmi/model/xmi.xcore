@@ -1,0 +1,12 @@
+@Ecore(nsURI="http://www.omg.org/XMI", nsPrefix="xmi")
+package com.github.veithen.ramsay.emf.xmi
+
+class Documentation {
+	String contact
+    String exporter
+    String exporterVersion
+    String longDescription
+    String shortDescription
+    String notice
+    String owner
+}
