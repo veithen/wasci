@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.junit.Test;
 
 import com.github.veithen.ramsay.emf.cm.impl.CovariantClassAdapter;
-import com.github.veithen.ramsay.emf.cm.impl.EMFUtil;
+import com.github.veithen.ramsay.emf.util.EMFUtil;
 
 public class RealmTest {
     private static void execute(Scenario scenario) {

@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Internal;
 
+import com.github.veithen.ramsay.emf.util.EMFUtil;
+
 public class FactoryWrapper implements EFactory, InternalEObject {
     private final EFactory target;
 

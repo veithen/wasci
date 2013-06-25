@@ -7,6 +7,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -71,5 +73,14 @@ public final class EMFUtil {
         } catch (IOException ex) {
             throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Failed to save resource " + resource.getURI().toString(), ex));
         }
+    }
+
+    public static <T> T getAdapter(Class<T> clazz, Notifier notifier) {
+        for (Adapter adapter : notifier.eAdapters()) {
+            if (clazz.isInstance(adapter)) {
+                return clazz.cast(adapter);
+            }
+        }
+        return null;
     }
 }

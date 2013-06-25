@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
-import com.github.veithen.ramsay.emf.cm.impl.EMFUtil;
+import com.github.veithen.ramsay.emf.util.EMFUtil;
 
 public final class LocalPackageUtil {
     private LocalPackageUtil() {}

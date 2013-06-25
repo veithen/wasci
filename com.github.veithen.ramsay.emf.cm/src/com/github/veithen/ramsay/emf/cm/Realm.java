@@ -11,8 +11,8 @@ import org.eclipse.emf.ecore.EcoreFactory;
 
 import com.github.veithen.ramsay.emf.cm.impl.CovariantClassAdapter;
 import com.github.veithen.ramsay.emf.cm.impl.CovariantPackageAdapter;
-import com.github.veithen.ramsay.emf.cm.impl.EMFUtil;
 import com.github.veithen.ramsay.emf.cm.impl.FactoryWrapper;
+import com.github.veithen.ramsay.emf.util.EMFUtil;
 
 public class Realm {
     private final List<CovariantPackageAdapter> packageAdapters = new ArrayList<CovariantPackageAdapter>();

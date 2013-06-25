@@ -4,8 +4,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 
-import com.github.veithen.ramsay.emf.cm.impl.EMFUtil;
 import com.github.veithen.ramsay.emf.notify.AdapterBase;
+import com.github.veithen.ramsay.emf.util.EMFUtil;
 
 final class ResourceAdapter extends AdapterBase<Resource> {
     private final ResourceSetAdapter resourceSetAdapter;
