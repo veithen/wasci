@@ -4,7 +4,8 @@ Bundle-Name: Ramsay EMF Utilities
 Bundle-SymbolicName: com.github.veithen.ramsay.emf;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.github.veithen.ramsay.emf.notify,
+Export-Package: com.github.veithen.ramsay.emf.local,
+ com.github.veithen.ramsay.emf.notify,
  com.github.veithen.ramsay.emf.util
 Import-Package: org.eclipse.core.resources,
  org.eclipse.core.runtime,

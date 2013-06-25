@@ -4,5 +4,4 @@ Bundle-SymbolicName: com.github.veithen.ramsay.emf.cm.test
 Bundle-Version: 0.1.0.qualifier
 Fragment-Host: com.github.veithen.ramsay.emf.cm
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: org.eclipse.emf.ecore.resource.impl,
- org.junit;version="4.10.0"
+Import-Package: org.junit;version="4.10.0"
