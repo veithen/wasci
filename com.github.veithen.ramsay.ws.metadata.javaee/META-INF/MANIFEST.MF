@@ -13,7 +13,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jst.j2ee.core,
  org.eclipse.wst.common.emf
 Bundle-ActivationPolicy: lazy
-Import-Package: com.github.veithen.ramsay.ws.metadata.extension,
+Import-Package: com.github.veithen.ramsay.emf.notify,
+ com.github.veithen.ramsay.ws.metadata.extension,
  com.github.veithen.ramsay.ws.metadata.repository,
  com.github.veithen.ramsay.ws.metadata.repository.handler,
  com.github.veithen.ramsay.ws.metadata.repository.impl,

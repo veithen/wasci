@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="com.github.veithen.ramsay.ws.metadata" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="com.github.veithen.ramsay.emf" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="com.github.veithen.ramsay.ws.metadata" id="adapters" name="Metadata Adapters"/>
+         <meta.schema plugin="com.github.veithen.ramsay.emf" id="adapterFactoryDelegates" name="Adapter Factory Delegates"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]
@@ -17,8 +17,8 @@
          </appinfo>
       </annotation>
       <complexType>
-         <sequence>
-            <element ref="adapterFactory"/>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="delegate"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,15 +47,32 @@
       </complexType>
    </element>
 
-   <element name="adapterFactory">
+   <element name="delegate">
       <complexType>
+         <attribute name="type" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="uri" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.common.notify.AdapterFactory"/>
+                  <meta.attribute kind="java" basedOn=":com.github.veithen.ramsay.emf.notify.AdapterFactoryDelegate"/>
                </appinfo>
             </annotation>
          </attribute>

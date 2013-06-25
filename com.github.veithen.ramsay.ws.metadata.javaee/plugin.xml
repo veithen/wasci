@@ -20,10 +20,12 @@
       </metadataExtension>
    </extension>
    <extension
-         point="com.github.veithen.ramsay.ws.metadata.adapters">
-      <adapterFactory
-            class="com.github.veithen.ramsay.ws.metadata.javaee.handler.ApplicationDeploymentDescriptorHandlerAdapterFactory">
-      </adapterFactory>
+         point="com.github.veithen.ramsay.emf.adapterFactoryDelegates">
+      <delegate
+            class="com.github.veithen.ramsay.ws.metadata.javaee.handler.DocumentTypeHandlerAdapterFactoryDelegate"
+            type="com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler"
+            uri="com.github.veithen.ramsay.ws.metadata.javaee">
+      </delegate>
    </extension>
 
 </plugin>

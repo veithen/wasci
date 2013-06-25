@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ramsay EMF Utilities
-Bundle-SymbolicName: com.github.veithen.ramsay.emf
+Bundle-SymbolicName: com.github.veithen.ramsay.emf;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: com.github.veithen.ramsay.emf.notify,
@@ -10,7 +10,10 @@ Import-Package: org.eclipse.core.resources,
  org.eclipse.core.runtime,
  org.eclipse.core.runtime.jobs,
  org.eclipse.emf.common.notify,
+ org.eclipse.emf.common.notify.impl,
  org.eclipse.emf.common.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.resource,
- org.eclipse.emf.ecore.util
+ org.eclipse.emf.ecore.util,
+ org.osgi.framework
+Bundle-Activator: com.github.veithen.ramsay.emf.internal.EMFPlugin
