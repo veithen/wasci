@@ -33,13 +33,13 @@
           point="com.github.veithen.ramsay.emf.adapterFactoryDelegates">
        <delegate
              class="com.github.veithen.ramsay.ws.metadata.repository.handler.impl.AdapterFactoryDelegateImpl"
-             type="com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler"
              uri="com.github.veithen.ramsay.ws.metadata.repository">
-       </delegate>
-       <delegate
-             class="com.github.veithen.ramsay.ws.metadata.repository.handler.impl.AdapterFactoryDelegateImpl"
-             type="com.github.veithen.ramsay.ws.metadata.repository.handler.ContextTypeHandler"
-             uri="com.github.veithen.ramsay.ws.metadata.repository">
+          <supportedType
+                class="com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler">
+          </supportedType>
+          <supportedType
+                class="com.github.veithen.ramsay.ws.metadata.repository.handler.ContextTypeHandler">
+          </supportedType>
        </delegate>
     </extension>
 </plugin>

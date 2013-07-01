@@ -49,30 +49,38 @@
 
    <element name="delegate">
       <complexType>
-         <attribute name="type" type="string" use="required">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-               <appinfo>
-                  <meta.attribute kind="java"/>
-               </appinfo>
-            </annotation>
-         </attribute>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="supportedType"/>
+         </sequence>
          <attribute name="uri" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  The namespace URI of the EPackage containing the classes for which the delegate can create adapters.
                </documentation>
             </annotation>
          </attribute>
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  The AdapterFactoryDelegate implementation class.
                </documentation>
                <appinfo>
                   <meta.attribute kind="java" basedOn=":com.github.veithen.ramsay.emf.notify.AdapterFactoryDelegate"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="supportedType">
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The adapter type that the delegate can create. Typically this is the interface implemented by the adapter.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java"/>
                </appinfo>
             </annotation>
          </attribute>

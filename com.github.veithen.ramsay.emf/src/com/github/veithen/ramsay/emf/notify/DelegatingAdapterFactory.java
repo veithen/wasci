@@ -23,9 +23,11 @@ public class DelegatingAdapterFactory extends AdapterFactoryImpl {
         this.type = type;
         IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
         String typeName = type.getName();
-        for (IConfigurationElement element : extensionRegistry.getConfigurationElementsFor(Constants.ADAPTER_FACTORY_DELEGATES_ID)) {
-            if (typeName.equals(element.getAttribute("type"))) {
-                delegateHolders.put(element.getAttribute("uri"), new AdapterFactoryDelegateHolder(element));
+        for (IConfigurationElement delegateElement : extensionRegistry.getConfigurationElementsFor(Constants.ADAPTER_FACTORY_DELEGATES_ID)) {
+            for (IConfigurationElement supportedTypeElement : delegateElement.getChildren("supportedType")) {
+                if (typeName.equals(supportedTypeElement.getAttribute("class"))) {
+                    delegateHolders.put(delegateElement.getAttribute("uri"), new AdapterFactoryDelegateHolder(delegateElement));
+                }
             }
         }
     }

@@ -23,8 +23,10 @@
          point="com.github.veithen.ramsay.emf.adapterFactoryDelegates">
       <delegate
             class="com.github.veithen.ramsay.ws.metadata.javaee.handler.DocumentTypeHandlerAdapterFactoryDelegate"
-            type="com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler"
             uri="com.github.veithen.ramsay.ws.metadata.javaee">
+         <supportedType
+               class="com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler">
+         </supportedType>
       </delegate>
    </extension>
 
