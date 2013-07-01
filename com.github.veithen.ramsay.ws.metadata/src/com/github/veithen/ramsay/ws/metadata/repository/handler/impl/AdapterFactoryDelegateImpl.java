@@ -5,13 +5,19 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 
 import com.github.veithen.ramsay.emf.notify.AdapterFactoryDelegate;
+import com.github.veithen.ramsay.ws.metadata.repository.DefaultContextType;
 import com.github.veithen.ramsay.ws.metadata.repository.DefaultDocumentType;
 import com.github.veithen.ramsay.ws.metadata.repository.util.RepositoryMetadataSwitch;
 
-public class DocumentTypeHandlerAdapterFactoryDelegate extends RepositoryMetadataSwitch<Adapter> implements AdapterFactoryDelegate {
+public class AdapterFactoryDelegateImpl extends RepositoryMetadataSwitch<Adapter> implements AdapterFactoryDelegate {
     @Override
     public Adapter createAdapter(Notifier target) {
         return doSwitch((EObject)target);
+    }
+
+    @Override
+    public Adapter caseDefaultContextType(DefaultContextType object) {
+        return new DefaultContextTypeHandler(object);
     }
 
     @Override

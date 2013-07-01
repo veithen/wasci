@@ -37,6 +37,8 @@ import com.github.veithen.ramsay.ws.metadata.repository.ContextType;
 import com.github.veithen.ramsay.ws.metadata.repository.Document;
 import com.github.veithen.ramsay.ws.metadata.repository.DocumentType;
 import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadataFactory;
+import com.github.veithen.ramsay.ws.metadata.repository.handler.ContextTypeHandler;
+import com.github.veithen.ramsay.ws.metadata.repository.handler.DiscoveredContext;
 import com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler;
 import com.ibm.websphere.management.exception.RepositoryException;
 import com.ibm.websphere.management.repository.ConfigRepository;
@@ -115,14 +117,12 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
             if (childContextType.getName().equals("repository") || childContextType.getName().equals("aver") || childContextType.getName().equals("bver") || childContextType.getName().equals("cver")) {
                 continue; // TODO: hack!
             }
-            String prefix = contextURI + "/" + childContextType.getName() + "/";
-            for (String resourceName : resourceNames) {
-                if (resourceName.startsWith(prefix) && resourceName.indexOf('/', prefix.length()) == -1) {
-                    ChildContext childContext = RepositoryMetadataFactory.eINSTANCE.createChildContext();
-                    childContext.setLink(link);
-                    childContext.setContext(buildContext(resourceName, childContextType, resourceName.substring(prefix.length())));
-                    context.getChildContexts().add(childContext);
-                }
+            ContextTypeHandler handler = (ContextTypeHandler)EcoreUtil.getRegisteredAdapter(childContextType, ContextTypeHandler.class);
+            for (DiscoveredContext discoveredContext : handler.scan(relativeURIs)) {
+                ChildContext childContext = RepositoryMetadataFactory.eINSTANCE.createChildContext();
+                childContext.setLink(link);
+                childContext.setContext(buildContext(contextURI + "/" + discoveredContext.getRelativeURI(), childContextType, discoveredContext.getName()));
+                context.getChildContexts().add(childContext);
             }
         }
         return context;

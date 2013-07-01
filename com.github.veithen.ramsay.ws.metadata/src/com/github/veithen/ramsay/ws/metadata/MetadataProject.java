@@ -24,6 +24,7 @@ import com.github.veithen.ramsay.emf.notify.DelegatingAdapterFactory;
 import com.github.veithen.ramsay.emf.util.FolderSubset;
 import com.github.veithen.ramsay.ws.metadata.extension.MetadataExtension;
 import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadata;
+import com.github.veithen.ramsay.ws.metadata.repository.handler.ContextTypeHandler;
 import com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler;
 
 public class MetadataProject {
@@ -47,6 +48,7 @@ public class MetadataProject {
         RepositoryMetadata repositoryMetadata = (RepositoryMetadata)folderSubset.getResource(modelsFolder.getFile("repository-metadata.xmi")).getContents().get(0);
         
         resourceSet.getAdapterFactories().add(DelegatingAdapterFactory.getInstance(DocumentTypeHandler.class));
+        resourceSet.getAdapterFactories().add(DelegatingAdapterFactory.getInstance(ContextTypeHandler.class));
         
         IConfigurationElement[] extensionConfig = Platform.getExtensionRegistry().getConfigurationElementsFor(Constants.METADATA_EXTENSIONS_ID);
         MetadataExtension[] metadataExtensions = new MetadataExtension[extensionConfig.length];

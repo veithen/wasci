@@ -34,7 +34,7 @@ import com.github.veithen.ramsay.ws.metadata.extractor.MetadataExtractorImpl;
 import com.github.veithen.ramsay.ws.metadata.extractor.RepositoryMetadataCallback;
 import com.github.veithen.ramsay.ws.metadata.repository.ChildContextTypeLink;
 import com.github.veithen.ramsay.ws.metadata.repository.ChildDocumentTypeLink;
-import com.github.veithen.ramsay.ws.metadata.repository.ContextType;
+import com.github.veithen.ramsay.ws.metadata.repository.DefaultContextType;
 import com.github.veithen.ramsay.ws.metadata.repository.DefaultDocumentType;
 import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadata;
 import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadataFactory;
@@ -47,7 +47,7 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
     private final ResourceSet resourceSet = new ResourceSetImpl();
     private final Map<String,EPackage> packageMap = new HashMap<String,EPackage>();
     private final Map<String,DefaultDocumentType> documentTypeMap = new TreeMap<String,DefaultDocumentType>();
-    private final Map<String,ContextType> contextTypeMap = new TreeMap<String,ContextType>();
+    private final Map<String,DefaultContextType> contextTypeMap = new TreeMap<String,DefaultContextType>();
     
     public ExtractRawMetadataRunnable(File installDir, File profileDir, IFolder folder) {
         this.installDir = installDir;
@@ -143,7 +143,7 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
 
     @Override
     public void createContextType(String name, String rootDocumentTypeName) {
-        ContextType contextType = RepositoryMetadataFactory.eINSTANCE.createContextType();
+        DefaultContextType contextType = RepositoryMetadataFactory.eINSTANCE.createDefaultContextType();
         contextType.setName(name);
         contextType.setRootDocumentType(rootDocumentTypeName == null ? null : documentTypeMap.get(rootDocumentTypeName));
         contextTypeMap.put(name, contextType);

@@ -7,13 +7,17 @@ import org.eclipse.emf.ecore.EObject
 
 annotation "http://www.eclipse.org/emf/2002/GenModel" as GenModel
 
-class ContextType {
+abstract class ContextType {
 	String name
 	contains ChildContextTypeLink[] childContextTypeLinks
 	contains ChildDocumentTypeLink[] childDocumentTypeLinks
 	refers DocumentType rootDocumentType
 	@GenModel(documentation="The generated class is only relevant if the context type has no root document type. It this case, it specifies the class that will be used to represent contexts of this type.")
 	refers EClass generatedClass
+}
+
+class DefaultContextType extends ContextType {
+	
 }
 
 class ChildContextTypeLink {
