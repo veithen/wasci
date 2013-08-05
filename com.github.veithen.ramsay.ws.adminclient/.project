@@ -40,7 +40,7 @@
 	<variableList>
 		<variable>
 			<name>WAS_HOME</name>
-			<value>file:/C:/opt/IBM/WebSphere/AppServer-8.5</value>
+			<value>file:/opt/IBM/WebSphere/AppServer-8.5</value>
 		</variable>
 	</variableList>
 </projectDescription>
