@@ -7,15 +7,16 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.github.veithen.ramsay.ws.metadata.javaee,
+ com.github.veithen.ramsay.ws.metadata.javaee.impl,
+ com.github.veithen.ramsay.ws.metadata.javaee.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.xtext.xbase.lib;visibility:=reexport,
+ org.eclipse.emf.ecore.xcore.lib;visibility:=reexport,
+ com.github.veithen.ramsay.ws.metadata;visibility:=reexport,
  org.eclipse.jst.j2ee.core,
  org.eclipse.wst.common.emf
 Bundle-ActivationPolicy: lazy
 Import-Package: com.github.veithen.ramsay.emf.notify,
- com.github.veithen.ramsay.ws.metadata.extension,
- com.github.veithen.ramsay.ws.metadata.repository,
- com.github.veithen.ramsay.ws.metadata.repository.handler,
- com.github.veithen.ramsay.ws.metadata.repository.impl,
  org.eclipse.emf.ecore.xmi

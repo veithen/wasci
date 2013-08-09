@@ -12,7 +12,8 @@ Export-Package: com.github.veithen.ramsay.report,
  com.github.veithen.ramsay.report.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.xtext.xbase.lib;visibility:=reexport
+ org.eclipse.xtext.xbase.lib;visibility:=reexport,
+ org.eclipse.emf.ecore.xcore.lib
 Bundle-ActivationPolicy: lazy
 Import-Package: com.github.veithen.ramsay.emf.util,
  org.eclipse.core.resources,
