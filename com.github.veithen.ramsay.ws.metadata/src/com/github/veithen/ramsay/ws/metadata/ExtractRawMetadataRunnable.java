@@ -65,6 +65,11 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
             }
         }
         jars.add(new File(installDir, "lib/bootstrap.jar"));
+        
+        // Adding j2ee.jar is necessary for WebSphere 6.1. We add it as the last JAR so that
+        // we don't interfere with the classes in the plugins.
+        jars.add(new File(installDir, "lib/j2ee.jar"));
+        
         List<URL> urls = new ArrayList<URL>(jars.size());
         for (File jar : jars) {
             try {
