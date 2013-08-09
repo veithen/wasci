@@ -14,7 +14,5 @@ public final class Constants {
     
     public static final IPath TRANSFORMED_PATH = new Path("transformed");
     
-    public static final IPath METADATA_FILE = new Path("wsconfig.ecore");
-    
     private Constants() {}
 }
