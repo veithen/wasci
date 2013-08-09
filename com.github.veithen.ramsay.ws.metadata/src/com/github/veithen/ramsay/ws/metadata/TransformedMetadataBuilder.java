@@ -14,8 +14,10 @@ public class TransformedMetadataBuilder extends SimpleBuilder {
     public static final String ID = Constants.PLUGIN_ID + ".builder";
     
     @Override
-    protected IPath[] getInputPaths() {
-        return new IPath[] { Constants.RAW_PATH, Constants.TRANSFORMATIONS_PATH };
+    protected BuildInput[] getInputs() {
+        return new BuildInput[] {
+                new BuildInput(Constants.RAW_PATH, true),
+                new BuildInput(Constants.TRANSFORMATIONS_PATH, false) };
     }
 
     @Override

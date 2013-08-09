@@ -16,16 +16,43 @@ import org.eclipse.core.runtime.IProgressMonitor;
  * really incremental. It will do a full build each time a file in the input directory is modified.
  */
 public abstract class SimpleBuilder extends IncrementalProjectBuilder {
+    public static class BuildInput {
+        private final IPath path;
+        private final boolean required;
+        
+        /**
+         * Constructor.
+         * 
+         * @param path
+         *            the paths to the input folder relative to the project
+         * @param required
+         *            <code>true</code> if the input folder is required; <code>false</code> if the
+         *            input folder is optional
+         */
+        public BuildInput(IPath path, boolean required) {
+            this.path = path;
+            this.required = required;
+        }
+
+        public IPath getPath() {
+            return path;
+        }
+
+        public boolean isRequired() {
+            return required;
+        }
+    }
+    
     @Override
     protected final IProject[] build(int kind, Map<String,String> args, IProgressMonitor monitor) throws CoreException {
         IProject project = getProject();
         IResourceDelta delta = getDelta(project);
-        IPath[] inputPaths = getInputPaths();
+        BuildInput[] inputs = getInputs();
         // Note: delta == null means unspecified changes
         boolean buildRequired = kind == FULL_BUILD || delta == null;
         if (!buildRequired) {
-            for (IPath inputPath : inputPaths) {
-                if (delta.findMember(inputPath) != null) {
+            for (BuildInput input : inputs) {
+                if (delta.findMember(input.getPath()) != null) {
                     buildRequired = true;
                     break;
                 }
@@ -33,21 +60,30 @@ public abstract class SimpleBuilder extends IncrementalProjectBuilder {
         }
         if (buildRequired) {
             // TODO: create/clean output folder
-            IFolder[] inputFolders = new IFolder[inputPaths.length];
-            for (int i=0; i<inputPaths.length; i++) {
-                inputFolders[i] = project.getFolder(inputPaths[i]);
+            boolean canBuild = true;
+            IFolder[] inputFolders = new IFolder[inputs.length];
+            for (int i=0; i<inputs.length; i++) {
+                BuildInput input = inputs[i];
+                IFolder folder = project.getFolder(input.getPath());
+                if (input.isRequired() && !folder.exists()) {
+                    canBuild = false;
+                    break;
+                }
+                inputFolders[i] = folder;
             }
-            doBuild(inputFolders, project.getFolder(getOutputPath()), monitor);
+            if (canBuild) {
+                doBuild(inputFolders, project.getFolder(getOutputPath()), monitor);
+            }
         }
         return null;
     }
     
     /**
-     * Get the paths to the input folders relative to the project.
+     * Get the build inputs.
      * 
-     * @return the path to the input folder
+     * @return the build inputs
      */
-    protected abstract IPath[] getInputPaths();
+    protected abstract BuildInput[] getInputs();
     
     /**
      * Get the path to the output folder relative to the project.

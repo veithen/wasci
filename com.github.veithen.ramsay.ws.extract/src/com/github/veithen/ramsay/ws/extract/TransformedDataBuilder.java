@@ -17,8 +17,8 @@ public class TransformedDataBuilder extends SimpleBuilder {
     public static final String ID = Constants.PLUGIN_ID + ".builder";
     
     @Override
-    protected IPath[] getInputPaths() {
-        return new IPath[] { Constants.RAW_PATH };
+    protected BuildInput[] getInputs() {
+        return new BuildInput[] { new BuildInput(Constants.RAW_PATH, true) };
     }
 
     @Override
