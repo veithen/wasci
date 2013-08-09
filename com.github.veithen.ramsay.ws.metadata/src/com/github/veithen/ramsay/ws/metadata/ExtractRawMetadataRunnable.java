@@ -109,7 +109,7 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
             repositoryMetadata.getContextTypes().addAll(contextTypeMap.values());
             resource.getContents().add(repositoryMetadata);
             EMFUtil.save(resource);
-       } finally {
+        } finally {
             thread.setContextClassLoader(savedContextClassLoader);
         }
     }
