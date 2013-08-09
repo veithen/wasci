@@ -33,20 +33,20 @@ public class MetadataExtractorApplication implements IApplication {
                 projectName = args[i++];
             } else {
                 System.err.println("Unrecognized option: " + arg);
-                return -1;
+                return EXIT_OK;
             }
         }
         if (installDir == null) {
             System.err.println("No WebSphere installation directory specified");
-            return -1;
+            return EXIT_OK;
         }
         if (profileDir == null) {
             System.err.println("No profile directory specified");
-            return -1;
+            return EXIT_OK;
         }
         if (projectName == null) {
             System.err.println("No project name specified");
-            return -1;
+            return EXIT_OK;
         }
         
         IProgressMonitor monitor = new SystemOutProgressMonitor();
