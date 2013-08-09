@@ -3,6 +3,8 @@ package com.github.veithen.ramsay.ws.metadata;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -83,6 +85,24 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
         ClassLoader savedContextClassLoader = thread.getContextClassLoader();
         thread.setContextClassLoader(cl);
         try {
+            // Ensure that the EPackage.Registry.INSTANCE is of type EPackageRegistryImpl (i.e. a single registry for
+            // all class loaders). If we don't do this (and EPackage.Registry.INSTANCE is a per class loader registry),
+            // then there may be problems because the EPackages are registered in the wrong registry and TypeRegistry
+            // will not find them.
+            // Note that this problem occurs with WAS 6.1. In 7.0 and 8.x, it is actually enough to set the context
+            // class loader correctly.
+            // Setting EPackage.Registry.INSTANCE requires some really dirty hacks because it is a final field.
+            try {
+                Class<?> ePackageClass = cl.loadClass("org.eclipse.emf.ecore.EPackage$Registry");
+                Field instanceField = ePackageClass.getField("INSTANCE");
+                Field modifiersField = Field.class.getDeclaredField("modifiers");
+                modifiersField.setAccessible(true);
+                modifiersField.setInt(instanceField, instanceField.getModifiers() & ~Modifier.FINAL);
+                instanceField.set(null, cl.loadClass("org.eclipse.emf.ecore.impl.EPackageRegistryImpl").newInstance());
+            } catch (Exception ex) {
+                throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Failed to configure EPackage registry", ex));
+            }
+            
             MetadataExtractor extractor;
             try {
                 extractor = (MetadataExtractor)cl.loadClass(MetadataExtractorImpl.class.getName()).newInstance();
