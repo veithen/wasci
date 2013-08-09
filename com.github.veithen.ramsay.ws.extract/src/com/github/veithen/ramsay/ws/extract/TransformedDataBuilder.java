@@ -27,7 +27,7 @@ public class TransformedDataBuilder extends SimpleBuilder {
     }
 
     @Override
-    protected void doBuild(IFolder[] inputFolders, final IFolder outputFolder, IProgressMonitor monitor) throws CoreException {
+    protected void doBuild(IFolder[] inputFolders, IFolder outputFolder, IProgressMonitor monitor) throws CoreException {
         IFolder inputFolder = inputFolders[0];
         DataProject project = (DataProject)getProject().getAdapter(DataProject.class);
         ResourceSet resourceSet = new ResourceSetImpl();
