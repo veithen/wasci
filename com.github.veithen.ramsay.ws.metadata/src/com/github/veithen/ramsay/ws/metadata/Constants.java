@@ -14,5 +14,20 @@ public final class Constants {
     
     public static final IPath TRANSFORMED_PATH = new Path("transformed");
     
+    /**
+     * The name of the preferences node where the project configuration is stored.
+     */
+    public static final String PREFERENCES_NODE = PLUGIN_ID;
+    
+    /**
+     * The key for the preference that specifies the WebSphere installation directory.
+     */
+    public static final String PREF_INSTALL_DIR = "installDir";
+    
+    /**
+     * The key for the preference that specifies the WebSphere profile directory.
+     */
+    public static final String PREF_PROFILE_DIR = "profileDir";
+    
     private Constants() {}
 }

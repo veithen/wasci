@@ -1,19 +1,16 @@
 package com.github.veithen.ramsay.ws.metadata;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -63,19 +60,9 @@ public class MetadataProject {
     }
 
     public void extractRaw(IProgressMonitor monitor) throws CoreException {
-        Properties props = new Properties();
-        try {
-            InputStream in = project.getFile("was.properties").getContents();
-            try {
-                props.load(in);
-            } finally {
-                in.close();
-            }
-        } catch (IOException ex) {
-            throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Failed to load properties", ex));
-        }
+        IEclipsePreferences prefs = new ProjectScope(project).getNode(Constants.PREFERENCES_NODE);
         project.getWorkspace().run(new ExtractRawMetadataRunnable(
-                new File(props.getProperty("installDir")), new File(props.getProperty("profileDir")),
+                new File(prefs.get(Constants.PREF_INSTALL_DIR, null)), new File(prefs.get(Constants.PREF_PROFILE_DIR, null)),
                 project.getFolder(Constants.RAW_PATH)),
                 null, IWorkspace.AVOID_UPDATE, monitor);
     }
