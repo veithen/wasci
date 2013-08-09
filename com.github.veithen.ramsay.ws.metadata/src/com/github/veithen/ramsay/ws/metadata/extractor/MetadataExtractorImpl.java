@@ -42,7 +42,14 @@ public class MetadataExtractorImpl implements MetadataExtractor {
      * Required EPackages. These packages contain classes references by configuration object types,
      * but that are not considered as configuration object types themselves.
      */
+    // TODO: we should implement something more intelligent, namely check for references from the EPackages that are known to contain configuration objects
     private static final Set<String> requiredEPackages = new HashSet<String>(Arrays.asList(
+            "http://www.ibm.com/websphere/appserver/schemas/5.0.2/wsbnd.xmi", // Necessary for WAS 6.1
+            "http://www.ibm.com/websphere/appserver/schemas/5.0.2/wsext.xmi", // Necessary for WAS 6.1
+            "http://www.ibm.com/websphere/appserver/schemas/5.0.2/wscbnd.xmi", // Necessary for WAS 6.1
+            "http://www.ibm.com/websphere/appserver/schemas/5.0.2/wscext.xmi", // Necessary for WAS 6.1
+            "http://www.ibm.com/websphere/appserver/schemas/5.0.2/wscommonbnd.xmi", // Necessary for WAS 6.1
+            "http://www.ibm.com/websphere/appserver/schemas/5.0.2/wscommonext.xmi", // Necessary for WAS 6.1
             "http://www.ibm.com/websphere/appserver/schemas/5.0/datatype.xmi",
             "application.xmi"));
     
