@@ -13,4 +13,16 @@
          </run>
       </application>
    </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.github.veithen.ramsay.ws.metadata.app.extractor"
+            name="WebSphere Metadata Extractor">
+         <property
+               name="appName"
+               value="WebSphere Metadata Extractor">
+         </property>
+      </product>
+   </extension>
 </plugin>
