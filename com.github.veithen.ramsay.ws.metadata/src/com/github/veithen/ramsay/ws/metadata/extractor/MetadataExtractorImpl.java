@@ -65,7 +65,7 @@ public class MetadataExtractorImpl implements MetadataExtractor {
         
         // Load all EPackages found in the plug-ins
         
-        URLClassLoader cl = (URLClassLoader)MetadataExtractorImpl.class.getClassLoader();
+        URLClassLoader cl = (URLClassLoader)MetadataExtractorImpl.class.getClassLoader().getParent();
         for (URL url : cl.getURLs()) {
             File file = new File(url.toURI());
             if (file.isFile()) {

@@ -33,6 +33,7 @@ import com.github.veithen.ramsay.ws.metadata.extractor.ConfigMetadataCallback;
 import com.github.veithen.ramsay.ws.metadata.extractor.IsolatedClassLoader;
 import com.github.veithen.ramsay.ws.metadata.extractor.MetadataExtractor;
 import com.github.veithen.ramsay.ws.metadata.extractor.MetadataExtractorImpl;
+import com.github.veithen.ramsay.ws.metadata.extractor.MirrorClassLoader;
 import com.github.veithen.ramsay.ws.metadata.extractor.RepositoryMetadataCallback;
 import com.github.veithen.ramsay.ws.metadata.repository.ChildContextTypeLink;
 import com.github.veithen.ramsay.ws.metadata.repository.ChildDocumentTypeLink;
@@ -80,7 +81,8 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
                 throw new Error("Unexpected exception", ex);
             }
         }
-        ClassLoader cl = new IsolatedClassLoader(urls.toArray(new URL[urls.size()]), ExtractRawMetadataRunnable.class.getClassLoader());
+        ClassLoader isolatedClassLoader = new IsolatedClassLoader(urls.toArray(new URL[urls.size()]), ExtractRawMetadataRunnable.class.getClassLoader());
+        ClassLoader cl = new MirrorClassLoader(isolatedClassLoader, MetadataExtractorImpl.class.getClassLoader(), MetadataExtractorImpl.class.getName());
         Thread thread = Thread.currentThread();
         ClassLoader savedContextClassLoader = thread.getContextClassLoader();
         thread.setContextClassLoader(cl);

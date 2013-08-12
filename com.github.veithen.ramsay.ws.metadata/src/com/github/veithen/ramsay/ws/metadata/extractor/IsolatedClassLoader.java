@@ -1,8 +1,5 @@
 package com.github.veithen.ramsay.ws.metadata.extractor;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Arrays;
@@ -19,13 +16,6 @@ public class IsolatedClassLoader extends URLClassLoader {
             ConfigMetadataCallback.class.getName(),
             RepositoryMetadataCallback.class.getName()));
 
-    /**
-     * Classes that are injected into the isolated class loader. The class loader will load the
-     * class files for these classes from the parent class loader, but define them itself.
-     */
-    private static final Set<String> injectedClasses = new HashSet<String>(Arrays.asList(
-            MetadataExtractorImpl.class.getName()));
-    
     public IsolatedClassLoader(URL[] urls, ClassLoader parent) {
         super(urls, parent);
     }
@@ -47,34 +37,6 @@ public class IsolatedClassLoader extends URLClassLoader {
             } catch (ClassNotFoundException ex) {
                 return super.loadClass(name, resolve);
             }
-        }
-    }
-
-    @Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
-        if (injectedClasses.contains(name)) {
-            InputStream in = getParent().getResourceAsStream(name.replace('.', '/').concat(".class"));
-            if (in == null) {
-                throw new ClassNotFoundException(name);
-            }
-            try {
-                try {
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    int c;
-                    byte[] buffer = new byte[4096];
-                    while ((c = in.read(buffer)) != -1) {
-                        baos.write(buffer, 0, c);
-                    }
-                    byte[] byteCode = baos.toByteArray();
-                    return defineClass(name, byteCode, 0, byteCode.length);
-                } finally {
-                    in.close();
-                }
-            } catch (IOException ex) {
-                throw new ClassNotFoundException(name, ex);
-            }
-        } else {
-            return super.findClass(name);
         }
     }
 }
