@@ -1,23 +1,19 @@
 package com.github.veithen.ramsay.ws.metadata.extractor;
 
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class IsolatedClassLoader extends URLClassLoader {
+public class IsolatedClassLoader extends ClassLoader {
     /**
      * Classes that are loaded from the parent. They provide the interface between the Eclipse
      * plug-in and the custom code running in the isolated class loader.
      */
-    private static final Set<String> classesLoadedFromParent = new HashSet<String>(Arrays.asList(
-            MetadataExtractor.class.getName(),
-            ConfigMetadataCallback.class.getName(),
-            RepositoryMetadataCallback.class.getName()));
+    private final Set<String> classesLoadedFromParent;
 
-    public IsolatedClassLoader(URL[] urls, ClassLoader parent) {
-        super(urls, parent);
+    public IsolatedClassLoader(ClassLoader parent, String... classesLoadedFromParent) {
+        super(parent);
+        this.classesLoadedFromParent = new HashSet<String>(Arrays.asList(classesLoadedFromParent)); 
     }
 
     @Override
@@ -29,14 +25,15 @@ public class IsolatedClassLoader extends URLClassLoader {
             return super.loadClass(name, resolve);
         } else {
             try {
-                clazz = findClass(name);
-                if (resolve) {
-                    resolveClass(clazz);
-                }
-                return clazz;
+                // Always delegate to the system class loader (but not to the parent)
+                clazz = findSystemClass(name);
             } catch (ClassNotFoundException ex) {
-                return super.loadClass(name, resolve);
+                clazz = findClass(name);
             }
+            if (resolve) {
+                resolveClass(clazz);
+            }
+            return clazz;
         }
     }
 }

@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -81,8 +82,10 @@ public class ExtractRawMetadataRunnable implements IWorkspaceRunnable, ConfigMet
                 throw new Error("Unexpected exception", ex);
             }
         }
-        ClassLoader isolatedClassLoader = new IsolatedClassLoader(urls.toArray(new URL[urls.size()]), ExtractRawMetadataRunnable.class.getClassLoader());
-        ClassLoader cl = new MirrorClassLoader(isolatedClassLoader, MetadataExtractorImpl.class.getClassLoader(), MetadataExtractorImpl.class.getName());
+        ClassLoader isolatedClassLoader = new IsolatedClassLoader(ExtractRawMetadataRunnable.class.getClassLoader(),
+                MetadataExtractor.class.getName(), ConfigMetadataCallback.class.getName(), RepositoryMetadataCallback.class.getName());
+        ClassLoader webSphereClassLoader = new URLClassLoader(urls.toArray(new URL[urls.size()]), isolatedClassLoader);
+        ClassLoader cl = new MirrorClassLoader(webSphereClassLoader, MetadataExtractorImpl.class.getClassLoader(), MetadataExtractorImpl.class.getName());
         Thread thread = Thread.currentThread();
         ClassLoader savedContextClassLoader = thread.getContextClassLoader();
         thread.setContextClassLoader(cl);
