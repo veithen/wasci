@@ -1,23 +1,33 @@
 package com.github.veithen.ramsay.ws.extract;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import java.net.Proxy;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 
-import com.github.veithen.ramsay.ws.metadata.Constants;
 import com.github.veithen.ramsay.ws.metadata.MetadataProject;
-import com.ibm.websphere.management.repository.ConfigRepository;
-import com.ibm.ws.management.repository.client.JMXRemoteConfigRepositoryClient;
+import com.github.veithen.visualwas.connector.factory.Attributes;
+import com.github.veithen.visualwas.connector.factory.ConnectorConfiguration;
+import com.github.veithen.visualwas.connector.factory.ConnectorFactory;
+import com.github.veithen.visualwas.connector.security.BasicAuthCredentials;
+import com.github.veithen.visualwas.connector.security.Credentials;
+import com.github.veithen.visualwas.connector.transport.Endpoint;
+import com.github.veithen.visualwas.connector.transport.TransportConfiguration;
+import com.github.veithen.visualwas.repoclient.ConfigRepository;
+import com.github.veithen.visualwas.repoclient.RepositoryClientFeature;
 
 public class DataProject {
+    private static final ConnectorConfiguration connectorConfig = ConnectorConfiguration.custom()
+            .addFeatures(RepositoryClientFeature.INSTANCE)
+            .setTransportConfiguration(TransportConfiguration.custom().setProxy(Proxy.NO_PROXY).build()).build();
+    
     private final IProject project;
 
     public DataProject(IProject project) {
@@ -25,24 +35,20 @@ public class DataProject {
     }
     
     private ConfigRepository connect() throws CoreException {
-        Properties props = new Properties();
-        try {
-            InputStream in = project.getFile("adminclient.properties").getContents();
-            try {
-                props.load(in);
-            } finally {
-                in.close();
-            }
-        } catch (IOException ex) {
-            throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Failed to load properties", ex));
+        IEclipsePreferences prefs = new ProjectScope(project).getNode(Constants.PREFERENCES_NODE);
+        Credentials credentials;
+        String username = prefs.get(Constants.PREF_USERNAME, null);
+        if (username == null || username.length() == 0) {
+            credentials = null;
+        } else {
+            credentials = new BasicAuthCredentials(username, prefs.get(Constants.PREF_PASSWORD, null));
         }
-        JMXRemoteConfigRepositoryClient repository = new JMXRemoteConfigRepositoryClient();
-        try {
-            repository.connect(props);
-        } catch (Exception ex) {
-            throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Failed to connect to WebSphere", ex));
+        Endpoint endpoint = new Endpoint(prefs.get(Constants.PREF_HOST, null), prefs.getInt(Constants.PREF_PORT, -1), credentials != null);
+        Attributes attributes = new Attributes();
+        if (credentials != null) {
+            attributes.set(Credentials.class, credentials);
         }
-        return repository;
+        return ConnectorFactory.getInstance().createConnector(endpoint, connectorConfig, attributes).getAdapter(ConfigRepository.class);
     }
     
     /**

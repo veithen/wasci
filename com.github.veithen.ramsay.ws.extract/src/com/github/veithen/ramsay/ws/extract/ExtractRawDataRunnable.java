@@ -40,8 +40,8 @@ import com.github.veithen.ramsay.ws.metadata.repository.RepositoryMetadataFactor
 import com.github.veithen.ramsay.ws.metadata.repository.handler.ContextTypeHandler;
 import com.github.veithen.ramsay.ws.metadata.repository.handler.DiscoveredContext;
 import com.github.veithen.ramsay.ws.metadata.repository.handler.DocumentTypeHandler;
-import com.ibm.websphere.management.exception.RepositoryException;
-import com.ibm.websphere.management.repository.ConfigRepository;
+import com.github.veithen.visualwas.repoclient.ConfigRepository;
+import com.github.veithen.visualwas.repoclient.RepositoryException;
 
 public class ExtractRawDataRunnable implements IWorkspaceRunnable {
     private final MetadataProject metadataProject;
@@ -164,11 +164,7 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
         XMIResource resource;
         InputStream in;
         try {
-            in = repository.extract(uri).getSource();
-        } catch (RepositoryException ex) {
-            throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Error extracting document " + uri, ex));
-        }
-        try {
+            in = repository.extract(uri).getSource().getInputStream();
             try {
                 // All documents are saved as XMI irrespective of the original format
                 resource = new XMIResourceImpl(URI.createURI("wsrepo:///" + uri));
@@ -177,6 +173,8 @@ public class ExtractRawDataRunnable implements IWorkspaceRunnable {
             } finally {
                 in.close();
             }
+        } catch (RepositoryException ex) {
+            throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Error extracting document " + uri, ex));
         } catch (IOException ex) {
             throw new CoreException(new Status(IStatus.ERROR, Constants.PLUGIN_ID, "Error loading document " + uri, ex));
         }
